@@ -15,14 +15,13 @@ class PersonStub1 extends PersonImpl
 
     const FIRST_NAME = 'Person stub 1 first name';
 
-    const ID = 1;
+    const ID = 1534;
 
     const JOINED_AT = '2016-09-27 15:30:06';
 
     const LAST_NAME = 'Person stub 1 last name';
 
     const PHONE = 'Person stub 1 PHONE';
-
 
     protected $address = self::ADDRESS;
 
@@ -33,7 +32,6 @@ class PersonStub1 extends PersonImpl
     protected $lastName = self::LAST_NAME;
 
     protected $phone = self::PHONE;
-
 
     public function __construct()
     {

@@ -8,7 +8,7 @@ namespace OpenClassrooms\FrontDesk\Models;
 abstract class Pack
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $count;
 
@@ -70,7 +70,7 @@ abstract class Pack
     }
 
     /**
-     * @param string[] $personIds
+     * @param int[] $personIds
      */
     public function setPersonIds($personIds)
     {

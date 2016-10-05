@@ -31,10 +31,10 @@ class ApiClientMock extends ApiClientImpl
     /**
      * {@inheritdoc}
      */
-    public function post($resource, $params)
+    public function post($resourceName, $resourceData)
     {
-        self::$resource = $resource;
-        self::$params = $params;
+        self::$resource = $resourceName;
+        self::$params = $resourceData;
 
         return self::$response;
     }

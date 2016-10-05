@@ -14,7 +14,6 @@ class PackBuilderImpl implements PackBuilder
      */
     private $pack;
 
-
     /**
      * {@inheritdoc}
      */

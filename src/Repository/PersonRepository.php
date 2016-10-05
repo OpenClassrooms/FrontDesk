@@ -23,7 +23,7 @@ class PersonRepository implements PersonGateway
      */
     public function insert(Person $person)
     {
-        return $this->apiClient->post(self::RESOURCE_NAME, $person->toArray());
+        return $this->apiClient->post(self::RESOURCE_NAME, $person);
     }
 
     public function setApiClient(ApiClient $apiClient)

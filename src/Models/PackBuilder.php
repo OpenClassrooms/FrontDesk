@@ -13,7 +13,7 @@ interface PackBuilder
     public function create();
 
     /**
-     * @param integer $count
+     * @param int $count
      *
      * @return PackBuilder
      */
@@ -25,7 +25,7 @@ interface PackBuilder
     public function withEndDate(\DateTime $endDate = null);
 
     /**
-     * @param array $personIds
+     * @param int[] $personIds
      *
      * @return PackBuilder
      */

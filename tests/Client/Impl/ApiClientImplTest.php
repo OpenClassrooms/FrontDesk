@@ -14,9 +14,9 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
 {
     const KEY = '123apikey';
 
-    const BLOG = 'http://yourblogdomainname.com';
+    const TOKEN = 'jlsdhfxgcwljhgcjhgwxb';
 
-    const RESOURCE = 'resource';
+    const RESOURCE_NAME = 'resource';
 
     const PARAMS = ['param1' => 'myParam1'];
 
@@ -41,18 +41,18 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
         $responseMock->method('getBody')->willReturn($streamMock);
         ClientMock::$response = $responseMock;
 
-        $response = $this->apiClient->post(self::RESOURCE, self::PARAMS);
+        $response = $this->apiClient->post(self::RESOURCE_NAME, self::PARAMS);
 
         $this->assertEquals(ClientMock::$response->getBody()->getContents(), $response);
-        $this->assertEquals(self::RESOURCE, ClientMock::$resource);
-        $this->assertEquals(['form_params' => self::PARAMS], ClientMock::$params);
+        $this->assertEquals(self::RESOURCE_NAME, ClientMock::$resource);
+        $this->assertEquals(['json' => self::PARAMS], ClientMock::$params);
     }
 
     protected function setUp()
     {
-        $this->apiClient = new ApiClientImpl(self::KEY, self::BLOG);
+        $this->apiClient = new ApiClientImpl(self::KEY, self::TOKEN);
         $this->guzzleClientMock = new ClientMock();
-        $this->setPropertyToObject($this->apiClient, 'guzzle', $this->guzzleClientMock);
+        $this->setPropertyToObject($this->apiClient, 'client', $this->guzzleClientMock);
     }
 
     /**

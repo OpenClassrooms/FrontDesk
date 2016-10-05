@@ -26,8 +26,8 @@ class PackServiceImplTest extends \PHPUnit_Framework_TestCase
     {
         $actualId = $this->service->create($this->buildPack());
 
-        $this->assertEquals(PackStub1::ID, $actualId);
-        $this->assertPack(new PackStub1(), PackGatewayMock::$packs[PackStub1::ID]);
+        $this->assertEquals(1, $actualId);
+        $this->assertPack(new PackStub1(), PackGatewayMock::$packs[1]);
     }
 
     /**

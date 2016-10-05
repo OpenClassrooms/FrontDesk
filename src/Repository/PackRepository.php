@@ -14,7 +14,7 @@ class PackRepository implements PackGateway
     const RESOURCE_NAME = 'pack';
 
     /**
-     * @var ApiClient $apiClient
+     * @var ApiClient
      */
     private $apiClient;
 
@@ -23,7 +23,7 @@ class PackRepository implements PackGateway
      */
     public function insert(Pack $pack)
     {
-        return $this->apiClient->post(self::RESOURCE_NAME, $pack->toArray());
+        return $this->apiClient->post(self::RESOURCE_NAME, $pack);
     }
 
     public function setApiClient(ApiClient $apiClient)

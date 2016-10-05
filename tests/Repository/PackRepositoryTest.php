@@ -29,7 +29,7 @@ class PackRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(PackStub1::ID, $result);
         $this->assertEquals(PackRepository::RESOURCE_NAME, ApiClientMock::$resource);
-        $this->assertEquals($pack->toArray(), ApiClientMock::$params);
+        $this->assertEquals(json_encode($pack), json_encode(ApiClientMock::$params));
     }
 
     /**

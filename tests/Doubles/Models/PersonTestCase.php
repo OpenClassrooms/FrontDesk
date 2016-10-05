@@ -10,7 +10,7 @@ use PHPUnit_Framework_Assert as Assert;
  */
 trait PersonTestCase
 {
-    public function assertPerson(Person $expected, Person $actual)
+    protected function assertPerson(Person $expected, Person $actual)
     {
         Assert::assertEquals($expected->getAddress(), $actual->getAddress());
         Assert::assertEquals($expected->getEmail(), $actual->getEmail());

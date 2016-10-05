@@ -10,7 +10,7 @@ use PHPUnit_Framework_Assert as Assert;
  */
 trait PackTestCase
 {
-    public function assertPack(Pack $expected, Pack $actual)
+    protected function assertPack(Pack $expected, Pack $actual)
     {
         Assert::assertEquals($expected->getCount(), $actual->getCount());
         Assert::assertEquals($expected->getEndDate(), $actual->getEndDate());

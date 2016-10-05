@@ -2,6 +2,7 @@
 
 namespace OpenClassrooms\FrontDesk\Client\Impl;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use OpenClassrooms\FrontDesk\Client\ApiClient;
 
@@ -13,7 +14,7 @@ class ApiClientImpl implements ApiClient
     /**
      * @var ClientInterface
      */
-    private $guzzle;
+    private $client;
 
     /**
      * @param string $key    The API key
@@ -21,10 +22,10 @@ class ApiClientImpl implements ApiClient
      */
     public function __construct($key, $token)
     {
-        $this->guzzle = new \GuzzleHttp\Client(
+        $this->client = new Client(
             [
-                'base_uri' => 'https://' . $key . '.frontdeskhq.com/api/v2/',
-                'headers'  => ['Authorization' => "Bearer $token"]
+                'base_uri' => 'https://'.$key.'.frontdeskhq.com/api/v2/',
+                'headers'  => ['Authorization' => "Bearer $token"],
             ]
         );
     }
@@ -32,12 +33,9 @@ class ApiClientImpl implements ApiClient
     /**
      * {@inheritdoc}
      */
-    public function post($resource, $params)
+    public function post($resourceName, $resourceData)
     {
-        $response = $this->guzzle->post(
-            $resource,
-            ['form_params' => $params]
-        );
+        $response = $this->client->post($resourceName, ['json' => $resourceData]);
 
         return $response->getBody()->getContents();
     }

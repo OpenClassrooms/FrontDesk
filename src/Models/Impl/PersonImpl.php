@@ -7,12 +7,12 @@ use OpenClassrooms\FrontDesk\Models\Person;
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class PersonImpl extends Person
+class PersonImpl extends Person implements \JsonSerializable
 {
     /**
      * @return array
      */
-    public function toArray()
+    public function jsonSerialize()
     {
         return [
             'person' => [
@@ -20,10 +20,10 @@ class PersonImpl extends Person
                 'email'      => $this->email,
                 'first_name' => $this->firstName,
                 'id'         => $this->id,
-                'joined_at'  => $this->joinedAt,
+                'joined_at'  => $this->joinedAt->getTimestamp(),
                 'last_name'  => $this->lastName,
                 'phone'      => $this->phone,
-            ]
+            ],
         ];
     }
 }

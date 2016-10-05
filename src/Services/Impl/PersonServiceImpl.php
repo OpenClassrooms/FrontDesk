@@ -17,16 +17,13 @@ class PersonServiceImpl implements PersonService
     private $personGateway;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function create(Person $person)
     {
         return $this->personGateway->insert($person);
     }
 
-    /**
-     * @param PersonGateway $personGateway
-     */
     public function setPersonGateway(PersonGateway $personGateway)
     {
         $this->personGateway = $personGateway;

@@ -8,10 +8,10 @@ namespace OpenClassrooms\FrontDesk\Client;
 interface ApiClient
 {
     /**
-     * @param string  $resource
-     * @param array[] $params
+     * @param string $resourceName
+     * @param mixed  $resourceData
      *
      * @return string
      */
-    public function post($resource, $params);
+    public function post($resourceName, $resourceData);
 }

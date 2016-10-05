@@ -13,19 +13,17 @@ class PackStub1 extends PackImpl
 
     const END_DATE = '2016-10-04 09:34:00';
 
-    const ID = 1;
+    const ID = 6473;
 
-    const PERSON_IDS = ['Pack Stub 1 person ids'];
+    const PERSON_IDS = [PersonStub1::ID];
 
     const START_DATE = '2016-09-30 11:30:00';
-
 
     protected $count = self::COUNT;
 
     protected $id = self::ID;
 
     protected $personIds = self::PERSON_IDS;
-
 
     public function __construct()
     {

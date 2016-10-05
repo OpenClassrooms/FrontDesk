@@ -16,7 +16,7 @@ class PersonGatewayMock implements PersonGateway
     public static $id = 0;
 
     /**
-     * @var array
+     * @var Person[]
      */
     public static $person = [];
 
