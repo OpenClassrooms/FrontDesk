@@ -32,7 +32,7 @@ class PackGatewayMock implements PackGateway
     /**
      * {@inheritdoc}
      */
-    public function insert(Pack $pack)
+    public function insert(Pack $pack, $packProductId)
     {
         self::$packs[++self::$id] = $pack;
 

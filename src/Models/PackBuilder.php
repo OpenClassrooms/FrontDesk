@@ -29,7 +29,7 @@ interface PackBuilder
      *
      * @return PackBuilder
      */
-    public function withPersonIds($personIds);
+    public function withPersonIds(array $personIds);
 
     /**
      * @param \DateTime $startDate

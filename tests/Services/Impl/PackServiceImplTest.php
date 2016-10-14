@@ -6,6 +6,7 @@ use OpenClassrooms\FrontDesk\Doubles\Gateways\PackGatewayMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PackStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\PackTestCase;
 use OpenClassrooms\FrontDesk\Models\Impl\PackBuilderImpl;
+use Repository\PackRepositoryTest;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
@@ -24,7 +25,7 @@ class PackServiceImplTest extends \PHPUnit_Framework_TestCase
      */
     public function create_ReturnId()
     {
-        $actualId = $this->service->create($this->buildPack());
+        $actualId = $this->service->create($this->buildPack(), PackRepositoryTest::PACK_PRODUCT_ID);
 
         $this->assertEquals(1, $actualId);
         $this->assertPack(new PackStub1(), PackGatewayMock::$packs[1]);
@@ -49,6 +50,6 @@ class PackServiceImplTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->service = new PackServiceImpl();
-        $this->service->setGateway(new PackGatewayMock());
+        $this->service->setPackGateway(new PackGatewayMock());
     }
 }
