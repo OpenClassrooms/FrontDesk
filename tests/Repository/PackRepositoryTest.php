@@ -13,6 +13,8 @@ use OpenClassrooms\FrontDesk\Repository\PackRepository;
  */
 class PackRepositoryTest extends \PHPUnit_Framework_TestCase
 {
+    const PACK_PRODUCT_ID = '1111111';
+
     /**
      * @var PackRepository
      */
@@ -23,12 +25,12 @@ class PackRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function insert_ReturnPackId()
     {
-        ApiClientMock::$response = PackStub1::ID;
+        ApiClientMock::$response = json_encode(['packs' => [0 => ['id' => PackStub1::ID]]]);
         $pack = $this->buildPack();
-        $result = $this->packRepository->insert($pack);
+        $result = $this->packRepository->insert($pack, self::PACK_PRODUCT_ID);
 
         $this->assertEquals(PackStub1::ID, $result);
-        $this->assertEquals(PackRepository::RESOURCE_NAME, ApiClientMock::$resource);
+        $this->assertEquals('desk/pack_products/1111111/'.PackRepository::RESOURCE_NAME, ApiClientMock::$resource);
         $this->assertEquals(json_encode($pack), json_encode(ApiClientMock::$params));
     }
 

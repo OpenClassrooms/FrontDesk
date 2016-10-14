@@ -1,14 +1,14 @@
 <?php
 
-namespace OpenClassrooms\FrontDesk\Doubles\Gateways;
+namespace OpenClassrooms\FrontDesk\Doubles\Services;
 
-use OpenClassrooms\FrontDesk\Gateways\PackGateway;
 use OpenClassrooms\FrontDesk\Models\Pack;
+use OpenClassrooms\FrontDesk\Services\PackService;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class PackGatewayMock implements PackGateway
+class PackServiceMock implements PackService
 {
     /**
      * @var int
@@ -30,9 +30,9 @@ class PackGatewayMock implements PackGateway
     }
 
     /**
-     * {@inheritdoc}
+     * @return int
      */
-    public function insert(Pack $pack, $packProductId)
+    public function create(Pack $pack, $packProductId)
     {
         self::$packs[++self::$id] = $pack;
 

@@ -12,5 +12,5 @@ interface PackGateway
     /**
      * @return int
      */
-    public function insert(Pack $pack);
+    public function insert(Pack $pack, $packProductId);
 }

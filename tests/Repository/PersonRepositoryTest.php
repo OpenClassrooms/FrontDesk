@@ -22,7 +22,7 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function insert_ReturnPersonId()
     {
-        ApiClientMock::$response = PersonStub1::ID;
+        ApiClientMock::$response = json_encode(['people' => [0 => ['id' => PersonStub1::ID]]]);
         $person = $this->buildPerson();
         $result = $this->personRepository->insert($person);
 

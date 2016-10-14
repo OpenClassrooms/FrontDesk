@@ -23,7 +23,10 @@ class PersonRepository implements PersonGateway
      */
     public function insert(Person $person)
     {
-        return $this->apiClient->post(self::RESOURCE_NAME, $person);
+        $jsonResult = $this->apiClient->post(self::RESOURCE_NAME, $person);
+        $result = json_decode($jsonResult, true);
+
+        return $result['people'][0]['id'];
     }
 
     public function setApiClient(ApiClient $apiClient)

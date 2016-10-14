@@ -47,7 +47,7 @@ class PackBuilderImpl implements PackBuilder
     /**
      * {@inheritdoc}
      */
-    public function withPersonIds($personIds)
+    public function withPersonIds(array $personIds)
     {
         $this->pack->setPersonIds($personIds);
 
