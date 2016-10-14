@@ -11,7 +11,7 @@ class PackStub1 extends PackImpl
 {
     const COUNT = '999999';
 
-    const END_DATE = '2017-12-08';
+    const END_DATE = '2017-12-08 09:34:00';
 
     const ID = 6473;
 
@@ -19,7 +19,7 @@ class PackStub1 extends PackImpl
 
     const PERSON_IDS = [PersonStub1::ID];
 
-    const START_DATE = '2016-08-30';
+    const START_DATE = '2016-08-30 11:30:00';
 
     protected $count = self::COUNT;
 
