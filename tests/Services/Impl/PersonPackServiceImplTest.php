@@ -11,13 +11,13 @@ use OpenClassrooms\FrontDesk\Doubles\Services\PersonServiceMock;
  */
 class PersonPackServiceImplTest extends \PHPUnit_Framework_TestCase
 {
-    const PACK_PRODUCT_ID = 1234;
+    const PACK_PRODUCT_ID = 340441;
 
     const COUNT = 999999;
 
     const START_DATE = '2016-06-25';
 
-    const ENDED_DATE = '2016-08-01';
+    const ENDED_DATE = '2016-11-01';
 
     /**
      * @var PersonPackServiceImpl

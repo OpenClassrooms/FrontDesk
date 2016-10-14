@@ -9,7 +9,7 @@ use OpenClassrooms\FrontDesk\Models\Pack;
  */
 class PackImpl extends Pack implements \JsonSerializable
 {
-    const DATE_FORMAT = 'yyyy-MM-dd';
+    const DATE_FORMAT = 'Y-m-d H:i:s';
 
     /**
      * @return array
@@ -19,10 +19,10 @@ class PackImpl extends Pack implements \JsonSerializable
         return [
             'pack' => [
                 'count'      => $this->count,
-                'end_date'   => $this->endDate,
+                'end_date'   => $this->endDate !== null ? $this->endDate->format(self::DATE_FORMAT) : null,
                 'id'         => $this->id,
                 'person_ids' => $this->personIds,
-                'start_date' => $this->startDate,
+                'start_date' => $this->startDate !== null ? $this->startDate->format(self::DATE_FORMAT) : null,
             ],
         ];
     }

@@ -12,5 +12,5 @@ interface PersonPackService
     /**
      * @return [int]array
      */
-    public function create(Person $person, \DateTime $startDate, \DateTime $endDate);
+    public function create(Person $person, \DateTime $startDate, \DateTime $endDate = null);
 }

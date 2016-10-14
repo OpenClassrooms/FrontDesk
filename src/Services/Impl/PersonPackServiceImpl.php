@@ -46,7 +46,7 @@ class PersonPackServiceImpl implements PersonPackService
     /**
      * {@inheritdoc}
      */
-    public function create(Person $person, \DateTime $startDate, \DateTime $endDate)
+    public function create(Person $person, \DateTime $startDate, \DateTime $endDate = null)
     {
         $personId = $this->personService->create($person);
 

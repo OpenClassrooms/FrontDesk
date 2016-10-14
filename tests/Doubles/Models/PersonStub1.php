@@ -11,7 +11,7 @@ class PersonStub1 extends PersonImpl
 {
     const ADDRESS = 'Person stub 1 address';
 
-    const EMAIL = 'personstub1email@openclassrooms.com';
+    const EMAIL = 'person___stub1email@openclassrooms.com';
 
     const FIRST_NAME = 'Person stub 1 first name';
 
