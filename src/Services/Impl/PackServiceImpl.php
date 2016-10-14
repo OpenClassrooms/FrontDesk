@@ -19,12 +19,12 @@ class PackServiceImpl implements PackService
     /**
      * {@inheritdoc}
      */
-    public function create(Pack $pack)
+    public function create(Pack $pack, $packProductId)
     {
-        return $this->packGateway->insert($pack);
+        return $this->packGateway->insert($pack, $packProductId);
     }
 
-    public function setGateway(PackGateway $packGateway)
+    public function setPackGateway(PackGateway $packGateway)
     {
         $this->packGateway = $packGateway;
     }

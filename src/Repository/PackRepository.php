@@ -11,7 +11,7 @@ use OpenClassrooms\FrontDesk\Models\Pack;
  */
 class PackRepository implements PackGateway
 {
-    const RESOURCE_NAME = 'pack';
+    const RESOURCE_NAME = 'packs';
 
     /**
      * @var ApiClient
@@ -21,9 +21,12 @@ class PackRepository implements PackGateway
     /**
      * {@inheritdoc}
      */
-    public function insert(Pack $pack)
+    public function insert(Pack $pack, $packProductId)
     {
-        return $this->apiClient->post(self::RESOURCE_NAME, $pack);
+        $jsonResult = $this->apiClient->post("desk/pack_products/{$packProductId}/".self::RESOURCE_NAME, $pack);
+        $result = json_decode($jsonResult, true);
+
+        return $result['packs'][0]['id'];
     }
 
     public function setApiClient(ApiClient $apiClient)
