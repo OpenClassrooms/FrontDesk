@@ -35,7 +35,7 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
      */
     public function postResource_ReturnResponse()
     {
-        $this->buildClientMock();
+        $this->initMock();
         $response = $this->apiClient->post(self::RESOURCE_NAME, self::PARAMS);
 
         $this->assertEquals(ClientMock::$response->getBody()->getContents(), $response);
@@ -43,7 +43,7 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['json' => self::PARAMS], ClientMock::$params);
     }
 
-    private function buildClientMock()
+    private function initMock()
     {
         $streamMock = $this->createMock(StreamInterface::class);
         $streamMock->method('getContents')->willReturn('string');
@@ -57,11 +57,21 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
      */
     public function getResource_ReturnResponse()
     {
-        $this->buildClientMock();
+        $this->initMock();
         $response = $this->apiClient->get(self::RESOURCE_NAME);
 
         $this->assertEquals(ClientMock::$response->getBody()->getContents(), $response);
         $this->assertEquals(self::RESOURCE_NAME, ClientMock::$resource);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteResource_ReturnNull()
+    {
+        $response = $this->apiClient->delete(self::RESOURCE_NAME);
+
+        $this->assertNull($response);
     }
 
     protected function setUp()

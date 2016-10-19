@@ -24,6 +24,14 @@ class PackServiceImpl implements PackService
         return $this->packGateway->insert($pack, $packProductId);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function deletePack($packId)
+    {
+        return $this->packGateway->deleteById($packId);
+    }
+
     public function setPackGateway(PackGateway $packGateway)
     {
         $this->packGateway = $packGateway;

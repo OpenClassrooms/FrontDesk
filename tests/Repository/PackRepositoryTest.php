@@ -50,6 +50,16 @@ class PackRepositoryTest extends \PHPUnit_Framework_TestCase
             ->build();
     }
 
+    /**
+     * @test
+     */
+    public function deleteById_ReturnNull()
+    {
+        ApiClientMock::$response = json_encode(new PackStub1());
+        $pack = $this->packRepository->deleteById(PackStub1::ID);
+        $this->assertNull($pack);
+    }
+
     protected function setUp()
     {
         $this->packRepository = new PackRepository();

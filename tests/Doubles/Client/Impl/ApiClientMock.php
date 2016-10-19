@@ -2,7 +2,9 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Client\Impl;
 
+use GuzzleHttp\Psr7\Response;
 use OpenClassrooms\FrontDesk\Client\Impl\ApiClientImpl;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
@@ -15,7 +17,7 @@ class ApiClientMock extends ApiClientImpl
     public static $id;
 
     /**
-     * @var string
+     * @var ResponseInterface
      */
     public static $response;
 
@@ -56,5 +58,13 @@ class ApiClientMock extends ApiClientImpl
         self::$resource = $resourceName;
 
         return self::$response;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete($resourceName)
+    {
+        return new Response();
     }
 }
