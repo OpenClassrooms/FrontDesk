@@ -14,4 +14,11 @@ interface ApiClient
      * @return string
      */
     public function post($resourceName, $resourceData);
+
+    /**
+     * @param string $resourceName
+     *
+     * @return string
+     */
+    public function get($resourceName);
 }

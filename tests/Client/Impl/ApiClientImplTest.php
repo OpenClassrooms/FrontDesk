@@ -35,17 +35,33 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
      */
     public function postResource_ReturnResponse()
     {
-        $streamMock = $this->createMock(StreamInterface::class);
-        $streamMock->method('getContents')->willReturn('string');
-        $responseMock = $this->createMock(ResponseInterface::class);
-        $responseMock->method('getBody')->willReturn($streamMock);
-        ClientMock::$response = $responseMock;
-
+        $this->initMock();
         $response = $this->apiClient->post(self::RESOURCE_NAME, self::PARAMS);
 
         $this->assertEquals(ClientMock::$response->getBody()->getContents(), $response);
         $this->assertEquals(self::RESOURCE_NAME, ClientMock::$resource);
         $this->assertEquals(['json' => self::PARAMS], ClientMock::$params);
+    }
+
+    private function initMock()
+    {
+        $streamMock = $this->createMock(StreamInterface::class);
+        $streamMock->method('getContents')->willReturn('string');
+        $responseMock = $this->createMock(ResponseInterface::class);
+        $responseMock->method('getBody')->willReturn($streamMock);
+        ClientMock::$response = $responseMock;
+    }
+
+    /**
+     * @test
+     */
+    public function getResource_ReturnResponse()
+    {
+        $this->initMock();
+        $response = $this->apiClient->get(self::RESOURCE_NAME);
+
+        $this->assertEquals(ClientMock::$response->getBody()->getContents(), $response);
+        $this->assertEquals(self::RESOURCE_NAME, ClientMock::$resource);
     }
 
     protected function setUp()

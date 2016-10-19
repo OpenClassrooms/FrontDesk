@@ -10,6 +10,11 @@ use OpenClassrooms\FrontDesk\Client\Impl\ApiClientImpl;
 class ApiClientMock extends ApiClientImpl
 {
     /**
+     * @var int
+     */
+    public static $id = 87932;
+
+    /**
      * @var string
      */
     public static $response;
@@ -37,5 +42,15 @@ class ApiClientMock extends ApiClientImpl
         self::$params = $resourceData;
 
         return self::$response;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($resourceName)
+    {
+        self::$resource = $resourceName;
+
+        return self::$id;
     }
 }

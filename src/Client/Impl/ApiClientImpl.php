@@ -39,4 +39,14 @@ class ApiClientImpl implements ApiClient
 
         return $response->getBody()->getContents();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($resourceName)
+    {
+        $response = $this->client->get($resourceName);
+
+        return $response->getBody()->getContents();
+    }
 }
