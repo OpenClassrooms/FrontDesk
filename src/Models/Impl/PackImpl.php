@@ -18,11 +18,11 @@ class PackImpl extends Pack implements \JsonSerializable
     {
         return [
             'pack' => [
-                'count'       => $this->count,
-                'end_date'    => $this->endDate !== null ? $this->endDate->format(self::DATE_FORMAT) : null,
-                'id'          => $this->id,
+                'count'      => $this->count,
+                'end_date'   => $this->endDate !== null ? $this->endDate->format(self::DATE_FORMAT) : null,
+                'id'         => $this->id,
                 'person_ids' => $this->personIds,
-                'start_date'  => $this->startDate !== null ? $this->startDate->format(self::DATE_FORMAT) : null,
+                'start_date' => $this->startDate !== null ? $this->startDate->format(self::DATE_FORMAT) : null,
             ],
         ];
     }
