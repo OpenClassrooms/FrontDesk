@@ -57,4 +57,11 @@ class ApiClientMock extends ApiClientImpl
 
         return self::$response;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete($resourceName)
+    {
+    }
 }

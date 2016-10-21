@@ -46,4 +46,12 @@ class ClientMock extends Client
 
         return self::$response;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete($resource)
+    {
+        return null;
+    }
 }

@@ -29,6 +29,14 @@ class PackRepository implements PackGateway
         return $result['packs'][0]['id'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteById($packId)
+    {
+        $this->apiClient->delete("desk/".self::RESOURCE_NAME."/".$packId);
+    }
+
     public function setApiClient(ApiClient $apiClient)
     {
         $this->apiClient = $apiClient;

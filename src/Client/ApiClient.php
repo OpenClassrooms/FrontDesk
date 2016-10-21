@@ -21,4 +21,9 @@ interface ApiClient
      * @return string
      */
     public function get($resourceName);
+
+    /**
+     * @param $resourceName
+     */
+    public function delete($resourceName);
 }

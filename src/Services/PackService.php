@@ -13,4 +13,9 @@ interface PackService
      * @return int
      */
     public function create(Pack $pack, $packProductId);
+
+    /**
+     * @param int $packId
+     */
+    public function deletePack($packId);
 }

@@ -16,6 +16,8 @@ class PackServiceImplTest extends \PHPUnit_Framework_TestCase
 
     const PACK_PRODUCT_ID = 2222222;
 
+    const PACK_ID = 11111;
+
     /**
      * @var PackServiceImpl
      */
@@ -46,6 +48,15 @@ class PackServiceImplTest extends \PHPUnit_Framework_TestCase
             ->withPersonIds(PackStub1::PERSON_IDS)
             ->withStartDate(new \DateTime(PackStub1::START_DATE))
             ->build();
+    }
+
+    /**
+     * @test
+     */
+    public function deletePack_ReturnNull()
+    {
+        $actualPack = $this->service->deletePack(self::PACK_ID);
+        $this->assertNull($actualPack);
     }
 
     protected function setUp()

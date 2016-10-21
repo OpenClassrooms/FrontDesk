@@ -64,6 +64,16 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::RESOURCE_NAME, ClientMock::$resource);
     }
 
+    /**
+     * @test
+     */
+    public function deleteResource_ReturnNull()
+    {
+        $response = $this->apiClient->delete(self::RESOURCE_NAME);
+
+        $this->assertNull($response);
+    }
+
     protected function setUp()
     {
         $this->apiClient = new ApiClientImpl(self::KEY, self::TOKEN);
