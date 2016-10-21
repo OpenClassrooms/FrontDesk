@@ -23,16 +23,8 @@ class ClientMock extends Client
     /**
      * @var array
      */
-    public static $config;
-
-    /**
-     * @var array
-     */
     public static $params;
 
-    public function __construct()
-    {
-    }
 
     /**
      * {@inheritdoc}
@@ -51,7 +43,6 @@ class ClientMock extends Client
     public function get($resource)
     {
         self::$resource = $resource;
-        self::$config = [];
 
         return self::$response;
     }

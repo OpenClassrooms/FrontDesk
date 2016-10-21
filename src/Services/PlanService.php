@@ -2,15 +2,17 @@
 
 namespace OpenClassrooms\FrontDesk\Services;
 
+use OpenClassrooms\FrontDesk\Models\Plan;
+
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
 interface PlanService
 {
     /**
-     * @param $personId
+     * @param int $personId
      *
-     * @return integer
+     * @return Plan[]
      */
-    public function pickUp($personId);
+    public function getPlans($personId);
 }

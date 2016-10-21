@@ -13,18 +13,18 @@ class PlanServiceImpl implements PlanService
     /**
      * @var PlanGateway
      */
-    private $personGateway;
+    private $planGateway;
 
     /**
      * {@inheritdoc}
      */
-    public function pickUp($personId)
+    public function getPlans($personId)
     {
-        return $this->personGateway->recuperate($personId);
+        return $this->planGateway->findAllByPersonId($personId);
     }
 
-    public function setPlanGateway(PlanGateway $personGateway)
+    public function setPlanGateway(PlanGateway $planGateway)
     {
-        $this->personGateway = $personGateway;
+        $this->planGateway = $planGateway;
     }
 }

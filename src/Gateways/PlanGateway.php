@@ -2,6 +2,8 @@
 
 namespace OpenClassrooms\FrontDesk\Gateways;
 
+use OpenClassrooms\FrontDesk\Models\Plan;
+
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
@@ -10,7 +12,7 @@ interface PlanGateway
     /**
      * @param integer $personId
      *
-     * @return integer
+     * @return Plan[]
      */
-    public function recuperate($personId);
+    public function findAllByPersonId($personId);
 }

@@ -12,7 +12,7 @@ class ApiClientMock extends ApiClientImpl
     /**
      * @var int
      */
-    public static $id = 87932;
+    public static $id;
 
     /**
      * @var string
@@ -31,6 +31,10 @@ class ApiClientMock extends ApiClientImpl
 
     public function __construct()
     {
+        self::$id = null;
+        self::$response = null;
+        self::$params = null;
+        self::$resource = null;
     }
 
     /**
@@ -51,6 +55,6 @@ class ApiClientMock extends ApiClientImpl
     {
         self::$resource = $resourceName;
 
-        return self::$id;
+        return self::$response;
     }
 }

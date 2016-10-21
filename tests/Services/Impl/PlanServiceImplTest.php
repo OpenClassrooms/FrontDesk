@@ -4,12 +4,15 @@ namespace OpenClassrooms\FrontDesk\Services\Impl;
 
 use OpenClassrooms\FrontDesk\Doubles\Gateways\PlanGatewayMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
+use OpenClassrooms\FrontDesk\Doubles\Models\PlanTestCase;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
 class PlanServiceImplTest extends \PHPUnit_Framework_TestCase
 {
+    use PlanTestCase;
+
     /**
      * @var PlanServiceImpl
      */
@@ -18,10 +21,10 @@ class PlanServiceImplTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function pickUp_ReturnId()
+    public function getPlans_ReturnId()
     {
-        $planId = $this->service->pickUp(PersonStub1::ID);
-        $this->assertEquals(PlanGatewayMock::$id, $planId);
+        $plan = $this->service->getPlans(PersonStub1::ID);
+        $this->assertPlan(PlanGatewayMock::$plans, $plan);
     }
 
     public function setUp()

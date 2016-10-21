@@ -2,7 +2,9 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Gateways;
 
+use OpenClassrooms\FrontDesk\Doubles\Models\PlanStub1;
 use OpenClassrooms\FrontDesk\Gateways\PlanGateway;
+use OpenClassrooms\FrontDesk\Models\Plan;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
@@ -10,15 +12,20 @@ use OpenClassrooms\FrontDesk\Gateways\PlanGateway;
 class PlanGatewayMock implements PlanGateway
 {
     /**
-     * @var int
+     * @var Plan[]
      */
-    public static $id = 1222;
+    public static $plans;
+
+    public function __construct()
+    {
+        self::$plans = new PlanStub1();
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function recuperate($planId)
+    public function findAllByPersonId($personId)
     {
-        return self::$id;
+        return self::$plans;
     }
 }
