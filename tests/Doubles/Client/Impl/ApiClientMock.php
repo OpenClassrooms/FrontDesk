@@ -10,6 +10,11 @@ use OpenClassrooms\FrontDesk\Client\Impl\ApiClientImpl;
 class ApiClientMock extends ApiClientImpl
 {
     /**
+     * @var int
+     */
+    public static $id;
+
+    /**
      * @var string
      */
     public static $response;
@@ -26,6 +31,10 @@ class ApiClientMock extends ApiClientImpl
 
     public function __construct()
     {
+        self::$id = null;
+        self::$response = null;
+        self::$params = [];
+        self::$resource = null;
     }
 
     /**
@@ -35,6 +44,16 @@ class ApiClientMock extends ApiClientImpl
     {
         self::$resource = $resourceName;
         self::$params = $resourceData;
+
+        return self::$response;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($resourceName)
+    {
+        self::$resource = $resourceName;
 
         return self::$response;
     }
