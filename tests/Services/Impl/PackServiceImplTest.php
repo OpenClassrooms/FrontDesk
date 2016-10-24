@@ -56,12 +56,12 @@ class PackServiceImplTest extends \PHPUnit_Framework_TestCase
     public function deletePack_ReturnNull()
     {
         $actualPack = $this->service->deletePack(self::PACK_ID);
-        $this->assertNull($actualPack);
+        $this->assertEmpty($actualPack);
     }
 
     protected function setUp()
     {
         $this->service = new PackServiceImpl();
-        $this->service->setPackGateway(new PackGatewayMock());
+        $this->service->setPackGateway(new PackGatewayMock([new PackStub1()]));
     }
 }

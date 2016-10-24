@@ -13,63 +13,57 @@ interface PlanBuilder
     public function create();
 
     /**
-     * @param $canceledAt
-     *
      * @return PlanBuilder
      */
     public function withCanceledAt(\DateTime $canceledAt = null);
 
     /**
-     * @param $considerMember
+     * @param boolean $considerMember
      *
      * @return PlanBuilder
      */
     public function withConsiderMember($considerMember);
 
     /**
-     * @param $count
+     * @param int $count
      *
      * @return PlanBuilder
      */
     public function withCount($count);
 
     /**
-     * @param $createdAt
-     *
      * @return PlanBuilder
      */
-    public function withCreatedAt(\DateTime $createdAt);
+    public function withCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * @param $description
+     * @param string $description
      *
      * @return PlanBuilder
      */
     public function withDescription($description);
 
     /**
-     * @param $endDate
-     *
      * @return PlanBuilder
      */
     public function withEndDate(\DateTime $endDate = null);
 
     /**
-     * @param $id
+     * @param int $id
      *
      * @return PlanBuilder
      */
     public function withId($id);
 
     /**
-     * @param $locationId
+     * @param int $locationId
      *
      * @return PlanBuilder
      */
     public function withLocationId($locationId);
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return PlanBuilder
      */
@@ -83,43 +77,39 @@ interface PlanBuilder
     public function withPersonIds(array $personIds = null);
 
     /**
-     * @param $planProductId
+     * @param int $planProductId
      *
      * @return PlanBuilder
      */
     public function withPlanProductId($planProductId);
 
     /**
-     * @param $priceCent
+     * @param int $priceCent
      *
      * @return PlanBuilder
      */
     public function withPriceCents($priceCent);
 
     /**
-     * @param $staffMemberId
+     * @param int $staffMemberId
      *
      * @return PlanBuilder
      */
     public function withStaffMemberId($staffMemberId);
 
     /**
-     * @param $startDate
-     *
      * @return PlanBuilder
      */
-    public function withStartDate(\DateTime $startDate);
+    public function withStartDate(\DateTime $startDate = null);
 
     /**
-     * @param $type
+     * @param string $type
      *
      * @return PlanBuilder
      */
     public function withType($type);
 
     /**
-     * @param $updateAt
-     *
      * @return PlanBuilder
      */
     public function withUpdateAt(\DateTime $updateAt = null);

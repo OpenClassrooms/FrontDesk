@@ -23,7 +23,7 @@ class PlanRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function checkTotalCount()
     {
-        ApiClientMock::$response = json_encode(["plans" => new PlanStub1(), "total_count" => 0]);
+        ApiClientMock::$response = json_encode(["plans" => [new PlanStub1()], "total_count" => 0]);
 
         $this->planRepository->findAllByPersonId(PersonStub1::ID);
     }
@@ -33,7 +33,7 @@ class PlanRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function findAllByPersonId_ReturnPlans()
     {
-        ApiClientMock::$response = json_encode(["plans" => new PlanStub1(), "total_count" => 1]);
+        ApiClientMock::$response = json_encode(["plans" => [new PlanStub1()], "total_count" => 1]);
 
         $plans = $this->planRepository->findAllByPersonId(PersonStub1::ID);
         $this->assertEquals(json_encode([new PlanStub1()]), json_encode($plans));

@@ -2,7 +2,6 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Gateways;
 
-use OpenClassrooms\FrontDesk\Doubles\Models\PlanStub1;
 use OpenClassrooms\FrontDesk\Gateways\PlanGateway;
 use OpenClassrooms\FrontDesk\Models\Plan;
 
@@ -16,9 +15,9 @@ class PlanGatewayMock implements PlanGateway
      */
     public static $plans;
 
-    public function __construct()
+    public function __construct(array $plans = [])
     {
-        self::$plans = new PlanStub1();
+        self::$plans = $plans;
     }
 
     /**

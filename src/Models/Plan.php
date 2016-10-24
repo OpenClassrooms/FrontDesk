@@ -141,7 +141,7 @@ abstract class Plan
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
@@ -295,7 +295,7 @@ abstract class Plan
         return $this->startDate;
     }
 
-    public function setStartDate(\DateTime $startDate)
+    public function setStartDate(\DateTime $startDate = null)
     {
         $this->startDate = $startDate;
     }

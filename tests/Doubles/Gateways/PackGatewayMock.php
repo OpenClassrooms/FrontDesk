@@ -44,5 +44,6 @@ class PackGatewayMock implements PackGateway
      */
     public function deleteById($packId)
     {
+        unset(self::$packs[$packId]);
     }
 }

@@ -5,6 +5,7 @@ namespace OpenClassrooms\FrontDesk\Repository;
 use OpenClassrooms\FrontDesk\Client\ApiClient;
 use OpenClassrooms\FrontDesk\Gateways\PlanGateway;
 use OpenClassrooms\FrontDesk\Models\Impl\PlanBuilderImpl;
+use OpenClassrooms\FrontDesk\Models\PlanBuilder;
 use OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException;
 
 /**
@@ -20,18 +21,24 @@ class PlanRepository implements PlanGateway
     private $apiClient;
 
     /**
+     * @var PlanBuilder
+     */
+    private $planBuilder;
+
+    public function __construct()
+    {
+        $this->planBuilder = new PlanBuilderImpl();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function findAllByPersonId($personId)
     {
-        $planBuilder = new PlanBuilderImpl();
-
         $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.'/'.$personId.'/plans');
         $result = json_decode($jsonResult, true);
 
-        $plans = $this->buildPlans($result, $planBuilder);
-
-        return $plans;
+        return $this->buildPlans($result);
     }
 
     /**
@@ -39,12 +46,11 @@ class PlanRepository implements PlanGateway
      *
      * @return array
      */
-    private function buildPlans($result, PlanBuilderImpl $planBuilder)
+    private function buildPlans($result)
     {
         $plans = [];
         foreach ($result['plans'] as $plan) {
-
-            $plans[] = $planBuilder
+            $plans[] = $this->planBuilder
                 ->create()
                 ->withCanceledAt($plan['canceled_at'] !== null ? new \DateTime($plan['canceled_at']) : null)
                 ->withConsiderMember($plan['consider_member'])

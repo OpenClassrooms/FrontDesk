@@ -3,6 +3,7 @@
 namespace OpenClassrooms\FrontDesk\Doubles\guzzlehttp\guzzle\src;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -25,6 +26,12 @@ class ClientMock extends Client
      */
     public static $params;
 
+    public function __construct()
+    {
+        self::$response = null;
+        self::$resource = null;
+        self::$params = [];
+    }
 
     /**
      * {@inheritdoc}
@@ -52,6 +59,6 @@ class ClientMock extends Client
      */
     public function delete($resource)
     {
-        return null;
+        return new Response();
     }
 }

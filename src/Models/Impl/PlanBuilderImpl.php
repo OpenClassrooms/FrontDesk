@@ -2,7 +2,6 @@
 
 namespace OpenClassrooms\FrontDesk\Models\Impl;
 
-use OpenClassrooms\FrontDesk\Models\Plan;
 use OpenClassrooms\FrontDesk\Models\PlanBuilder;
 
 /**
@@ -16,7 +15,7 @@ class PlanBuilderImpl implements PlanBuilder
     private $plan;
 
     /**
-     * @return PlanBuilder
+     * {@inheritdoc}
      */
     public function create()
     {
@@ -58,7 +57,7 @@ class PlanBuilderImpl implements PlanBuilder
     /**
      * {@inheritdoc}
      */
-    public function withCreatedAt(\DateTime $createdAt)
+    public function withCreatedAt(\DateTime $createdAt = null)
     {
         $this->plan->setCreatedAt($createdAt);
 
@@ -158,7 +157,7 @@ class PlanBuilderImpl implements PlanBuilder
     /**
      * {@inheritdoc}
      */
-    public function withStartDate(\DateTime $startDate)
+    public function withStartDate(\DateTime $startDate = null)
     {
         $this->plan->setStartDate($startDate);
 
@@ -186,7 +185,7 @@ class PlanBuilderImpl implements PlanBuilder
     }
 
     /**
-     * @return Plan
+     * {@inheritdoc}
      */
     public function build()
     {

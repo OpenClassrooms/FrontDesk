@@ -10,6 +10,8 @@ use OpenClassrooms\FrontDesk\Models\Pack;
 interface PackService
 {
     /**
+     * @param int $packProductId
+     *
      * @return int
      */
     public function create(Pack $pack, $packProductId);
