@@ -10,7 +10,14 @@ use OpenClassrooms\FrontDesk\Models\Pack;
 interface PackGateway
 {
     /**
+     * @param int $packProductId
+     *
      * @return int
      */
     public function insert(Pack $pack, $packProductId);
+
+    /**
+     * @param int $packId
+     */
+    public function deleteById($packId);
 }

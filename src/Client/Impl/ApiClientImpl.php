@@ -49,4 +49,12 @@ class ApiClientImpl implements ApiClient
 
         return $response->getBody()->getContents();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete($resourceName)
+    {
+        $this->client->delete($resourceName);
+    }
 }
