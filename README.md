@@ -41,7 +41,7 @@ $client = $factory->create('your_front_desk_server_name', 'your_token');
 ```
 
 ##### Gateway
-The library provides Gateway for a person and a pack:
+The library provides Gateway for a person, a pack, a plan and a visit:
 ```php
 use OpenClassrooms\FrontDesk\Repository\PersonRepository;
 use OpenClassrooms\FrontDesk\Repository\PackRepository;
@@ -50,7 +50,13 @@ $personGateway = new PersonRepository(); 
 $personGateway->setClient($client);         
 ...
 $packGateway = new PackRepository();         
-$packGateway->setClient($client);         
+$packGateway->setClient($client); 
+...
+$visitGateway = new VisitRepository();         
+$visitGateway->setClient($client);  
+...
+$planGateway = new PlanRepository();         
+$planGateway->setClient($client);          
 ```
 
 ##### Builder
@@ -82,28 +88,61 @@ $pack = $packBuilder->create()
                       ->build();
 ```
 
-##### Services
-
+## Services
+##### Services Instanciation
 The library provide a service for person and pack 
 ```php
 use OpenClassrooms\FrontDesk\Services\Impl\PersonServiceImpl;
-use OpenClassrooms\FrontDesk\Services\Impl\PersonServiceImpl;
+use OpenClassrooms\FrontDesk\Services\Impl\PackServiceImpl;
+use OpenClassrooms\FrontDesk\Services\Impl\PackServiceImpl;
 
 $service = new PersonServiceImpl();
 ...
 $service = new PackServiceImpl();
+...
+$service = new VisitServiceImpl();
 ```
-
-#### Creation
-
+##### Post a person or a pack 
 Just see here an exemple of a full person creation, this is the same logic for the pack: 
 
 ```php
-$fatory = new ClientFactoryImpl();         
-$client = $factory->create('server_name', 'dfqkjdfshqfaketokenldfjqhkdsjf');         
-$service = new PersonServiceImpl();         
-$personGateway = new PersonRepository();         
-$personGateway->setClient($client);         
-$service->setPersonGateway($personGateway);         
-$service->create(new PersonStub1());  
+$fatory = new ClientFactoryImpl();        
+$client = $factory->create('server_name', 'your_token');        
+$service = new PersonServiceImpl();        
+$personGateway = new PersonRepository();        
+$personGateway->setClient($client);       
+$service->setPersonGateway($personGateway);        
+$service->create(new PersonStub1()); 
 ```
+
+##### Get Visit by person id
+```php
+$fatory = new ClientFactoryImpl();        
+$client = $factory->create('server_name', 'your_token');
+$service = new VisitServiceImpl();
+$visitGateway = new VisitRepository();
+$visitGateway->setApiClient($client);
+$service->setVisitGateway($visitGateway);
+$service->getVisits($personId, $from, $to);
+```
+
+##### Get Plans by person id
+```php
+$fatory = new ClientFactoryImpl();        
+$client = $factory->create('server_name', 'your_token');
+$service = new PlanServiceImpl();
+$planGateway = new PlanRepository();
+$planGateway->setApiClient($client);
+$service->setPlanGateway($planGateway);
+$service->getPlans($personId);
+```
+
+##### Delete a pack by id 
+```php
+$fatory = new ClientFactoryImpl();        
+$client = $factory->create('server_name', 'your_token');
+$service = new PackServiceImpl();
+$packGateway = new PackRepository();        
+$packGateway->setClient($client);       
+$service->setPacknGateway($packGateway);        
+$service->deletePack($packId); 
