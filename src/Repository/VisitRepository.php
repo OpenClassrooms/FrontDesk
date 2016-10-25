@@ -5,13 +5,15 @@ namespace OpenClassrooms\FrontDesk\Repository;
 use OpenClassrooms\FrontDesk\Client\ApiClient;
 use OpenClassrooms\FrontDesk\Gateways\VisitGateway;
 use OpenClassrooms\FrontDesk\Models\Impl\VisitBuilderImpl;
+use OpenClassrooms\FrontDesk\Models\VisitBuilder;
+use OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
 class VisitRepository implements VisitGateway
 {
-    const RESOURCE_NAME = 'desk/people/';
+    const RESOURCE_NAME = 'desk/people';
 
     /**
      * @var ApiClient
@@ -19,38 +21,52 @@ class VisitRepository implements VisitGateway
     private $apiClient;
 
     /**
-     * {@inheritdoc}
+     * @var VisitBuilder
      */
-    public function findAllByPersonId($personId)
+    private $visitBuilder;
+
+    public function __construct()
     {
-        $visitBuilder = new VisitBuilderImpl();
-
-        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.$personId.'/visits');
-        $result = json_decode($jsonResult, true);
-
-        $visits = $this->buildVisits($result, $visitBuilder);
-
-        return $visits;
+        $this->visitBuilder = new VisitBuilderImpl();
     }
 
-    public function buildVisits($result, VisitBuilderImpl $visitBuilder)
+    /**
+     * {@inheritdoc}
+     */
+    public function findAllByPersonId($personId, $from = null, $to = null)
+    {
+        $parameters = null;
+        if (isset($from, $to)) {
+            $parameters = '?from='.$from.'&to='.$to;
+        }
+
+        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.'/'.$personId.'/visits'.$parameters);
+        $result = json_decode($jsonResult, true);
+
+        return $this->buildVisits($result);
+    }
+
+    public function buildVisits($result)
     {
         $visits = [];
-
-        foreach ($result as $visit) {
-            $visits = $visitBuilder
+        foreach ($result['visits'] as $visit) {
+            $visits[] = $this->visitBuilder
                 ->create()
-                ->withCancelledAt($visit['cancelled_at'])
-                ->withCompletedAt($visit['completed_at'])
-                ->withCreatedAt($visit['created_at'])
+                ->withCancelledAt($visit['cancelled_at'] !== null ? new \DateTime($visit['cancelled_at']) : null)
+                ->withCompletedAt($visit['completed_at'] !== null ? new \DateTime($visit['completed_at']) : null)
+                ->withCreatedAt($visit['created_at'] !== null ? new \DateTime($visit['created_at']) : null)
                 ->withEventOccurrence($visit['event_occurrence'])
                 ->withId($visit['id'])
-                ->withNoShowAt($visit['no_show_at'])
+                ->withNoShowAt($visit['noshow_at'] !== null ? new \DateTime($visit['noshow_at']) : null)
                 ->withPaid($visit['paid'])
                 ->withPaidForBy($visit['paid_for_by'])
-                ->withRegisterAt($visit['register_at'])
+                ->withRegisterAt($visit['registered_at'] !== null ? new \DateTime($visit['registered_at']) : null)
                 ->withStatus($visit['status'])
                 ->build();
+        }
+
+        if ($result['total_count'] !== count($visits)) {
+            throw new InvalidTotalCountException();
         }
 
         return $visits;

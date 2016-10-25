@@ -2,7 +2,6 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Gateways;
 
-use OpenClassrooms\FrontDesk\Doubles\Models\VisitStub1;
 use OpenClassrooms\FrontDesk\Gateways\VisitGateway;
 use OpenClassrooms\FrontDesk\Models\Visit;
 
@@ -16,15 +15,15 @@ class VisitGatewayMock implements VisitGateway
      */
     public static $visits;
 
-    public function __construct()
+    public function __construct(array $visits = [])
     {
-        self::$visits = new VisitStub1();
+        self::$visits = $visits;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findAllByPersonId($personId)
+    public function findAllByPersonId($personId, $from = null, $to = null)
     {
         return self::$visits;
     }

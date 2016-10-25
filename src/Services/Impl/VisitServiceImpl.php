@@ -18,12 +18,12 @@ class VisitServiceImpl implements VisitService
     /**
      * {@inheritdoc}
      */
-    public function getVisits($personId)
+    public function getVisits($personId, $from = null, $to = null)
     {
-        return $this->visitGateway->findAllByPersonId($personId);
+        return $this->visitGateway->findAllByPersonId($personId, $from, $to);
     }
 
-    public function setPlanGateway(VisitGateway $visitGateway)
+    public function setVisitGateway(VisitGateway $visitGateway)
     {
         $this->visitGateway = $visitGateway;
     }

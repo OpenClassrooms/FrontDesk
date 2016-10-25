@@ -13,11 +13,11 @@ class PlanStub1 extends PlanImpl
 
     const ID = 1;
 
-    const NAME = "Plan Stub 1 name";
+    const NAME = 'Plan Stub 1 name';
 
     const PERSON_IDS = [1];
 
-    const START_DATE = '2016-09-27 20:30:06';
+    const START_DATE = '2016-09-27';
 
     public function __construct()
     {

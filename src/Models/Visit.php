@@ -65,7 +65,7 @@ abstract class Visit
         return $this->cancelledAt;
     }
 
-    public function setCancelledAt(\DateTime $cancelledAt)
+    public function setCancelledAt(\DateTime $cancelledAt = null)
     {
         $this->cancelledAt = $cancelledAt;
     }
@@ -136,7 +136,7 @@ abstract class Visit
         return $this->noShowAt;
     }
 
-    public function setNoShowAt(\DateTime $noShowAt)
+    public function setNoShowAt(\DateTime $noShowAt = null)
     {
         $this->noShowAt = $noShowAt;
     }

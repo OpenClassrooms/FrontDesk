@@ -5,12 +5,15 @@ namespace OpenClassrooms\FrontDesk\Repository;
 use OpenClassrooms\FrontDesk\Doubles\Client\Impl\ApiClientMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\PlanStub1;
+use OpenClassrooms\FrontDesk\Doubles\Models\PlanTestCase;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
 class PlanRepositoryTest extends \PHPUnit_Framework_TestCase
 {
+    use PlanTestCase;
+
     /**
      * @var PlanRepository
      */
@@ -36,7 +39,12 @@ class PlanRepositoryTest extends \PHPUnit_Framework_TestCase
         ApiClientMock::$response = json_encode(["plans" => [new PlanStub1()], "total_count" => 1]);
 
         $plans = $this->planRepository->findAllByPersonId(PersonStub1::ID);
-        $this->assertEquals(json_encode([new PlanStub1()]), json_encode($plans));
+
+        $i = 0;
+        foreach ($plans as $plan) {
+            $planStub = '\OpenClassrooms\FrontDesk\Doubles\Models\PlanStub'.++$i;
+            $this->assertPlan(new $planStub(), $plan);
+        }
     }
 
     public function setUp()

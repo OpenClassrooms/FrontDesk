@@ -25,7 +25,7 @@ interface VisitBuilder
     /**
      * @return VisitBuilder
      */
-    public function withCreatedAt(\DateTime $createdAt);
+    public function withCreatedAt(\DateTime $createdAt = null);
 
     /**
      * @param int $eventOccurrence
@@ -44,7 +44,7 @@ interface VisitBuilder
     /**
      * @return VisitBuilder
      */
-    public function withNoShowAt(\DateTime $noShowAt);
+    public function withNoShowAt(\DateTime $noShowAt = null);
 
     /**
      * @param boolean $paid

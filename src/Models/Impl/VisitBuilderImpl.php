@@ -2,7 +2,6 @@
 
 namespace OpenClassrooms\FrontDesk\Models\Impl;
 
-use OpenClassrooms\FrontDesk\Models\Visit;
 use OpenClassrooms\FrontDesk\Models\VisitBuilder;
 
 /**
@@ -16,7 +15,7 @@ class VisitBuilderImpl implements VisitBuilder
     private $visit;
 
     /**
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
     public function create()
     {
@@ -26,7 +25,7 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
     public function withCancelledAt(\DateTime $cancelledAt = null)
     {
@@ -36,7 +35,7 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
     public function withCompletedAt(\DateTime $completedAt = null)
     {
@@ -46,9 +45,9 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
-    public function withCreatedAt(\DateTime $createdAt)
+    public function withCreatedAt(\DateTime $createdAt = null)
     {
         $this->visit->setCreatedAt($createdAt);
 
@@ -56,9 +55,7 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @param int $eventOccurrence
-     *
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
     public function withEventOccurrence($eventOccurrence)
     {
@@ -68,9 +65,7 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @param int $id
-     *
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
     public function withId($id)
     {
@@ -80,9 +75,9 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
-    public function withNoShowAt(\DateTime $noShowAt)
+    public function withNoShowAt(\DateTime $noShowAt = null)
     {
         $this->visit->setNoShowAt($noShowAt);
 
@@ -90,9 +85,7 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @param boolean $paid
-     *
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
     public function withPaid($paid)
     {
@@ -102,9 +95,7 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @param string $paidForBy
-     *
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
     public function withPaidForBy($paidForBy)
     {
@@ -114,7 +105,7 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
     public function withRegisterAt(\DateTime $registeredAt = null)
     {
@@ -124,9 +115,7 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @param string $status
-     *
-     * @return VisitBuilder
+     * {@inheritdoc}
      */
     public function withStatus($status)
     {
@@ -136,7 +125,7 @@ class VisitBuilderImpl implements VisitBuilder
     }
 
     /**
-     * @return Visit
+     * {@inheritdoc}
      */
     public function build()
     {

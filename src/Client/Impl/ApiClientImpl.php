@@ -17,8 +17,8 @@ class ApiClientImpl implements ApiClient
     private $client;
 
     /**
-     * @param string $key    The API key
-     * @param string $secret The front page or home URL
+     * @param string $key
+     * @param string $token
      */
     public function __construct($key, $token)
     {

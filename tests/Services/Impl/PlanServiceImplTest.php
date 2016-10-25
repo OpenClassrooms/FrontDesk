@@ -22,7 +22,7 @@ class PlanServiceImplTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function getPlans_ReturnId()
+    public function getPlans_ReturnPlans()
     {
         $plans = $this->service->getPlans(PersonStub1::ID);
         $this->assertEquals(0, count($plans) - count(PlanGatewayMock::$plans));

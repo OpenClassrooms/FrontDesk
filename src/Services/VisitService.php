@@ -14,5 +14,5 @@ interface VisitService
      *
      * @return Visit[]
      */
-    public function getVisits($personId);
+    public function getVisits($personId, $from = null, $to = null);
 }

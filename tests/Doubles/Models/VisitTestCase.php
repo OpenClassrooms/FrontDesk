@@ -10,6 +10,18 @@ use PHPUnit_Framework_Assert as Assert;
  */
 trait VisitTestCase
 {
+    /**
+     * @param Visit[] $visits
+     */
+    public function assertVisits(array $visits)
+    {
+        $i = 0;
+        foreach ($visits as $visit) {
+            $visitStub = '\OpenClassrooms\FrontDesk\Doubles\Models\VisitStub'.++$i;
+            $this->assertVisit(new $visitStub(), $visit);
+        }
+    }
+
     public function assertVisit(Visit $expected, Visit $actual)
     {
         Assert::assertEquals($expected->getCancelledAt(), $actual->getCancelledAt());

@@ -10,9 +10,11 @@ use OpenClassrooms\FrontDesk\Models\Visit;
 interface VisitGateway
 {
     /**
-     * @param integer $personId
+     * @param int $personId
+     * @param int $from
+     * @param int $to
      *
      * @return Visit[]
      */
-    public function findAllByPersonId($personId);
+    public function findAllByPersonId($personId, $from = null, $to = null);
 }
