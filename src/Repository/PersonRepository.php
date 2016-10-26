@@ -11,7 +11,7 @@ use OpenClassrooms\FrontDesk\Models\Person;
  */
 class PersonRepository implements PersonGateway
 {
-    const RESOURCE_NAME = 'desk/people';
+    const RESOURCE_NAME = 'desk/people/';
 
     /**
      * @var ApiClient

@@ -13,7 +13,7 @@ use OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException;
  */
 class VisitRepository implements VisitGateway
 {
-    const RESOURCE_NAME = 'desk/people';
+    const RESOURCE_NAME = 'desk/visits/';
 
     /**
      * @var ApiClient
@@ -40,7 +40,7 @@ class VisitRepository implements VisitGateway
             $parameters = '?from='.$from.'&to='.$to;
         }
 
-        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.'/'.$personId.'/visits'.$parameters);
+        $jsonResult = $this->apiClient->get(PersonRepository::RESOURCE_NAME.$personId.'/visits'.$parameters);
         $result = json_decode($jsonResult, true);
 
         return $this->buildVisits($result);
@@ -70,6 +70,14 @@ class VisitRepository implements VisitGateway
         }
 
         return $visits;
+    }
+
+    /**
+     * @param int $visitId
+     */
+    public function deleteById($visitId)
+    {
+        $this->apiClient->delete(self::RESOURCE_NAME.$visitId);
     }
 
     public function setApiClient(ApiClient $apiClient)

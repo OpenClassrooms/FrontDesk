@@ -2,8 +2,9 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Client\Impl;
 
-use GuzzleHttp\Psr7\Response;
 use OpenClassrooms\FrontDesk\Client\Impl\ApiClientImpl;
+use OpenClassrooms\FrontDesk\Client\NotFoundException;
+use OpenClassrooms\FrontDesk\Client\UnprocessableEntityException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -31,12 +32,18 @@ class ApiClientMock extends ApiClientImpl
      */
     public static $params;
 
+    /**
+     * @var int
+     */
+    public static $statusCode;
+
     public function __construct()
     {
         self::$id = null;
         self::$response = null;
         self::$params = [];
         self::$resource = null;
+        self::$statusCode = null;
     }
 
     /**
@@ -55,6 +62,9 @@ class ApiClientMock extends ApiClientImpl
      */
     public function get($resourceName)
     {
+        if (self::$statusCode === 404) {
+            throw new NotFoundException();
+        }
         self::$resource = $resourceName;
 
         return self::$response;
@@ -65,6 +75,13 @@ class ApiClientMock extends ApiClientImpl
      */
     public function delete($resourceName)
     {
-        return new Response();
+        if (self::$statusCode === 404) {
+            throw new NotFoundException();
+        } elseif (self::$statusCode === 422) {
+            throw new UnprocessableEntityException();
+        }
+        self::$resource = $resourceName;
+
+        return self::$response;
     }
 }

@@ -23,6 +23,14 @@ class VisitServiceImpl implements VisitService
         return $this->visitGateway->findAllByPersonId($personId, $from, $to);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteVisit($visitId)
+    {
+        return $this->visitGateway->deleteById($visitId);
+    }
+
     public function setVisitGateway(VisitGateway $visitGateway)
     {
         $this->visitGateway = $visitGateway;
