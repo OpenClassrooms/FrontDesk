@@ -38,7 +38,7 @@ abstract class Visit
     protected $noShowAt;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $paid;
 
@@ -142,7 +142,7 @@ abstract class Visit
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPaid()
     {
@@ -150,7 +150,7 @@ abstract class Visit
     }
 
     /**
-     * @param boolean $paid
+     * @param bool $paid
      */
     public function setPaid($paid)
     {

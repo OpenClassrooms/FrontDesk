@@ -16,13 +16,14 @@ class PersonImpl extends Person implements \JsonSerializable
     {
         return [
             'person' => [
-                'address'    => $this->address,
-                'email'      => $this->email,
-                'first_name' => $this->firstName,
-                'id'         => $this->id,
-                'joined_at'  => $this->joinedAt->getTimestamp(),
-                'last_name'  => $this->lastName,
-                'phone'      => $this->phone,
+                'address'       => $this->address,
+                'custom_fields' => $this->customFields,
+                'email'         => $this->email,
+                'first_name'    => $this->firstName,
+                'id'            => $this->id,
+                'joined_at'     => $this->joinedAt->getTimestamp(),
+                'last_name'     => $this->lastName,
+                'phone'         => $this->phone,
             ],
         ];
     }

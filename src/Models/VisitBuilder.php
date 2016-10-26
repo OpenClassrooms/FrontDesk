@@ -47,7 +47,7 @@ interface VisitBuilder
     public function withNoShowAt(\DateTime $noShowAt = null);
 
     /**
-     * @param boolean $paid
+     * @param bool $paid
      *
      * @return VisitBuilder
      */

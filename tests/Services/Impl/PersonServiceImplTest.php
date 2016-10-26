@@ -41,6 +41,7 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
         return $personBuilder
             ->create()
             ->withAddress(PersonStub1::ADDRESS)
+            ->withCustomFields(PersonStub1::CUSTOM_FIELDS)
             ->withEmail(PersonStub1::EMAIL)
             ->withFirstName(PersonStub1::FIRST_NAME)
             ->withJoinedAt(new \DateTime(PersonStub1::JOINED_AT))

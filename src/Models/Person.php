@@ -13,6 +13,11 @@ abstract class Person
     protected $address;
 
     /**
+     * @var array
+     */
+    protected $customFields;
+
+    /**
      * @var string
      */
     protected $email;
@@ -56,6 +61,22 @@ abstract class Person
     public function setAddress($address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->customFields;
+    }
+
+    /**
+     * @param array $customFields
+     */
+    public function setCustomFields(array $customFields = [])
+    {
+        $this->customFields = $customFields;
     }
 
     /**
