@@ -67,6 +67,7 @@ use OpenClassrooms\FrontDesk\Models\PersonBuilder;
 
 $person = $personBuilder->create()
                         ->withAddress(PersonStub1::ADDRESS)
+                        ->withCustomFields(PersonStub1::CUSTOM_FIELDS)
                         ->withEmail(PersonStub1::EMAIL)
                         ->withFirstName(PersonStub1::FIRST_NAME)
                         ->withJoinedAt(new \DateTime(PersonStub1::JOINED_AT))
@@ -90,7 +91,7 @@ $pack = $packBuilder->create()
 
 ## Services
 ##### Services Instanciation
-The library provide a service for person and pack 
+The library provide a service for person, plan, pack and visit 
 ```php
 use OpenClassrooms\FrontDesk\Services\Impl\PersonServiceImpl;
 use OpenClassrooms\FrontDesk\Services\Impl\PackServiceImpl;
@@ -101,12 +102,14 @@ $service = new PersonServiceImpl();
 $service = new PackServiceImpl();
 ...
 $service = new VisitServiceImpl();
+...
+$service = new PlanServiceImpl
 ```
 ##### Post a person or a pack 
 Just see here an exemple of a full person creation, this is the same logic for the pack: 
 
 ```php
-$fatory = new ClientFactoryImpl();        
+$factory = new ClientFactoryImpl();        
 $client = $factory->create('server_name', 'your_token');        
 $service = new PersonServiceImpl();        
 $personGateway = new PersonRepository();        
@@ -117,7 +120,7 @@ $service->create(new PersonStub1());
 
 ##### Get Visit by person id
 ```php
-$fatory = new ClientFactoryImpl();        
+$factory = new ClientFactoryImpl();        
 $client = $factory->create('server_name', 'your_token');
 $service = new VisitServiceImpl();
 $visitGateway = new VisitRepository();
@@ -126,9 +129,20 @@ $service->setVisitGateway($visitGateway);
 $service->getVisits($personId, $from, $to);
 ```
 
+##### Delete Visit by id
+```php
+$factory = new ClientFactoryImpl();        
+$client = $factory->create('server_name', 'your_token');
+$service = new VisitServiceImpl();
+$visitGateway = new VisitRepository();
+$visitGateway->setApiClient($client);
+$service->setVisitGateway($visitGateway);
+$service->deleteVisit($visitId);
+```
+
 ##### Get Plans by person id
 ```php
-$fatory = new ClientFactoryImpl();        
+$factory = new ClientFactoryImpl();        
 $client = $factory->create('server_name', 'your_token');
 $service = new PlanServiceImpl();
 $planGateway = new PlanRepository();
@@ -139,7 +153,7 @@ $service->getPlans($personId);
 
 ##### Delete a pack by id 
 ```php
-$fatory = new ClientFactoryImpl();        
+$factory = new ClientFactoryImpl();        
 $client = $factory->create('server_name', 'your_token');
 $service = new PackServiceImpl();
 $packGateway = new PackRepository();        
