@@ -20,6 +20,13 @@ interface PersonBuilder
     public function withAddress($address);
 
     /**
+     * @param array|null $customFields
+     *
+     * @return PersonBuilder
+     */
+    public function withCustomFields(array $customFields = []);
+
+    /**
      * @param string $email
      *
      * @return PersonBuilder

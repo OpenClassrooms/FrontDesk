@@ -7,5 +7,4 @@ namespace OpenClassrooms\FrontDesk\Services\Impl;
  */
 class InvalidTotalCountException extends \Exception
 {
-
 }

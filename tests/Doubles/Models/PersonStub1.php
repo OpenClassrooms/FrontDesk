@@ -11,6 +11,11 @@ class PersonStub1 extends PersonImpl
 {
     const ADDRESS = 'Person stub 1 address';
 
+    const CUSTOM_FIELDS = [
+        ['id' => 139386, 'value' => 'first custom field'],
+        ['id' => 139387, 'value' => 'second custom field'],
+    ];
+
     const EMAIL = 'personstub1email@openclassrooms.com';
 
     const FIRST_NAME = 'Person stub 1 first name';
@@ -23,18 +28,14 @@ class PersonStub1 extends PersonImpl
 
     const PHONE = 'Person stub 1 PHONE';
 
-    protected $address = self::ADDRESS;
-
-    protected $email = self::EMAIL;
-
-    protected $firstName = self::FIRST_NAME;
-
-    protected $lastName = self::LAST_NAME;
-
-    protected $phone = self::PHONE;
-
     public function __construct()
     {
+        $this->address = self::ADDRESS;
+        $this->customFields = self::CUSTOM_FIELDS;
+        $this->email = self::EMAIL;
+        $this->firstName = self::FIRST_NAME;
         $this->joinedAt = new \DateTime(self::JOINED_AT);
+        $this->lastName = self::LAST_NAME;
+        $this->phone = self::PHONE;
     }
 }

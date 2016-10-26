@@ -10,7 +10,7 @@ use OpenClassrooms\FrontDesk\Models\Plan;
 interface PlanGateway
 {
     /**
-     * @param integer $personId
+     * @param int $personId
      *
      * @return Plan[]
      */

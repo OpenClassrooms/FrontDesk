@@ -18,7 +18,7 @@ interface PlanBuilder
     public function withCanceledAt(\DateTime $canceledAt = null);
 
     /**
-     * @param boolean $considerMember
+     * @param bool $considerMember
      *
      * @return PlanBuilder
      */

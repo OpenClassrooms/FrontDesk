@@ -7,19 +7,18 @@ namespace OpenClassrooms\FrontDesk\Models;
  */
 abstract class Plan
 {
-
     /**
      * @var \DateTime
      */
     protected $canceledAt;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $considerMember;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $count;
 
@@ -39,12 +38,12 @@ abstract class Plan
     protected $endDate;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $locationId;
 
@@ -64,12 +63,12 @@ abstract class Plan
     protected $planProductId;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $priceCents;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $staffMemberId;
 
@@ -102,7 +101,7 @@ abstract class Plan
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isConsiderMember()
     {
@@ -110,7 +109,7 @@ abstract class Plan
     }
 
     /**
-     * @param boolean $considerMember
+     * @param bool $considerMember
      */
     public function setConsiderMember($considerMember)
     {
