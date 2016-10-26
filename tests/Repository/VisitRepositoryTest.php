@@ -17,6 +17,8 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
 
     const FROM = '2016-08-12 15:30:06';
 
+    const NOT_FOUND_RESPONSE = 404;
+
     const TO = '2016-09-12 15:30:06';
 
     /**
@@ -33,6 +35,17 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         ApiClientMock::$response = json_encode(['visits' => [new VisitStub1()], 'total_count' => 0]);
 
+        $this->visitRepository->findAllByPersonId(PersonStub1::ID);
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \OpenClassrooms\FrontDesk\Client\NotFoundException
+     */
+    public function visitNotFound_ThrowException()
+    {
+        ApiClientMock::$statusCode = self::NOT_FOUND_RESPONSE;
         $this->visitRepository->findAllByPersonId(PersonStub1::ID);
     }
 
@@ -71,6 +84,16 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
         $to = $to->toISO8601String();
 
         return [$from, $to];
+    }
+
+    /**
+     * @test
+     */
+    public function deleteById_DoNothing()
+    {
+        $this->visitRepository->deleteById(VisitStub1::ID);
+
+        $this->assertTrue(true);
     }
 
     public function setUp()

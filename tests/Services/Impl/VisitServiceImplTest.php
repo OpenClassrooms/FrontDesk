@@ -57,6 +57,15 @@ class VisitServiceImplTest extends \PHPUnit_Framework_TestCase
         return [$from, $to];
     }
 
+    /**
+     * @test
+     */
+    public function deleteVisit()
+    {
+        $this->service->deleteVisit(VisitStub1::ID);
+        $this->assertEmpty(VisitGatewayMock::$visits);
+    }
+
     public function setUp()
     {
         $this->service = new VisitServiceImpl();

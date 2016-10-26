@@ -40,7 +40,7 @@ class PackGatewayMock implements PackGateway
     }
 
     /**
-     * @param $packId
+     * @param int $packId
      */
     public function deleteById($packId)
     {

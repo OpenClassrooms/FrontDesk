@@ -5,6 +5,8 @@ namespace OpenClassrooms\FrontDesk\Client\Impl;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use OpenClassrooms\FrontDesk\Client\ApiClient;
+use OpenClassrooms\FrontDesk\Client\NotFoundException;
+use OpenClassrooms\FrontDesk\Client\UnprocessableEntityException;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
@@ -55,6 +57,12 @@ class ApiClientImpl implements ApiClient
      */
     public function delete($resourceName)
     {
-        $this->client->delete($resourceName);
+        $response = $this->client->delete($resourceName);
+
+        if ($response->getStatusCode() == 422) {
+            throw new UnprocessableEntityException();
+        } elseif ($response->getStatusCode() == 404) {
+            throw new NotFoundException();
+        }
     }
 }

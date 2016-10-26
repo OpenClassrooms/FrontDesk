@@ -11,6 +11,8 @@ interface ApiClient
      * @param string $resourceName
      *
      * @return string
+     *
+     * @throws NotFoundException
      */
     public function get($resourceName);
 
@@ -23,7 +25,7 @@ interface ApiClient
     public function post($resourceName, $resourceData);
 
     /**
-     * @param $resourceName
+     * @param string $resourceName
      */
     public function delete($resourceName);
 }

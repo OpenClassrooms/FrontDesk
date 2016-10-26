@@ -17,4 +17,9 @@ interface VisitGateway
      * @return Visit[]
      */
     public function findAllByPersonId($personId, $from = null, $to = null);
+
+    /**
+     * @param int $visitId
+     */
+    public function deleteById($visitId);
 }

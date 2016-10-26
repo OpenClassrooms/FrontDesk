@@ -20,6 +20,12 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
 
     const PARAMS = ['param1' => 'myParam1'];
 
+    const NOT_FOUND_RESPONSE = 404;
+
+    const UNPROCESSABLE_ENTITY_RESPONSE = 422;
+
+    const OK_RESPONSE = 200;
+
     /**
      * @var ApiClientImpl
      */
@@ -66,12 +72,49 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
+     * @expectedException \OpenClassrooms\FrontDesk\Client\NotFoundException
      */
-    public function deleteResource_ReturnNull()
+    public function notFoundResource_ThrowException()
     {
-        $response = $this->apiClient->delete(self::RESOURCE_NAME);
+        ClientMock::$response = $this->buildResponse(self::NOT_FOUND_RESPONSE);
+        $this->apiClient->delete(self::RESOURCE_NAME);
+    }
 
-        $this->assertNull($response);
+    /**
+     * @param int $statusCode
+     */
+    private function buildResponse($statusCode)
+    {
+        $streamMock = $this->createMock(StreamInterface::class);
+        $streamMock->method('getContents')->willReturn('');
+        $responseMock = $this->createMock(ResponseInterface::class);
+        $responseMock->method('getBody')->willReturn($streamMock);
+        $responseMock->method('getStatusCode')->willReturn($statusCode);
+
+        return $responseMock;
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \OpenClassrooms\FrontDesk\Client\UnprocessableEntityException
+     */
+    public function UnprocessableEntity_ThrowException()
+    {
+        ClientMock::$response = $this->buildResponse(self::UNPROCESSABLE_ENTITY_RESPONSE);
+        $this->apiClient->delete(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteResource_DoNothing()
+    {
+        ClientMock::$response = $this->buildResponse(self::OK_RESPONSE);
+        $this->apiClient->delete(self::RESOURCE_NAME);
+
+        $this->assertTrue(true);
     }
 
     protected function setUp()

@@ -3,7 +3,6 @@
 namespace OpenClassrooms\FrontDesk\Doubles\guzzlehttp\guzzle\src;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -59,6 +58,6 @@ class ClientMock extends Client
      */
     public function delete($resource)
     {
-        return new Response();
+        return self::$response;
     }
 }
