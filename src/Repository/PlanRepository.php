@@ -13,7 +13,7 @@ use OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException;
  */
 class PlanRepository implements PlanGateway
 {
-    const RESOURCE_NAME = 'desk/people';
+    const RESOURCE_NAME = ApiEndpoint::DESK.'/people/';
 
     /**
      * @var ApiClient
@@ -35,7 +35,7 @@ class PlanRepository implements PlanGateway
      */
     public function findAllByPersonId($personId)
     {
-        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.'/'.$personId.'/plans');
+        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.$personId.'/plans');
         $result = json_decode($jsonResult, true);
 
         return $this->buildPlans($result);

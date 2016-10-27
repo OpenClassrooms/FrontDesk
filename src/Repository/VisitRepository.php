@@ -13,7 +13,7 @@ use OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException;
  */
 class VisitRepository implements VisitGateway
 {
-    const RESOURCE_NAME = 'desk/visits/';
+    const RESOURCE_NAME = ApiEndpoint::DESK.'/visits/';
 
     /**
      * @var ApiClient
