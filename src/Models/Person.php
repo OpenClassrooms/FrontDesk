@@ -119,7 +119,7 @@ abstract class Person
         return $this->joinedAt;
     }
 
-    public function setJoinedAt(\DateTime $joinedAt)
+    public function setJoinedAt(\DateTime $joinedAt = null)
     {
         $this->joinedAt = $joinedAt;
     }
