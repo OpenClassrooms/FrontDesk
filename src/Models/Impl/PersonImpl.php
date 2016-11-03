@@ -21,7 +21,7 @@ class PersonImpl extends Person implements \JsonSerializable
                 'email'         => $this->email,
                 'first_name'    => $this->firstName,
                 'id'            => $this->id,
-                'joined_at'     => $this->joinedAt->getTimestamp(),
+                'joined_at'     => $this->joinedAt !== null ? $this->joinedAt->getTimestamp() : null,
                 'last_name'     => $this->lastName,
                 'phone'         => $this->phone,
             ],
