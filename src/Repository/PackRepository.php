@@ -34,7 +34,7 @@ class PackRepository implements PackGateway
      */
     public function deleteById($packId)
     {
-        $this->apiClient->delete('desk/'.self::RESOURCE_NAME.$packId);
+        $this->apiClient->delete(self::RESOURCE_NAME.$packId);
     }
 
     public function setApiClient(ApiClient $apiClient)
