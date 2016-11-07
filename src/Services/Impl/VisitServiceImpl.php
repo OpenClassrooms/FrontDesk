@@ -26,9 +26,9 @@ class VisitServiceImpl implements VisitService
     /**
      * {@inheritdoc}
      */
-    public function deleteVisit($visitId)
+    public function deleteVisit($visitId, $personNotification = false)
     {
-        return $this->visitGateway->deleteById($visitId);
+        return $this->visitGateway->deleteById($visitId, $personNotification);
     }
 
     public function setVisitGateway(VisitGateway $visitGateway)

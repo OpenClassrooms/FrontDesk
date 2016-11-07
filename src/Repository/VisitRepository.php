@@ -73,11 +73,11 @@ class VisitRepository implements VisitGateway
     }
 
     /**
-     * @param int $visitId
+     * {@inheritdoc}
      */
-    public function deleteById($visitId)
+    public function deleteById($visitId, $personNotification = false)
     {
-        $this->apiClient->delete(self::RESOURCE_NAME.$visitId);
+        $this->apiClient->delete(self::RESOURCE_NAME.$visitId.'?notify_client='.(string) $personNotification);
     }
 
     public function setApiClient(ApiClient $apiClient)
