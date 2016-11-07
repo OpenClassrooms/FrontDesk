@@ -31,7 +31,7 @@ class VisitGatewayMock implements VisitGateway
     /**
      * {@inheritdoc}
      */
-    public function deleteById($visitId)
+    public function deleteById($visitId, $personNotification = false)
     {
         unset(self::$visits[$visitId]);
     }

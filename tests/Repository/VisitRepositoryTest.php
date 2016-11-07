@@ -91,7 +91,7 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function deleteById_DoNothing()
     {
-        $this->visitRepository->deleteById(VisitStub1::ID);
+        $this->visitRepository->deleteById(VisitStub1::ID, false);
 
         $this->assertTrue(true);
     }

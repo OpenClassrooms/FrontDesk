@@ -17,7 +17,8 @@ interface VisitService
     public function getVisits($personId, $from = null, $to = null);
 
     /**
-     * @param int $visitId
+     * @param int       $visitId
+     * @param bool|null $personNotification
      */
-    public function deleteVisit($visitId);
+    public function deleteVisit($visitId, $personNotification = false);
 }
