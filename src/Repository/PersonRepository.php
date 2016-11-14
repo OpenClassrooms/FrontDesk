@@ -2,21 +2,15 @@
 
 namespace OpenClassrooms\FrontDesk\Repository;
 
-use OpenClassrooms\FrontDesk\Client\ApiClient;
 use OpenClassrooms\FrontDesk\Gateways\PersonGateway;
 use OpenClassrooms\FrontDesk\Models\Person;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class PersonRepository implements PersonGateway
+class PersonRepository extends BaseRepository implements PersonGateway
 {
     const RESOURCE_NAME = ApiEndpoint::DESK.'/people/';
-
-    /**
-     * @var ApiClient
-     */
-    private $apiClient;
 
     /**
      * {@inheritdoc}
@@ -27,10 +21,5 @@ class PersonRepository implements PersonGateway
         $result = json_decode($jsonResult, true);
 
         return $result['people'][0]['id'];
-    }
-
-    public function setApiClient(ApiClient $apiClient)
-    {
-        $this->apiClient = $apiClient;
     }
 }

@@ -10,7 +10,9 @@ use OpenClassrooms\FrontDesk\Models\Visit;
 interface VisitService
 {
     /**
-     * @param int $personId
+     * @param int    $personId
+     * @param string $from ISO8601String
+     * @param string $to   ISO8601String
      *
      * @return Visit[]
      */

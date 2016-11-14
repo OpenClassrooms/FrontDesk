@@ -59,9 +59,9 @@ class ApiClientImpl implements ApiClient
     {
         $response = $this->client->delete($resourceName);
 
-        if ($response->getStatusCode() == 422) {
+        if ($response->getStatusCode() === 422) {
             throw new UnprocessableEntityException();
-        } elseif ($response->getStatusCode() == 404) {
+        } elseif ($response->getStatusCode() === 404) {
             throw new NotFoundException();
         }
     }

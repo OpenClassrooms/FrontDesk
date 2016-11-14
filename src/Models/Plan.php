@@ -233,7 +233,7 @@ abstract class Plan
     /**
      * @param int[] $personIds
      */
-    public function setPersonIds(array $personIds = null)
+    public function setPersonIds(array $personIds)
     {
         $this->personIds = $personIds;
     }

@@ -28,10 +28,14 @@ class VisitImpl extends Visit implements \JsonSerializable
             ) : null,
             'event_occurrence' => $this->eventOccurrence,
             'id'               => $this->id,
-            'noshow_at'        => $this->noShowAt,
+            'noshow_at'        => $this->noShowAt !== null ? $this->noShowAt->format(
+                ApiDateFormat::DATE_FORMAT_FULL
+            ) : null,
             'paid'             => $this->paid,
             'paid_for_by'      => $this->paidForBy,
-            'registered_at'    => $this->registeredAt,
+            'registered_at'    => $this->registeredAt !== null ? $this->registeredAt->format(
+                ApiDateFormat::DATE_FORMAT_FULL
+            ) : null,
             'status'           => $this->status,
         ];
     }

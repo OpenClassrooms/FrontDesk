@@ -28,6 +28,8 @@ class PersonStub1 extends PersonImpl
 
     const PHONE = 'Person stub 1 PHONE';
 
+    protected $id = self::ID;
+
     public function __construct()
     {
         $this->address = self::ADDRESS;
