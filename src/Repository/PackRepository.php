@@ -2,23 +2,17 @@
 
 namespace OpenClassrooms\FrontDesk\Repository;
 
-use OpenClassrooms\FrontDesk\Client\ApiClient;
 use OpenClassrooms\FrontDesk\Gateways\PackGateway;
 use OpenClassrooms\FrontDesk\Models\Pack;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class PackRepository implements PackGateway
+class PackRepository extends BaseRepository implements PackGateway
 {
     const RESOURCE_PACK_PRODUCT_NAME = ApiEndpoint::DESK.'/pack_products/';
 
     const RESOURCE_PACK_NAME = ApiEndpoint::DESK.'/packs/';
-
-    /**
-     * @var ApiClient
-     */
-    private $apiClient;
 
     /**
      * {@inheritdoc}
@@ -37,10 +31,5 @@ class PackRepository implements PackGateway
     public function deleteById($packId)
     {
         $this->apiClient->delete(self::RESOURCE_PACK_NAME.$packId);
-    }
-
-    public function setApiClient(ApiClient $apiClient)
-    {
-        $this->apiClient = $apiClient;
     }
 }

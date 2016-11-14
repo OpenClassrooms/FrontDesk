@@ -2,7 +2,6 @@
 
 namespace OpenClassrooms\FrontDesk\Repository;
 
-use OpenClassrooms\FrontDesk\Client\ApiClient;
 use OpenClassrooms\FrontDesk\Gateways\PlanGateway;
 use OpenClassrooms\FrontDesk\Models\Impl\PlanBuilderImpl;
 use OpenClassrooms\FrontDesk\Models\PlanBuilder;
@@ -11,14 +10,9 @@ use OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException;
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class PlanRepository implements PlanGateway
+class PlanRepository extends BaseRepository implements PlanGateway
 {
     const RESOURCE_NAME = ApiEndpoint::DESK.'/people/';
-
-    /**
-     * @var ApiClient
-     */
-    private $apiClient;
 
     /**
      * @var PlanBuilder
@@ -76,10 +70,5 @@ class PlanRepository implements PlanGateway
         }
 
         return $plans;
-    }
-
-    public function setApiClient(ApiClient $apiClient)
-    {
-        $this->apiClient = $apiClient;
     }
 }

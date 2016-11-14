@@ -28,14 +28,22 @@ class PersonStub1 extends PersonImpl
 
     const PHONE = 'Person stub 1 PHONE';
 
+    protected $address = self::ADDRESS;
+
+    protected $customFields = self::CUSTOM_FIELDS;
+
+    protected $email = self::EMAIL;
+
+    protected $firstName = self::FIRST_NAME;
+
+    protected $id = self::ID;
+
+    protected $lastName = self::LAST_NAME;
+
+    protected $phone = self::PHONE;
+
     public function __construct()
     {
-        $this->address = self::ADDRESS;
-        $this->customFields = self::CUSTOM_FIELDS;
-        $this->email = self::EMAIL;
-        $this->firstName = self::FIRST_NAME;
         $this->joinedAt = new \DateTime(self::JOINED_AT);
-        $this->lastName = self::LAST_NAME;
-        $this->phone = self::PHONE;
     }
 }

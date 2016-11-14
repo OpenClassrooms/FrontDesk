@@ -62,7 +62,7 @@ abstract class Pack
     }
 
     /**
-     * @return array
+     * @return int[]
      */
     public function getPersonIds()
     {
@@ -72,7 +72,7 @@ abstract class Pack
     /**
      * @param int[] $personIds
      */
-    public function setPersonIds($personIds)
+    public function setPersonIds(array $personIds)
     {
         $this->personIds = $personIds;
     }

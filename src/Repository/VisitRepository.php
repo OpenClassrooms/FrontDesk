@@ -2,7 +2,6 @@
 
 namespace OpenClassrooms\FrontDesk\Repository;
 
-use OpenClassrooms\FrontDesk\Client\ApiClient;
 use OpenClassrooms\FrontDesk\Gateways\VisitGateway;
 use OpenClassrooms\FrontDesk\Models\Impl\VisitBuilderImpl;
 use OpenClassrooms\FrontDesk\Models\VisitBuilder;
@@ -11,14 +10,9 @@ use OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException;
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class VisitRepository implements VisitGateway
+class VisitRepository extends BaseRepository implements VisitGateway
 {
     const RESOURCE_NAME = ApiEndpoint::DESK.'/visits/';
-
-    /**
-     * @var ApiClient
-     */
-    private $apiClient;
 
     /**
      * @var VisitBuilder
@@ -78,10 +72,5 @@ class VisitRepository implements VisitGateway
     public function deleteById($visitId, $personNotification = false)
     {
         $this->apiClient->delete(self::RESOURCE_NAME.$visitId.'?notify_client='.(string) $personNotification);
-    }
-
-    public function setApiClient(ApiClient $apiClient)
-    {
-        $this->apiClient = $apiClient;
     }
 }
