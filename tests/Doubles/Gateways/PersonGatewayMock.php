@@ -2,7 +2,6 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Gateways;
 
-use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
 use OpenClassrooms\FrontDesk\Gateways\PersonGateway;
 use OpenClassrooms\FrontDesk\Models\Person;
 
@@ -35,8 +34,7 @@ class PersonGatewayMock implements PersonGateway
      */
     public function insert(Person $person)
     {
-        $person->setId(PersonStub1::ID);
-        self::$person[++self::$id] = $person;
+        self::$person[self::$id] = $person;
 
         return self::$id;
     }

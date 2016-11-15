@@ -41,6 +41,7 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
         return $personBuilder
             ->create()
             ->withAddress(PersonStub1::ADDRESS)
+            ->withBirthdate(new \DateTime(PersonStub1::BIRTHDATE))
             ->withCustomFields(PersonStub1::CUSTOM_FIELDS)
             ->withEmail(PersonStub1::EMAIL)
             ->withFirstName(PersonStub1::FIRST_NAME)

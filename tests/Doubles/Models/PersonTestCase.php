@@ -19,7 +19,6 @@ trait PersonTestCase
         Assert::assertEquals($expected->getFirstName(), $actual->getFirstName());
         Assert::assertEquals($expected->getGuardianEmail(), $actual->getGuardianEmail());
         Assert::assertEquals($expected->getGuardianName(), $actual->getGuardianName());
-        Assert::assertEquals($expected->getId(), $actual->getId());
         Assert::assertEquals($expected->getJoinedAt(), $actual->getJoinedAt());
         Assert::assertEquals($expected->getLastName(), $actual->getLastName());
         Assert::assertEquals($expected->getLocationId(), $actual->getLocationId());

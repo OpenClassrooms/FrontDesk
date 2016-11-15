@@ -25,10 +25,11 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
      */
     public function create_ReturnId()
     {
+        PersonGatewayMock::$id = PersonStub1::ID;
         $result = $this->service->create($this->buildPerson());
 
-        $this->assertEquals(1, $result);
-        $this->assertPerson(new PersonStub1(), PersonGatewayMock::$person[1]);
+        $this->assertEquals(PersonStub1::ID, $result);
+        $this->assertPerson(new PersonStub1(), PersonGatewayMock::$person[PersonStub1::ID]);
     }
 
     /**

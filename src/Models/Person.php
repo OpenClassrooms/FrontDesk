@@ -90,9 +90,8 @@ abstract class Person
         return $this->address;
     }
 
-
     /**
-     * @param $address
+     * @param string $address
      */
     public function setAddress($address)
     {
@@ -147,22 +146,6 @@ abstract class Person
     /**
      * @return int
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return int
-     */
     public function getLocationId()
     {
         return $this->locationId;
@@ -193,7 +176,7 @@ abstract class Person
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSendInvite()
     {
@@ -201,7 +184,7 @@ abstract class Person
     }
 
     /**
-     * @param boolean $sendInvite
+     * @param bool $sendInvite
      */
     public function setSendInvite($sendInvite)
     {
@@ -233,7 +216,7 @@ abstract class Person
     }
 
     /**
-     * @param $email
+     * @param string $email
      */
     public function setEmail($email)
     {
@@ -249,7 +232,7 @@ abstract class Person
     }
 
     /**
-     * @param $firstName
+     * @param string $firstName
      */
     public function setFirstName($firstName)
     {
@@ -277,6 +260,9 @@ abstract class Person
         return $this->lastName;
     }
 
+    /**
+     * @param string $lastName
+     */
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
@@ -291,7 +277,7 @@ abstract class Person
     }
 
     /**
-     * @param $phone
+     * @param string $phone
      */
     public function setPhone($phone)
     {
@@ -299,7 +285,7 @@ abstract class Person
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSkipComplimentaryPasses()
     {
@@ -307,7 +293,7 @@ abstract class Person
     }
 
     /**
-     * @param boolean $skipComplimentaryPasses
+     * @param bool $skipComplimentaryPasses
      */
     public function setSkipComplimentaryPasses($skipComplimentaryPasses)
     {
