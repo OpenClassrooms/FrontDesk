@@ -41,12 +41,19 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
         return $personBuilder
             ->create()
             ->withAddress(PersonStub1::ADDRESS)
+            ->withBirthdate(new \DateTime(PersonStub1::BIRTHDATE))
             ->withCustomFields(PersonStub1::CUSTOM_FIELDS)
             ->withEmail(PersonStub1::EMAIL)
             ->withFirstName(PersonStub1::FIRST_NAME)
+            ->withGuardianEmail(PersonStub1::GUARDIAN_EMAIL)
+            ->withGuardianName(PersonStub1::GUARDIAN_NAME)
             ->withJoinedAt(new \DateTime(PersonStub1::JOINED_AT))
+            ->withMiddleName(PersonStub1::MIDDLE_NAME)
             ->withLastName(PersonStub1::LAST_NAME)
+            ->withLocationId(PersonStub1::LOCATION_ID)
             ->withPhone(PersonStub1::PHONE)
+            ->withSendInvite(PersonStub1::SEND_INVITE)
+            ->withSkipComplimentaryPasses(PersonStub1::SKIP_COMPLIMENTARY_PASSES)
             ->build();
     }
 

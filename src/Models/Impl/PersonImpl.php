@@ -2,6 +2,7 @@
 
 namespace OpenClassrooms\FrontDesk\Models\Impl;
 
+use OpenClassrooms\FrontDesk\Models\ApiDateFormat;
 use OpenClassrooms\FrontDesk\Models\Person;
 
 /**
@@ -16,14 +17,23 @@ class PersonImpl extends Person implements \JsonSerializable
     {
         return [
             'person' => [
-                'address'       => $this->address,
-                'custom_fields' => $this->customFields,
-                'email'         => $this->email,
-                'first_name'    => $this->firstName,
-                'id'            => $this->id,
-                'joined_at'     => $this->joinedAt !== null ? $this->joinedAt->getTimestamp() : null,
-                'last_name'     => $this->lastName,
-                'phone'         => $this->phone,
+                'address'                   => $this->address,
+                'birthdate'                 => $this->birthdate !== null ? $this->birthdate->format(
+                    ApiDateFormat::DATE_FORMAT_MIN
+                ) : null,
+                'custom_fields'             => $this->customFields,
+                'email'                     => $this->email,
+                'first_name'                => $this->firstName,
+                'guardian_email'            => $this->guardianEmail,
+                'guardian_name'             => $this->guardianName,
+                'id'                        => $this->id,
+                'joined_at'                 => $this->joinedAt !== null ? $this->joinedAt->getTimestamp() : null,
+                'location_id'               => $this->locationId,
+                'last_name'                 => $this->lastName,
+                'middle_name'               => $this->middleName,
+                'phone'                     => $this->phone,
+                'send_invite'               => $this->sendInvite,
+                'skip_complimentary_passes' => $this->skipComplimentaryPasses,
             ],
         ];
     }
