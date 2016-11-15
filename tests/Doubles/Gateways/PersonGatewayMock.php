@@ -38,4 +38,15 @@ class PersonGatewayMock implements PersonGateway
 
         return self::$id;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function update(Person $person, $personId)
+    {
+        self::$person[++self::$id] = $person;
+        self::$id = $personId;
+
+        return self::$id;
+    }
 }

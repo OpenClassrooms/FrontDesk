@@ -35,6 +35,16 @@ class ApiClientImpl implements ApiClient
     /**
      * {@inheritdoc}
      */
+    public function get($resourceName)
+    {
+        $response = $this->client->get($resourceName);
+
+        return $response->getBody()->getContents();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function post($resourceName, $resourceData)
     {
         $response = $this->client->post($resourceName, ['json' => $resourceData]);
@@ -45,9 +55,9 @@ class ApiClientImpl implements ApiClient
     /**
      * {@inheritdoc}
      */
-    public function get($resourceName)
+    public function put($resourceName, $resourceData)
     {
-        $response = $this->client->get($resourceName);
+        $response = $this->client->put($resourceName, ['json' => $resourceData]);
 
         return $response->getBody()->getContents();
     }

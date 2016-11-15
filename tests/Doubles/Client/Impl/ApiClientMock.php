@@ -60,6 +60,17 @@ class ApiClientMock extends ApiClientImpl
     /**
      * {@inheritdoc}
      */
+    public function put($resourceName, $resourceData)
+    {
+        self::$resource = $resourceName;
+        self::$params = $resourceData;
+
+        return self::$response;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function get($resourceName)
     {
         if (self::$statusCode === 404) {

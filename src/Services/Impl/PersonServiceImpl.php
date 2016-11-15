@@ -24,6 +24,14 @@ class PersonServiceImpl implements PersonService
         return $this->personGateway->insert($person);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function update(Person $person, $personId)
+    {
+        return $this->personGateway->update($person, $personId);
+    }
+
     public function setPersonGateway(PersonGateway $personGateway)
     {
         $this->personGateway = $personGateway;

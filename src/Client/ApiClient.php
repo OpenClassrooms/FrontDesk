@@ -26,6 +26,14 @@ interface ApiClient
 
     /**
      * @param string $resourceName
+     * @param object $resourceData
+     *
+     * @return string
+     */
+    public function put($resourceName, $resourceData);
+
+    /**
+     * @param string $resourceName
      */
     public function delete($resourceName);
 }

@@ -46,6 +46,17 @@ class ClientMock extends Client
     /**
      * {@inheritdoc}
      */
+    public function put($resource, $params)
+    {
+        self::$resource = $resource;
+        self::$params = $params;
+
+        return self::$response;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function get($resource)
     {
         self::$resource = $resource;

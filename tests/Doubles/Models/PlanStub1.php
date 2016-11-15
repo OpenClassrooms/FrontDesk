@@ -37,7 +37,7 @@ class PlanStub1 extends PlanImpl
 
     const START_DATE = '2016-09-27';
 
-    const TYPE = "planType";
+    const TYPE = 'planType';
 
     const UPDATED_AT = '2016-10-12';
 
