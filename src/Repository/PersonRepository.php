@@ -26,9 +26,9 @@ class PersonRepository extends BaseRepository implements PersonGateway
     /**
      * {@inheritdoc}
      */
-    public function update(Person $person, $personId)
+    public function update(Person $person)
     {
-        $jsonResult = $this->apiClient->put(self::RESOURCE_NAME.$personId, $person);
+        $jsonResult = $this->apiClient->put(self::RESOURCE_NAME.$person->getId(), $person);
         $result = json_decode($jsonResult, true);
 
         return $result['people'][0]['id'];

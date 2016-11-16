@@ -57,10 +57,10 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         ApiClientMock::$response = json_encode(['people' => [0 => ['id' => PersonStub1::ID]]]);
         $person = $this->buildPerson();
-        $result = $this->personRepository->update($person, PersonStub1::ID);
+        $result = $this->personRepository->update($person);
 
         $this->assertEquals(PersonStub1::ID, $result);
-        $this->assertEquals(PersonRepository::RESOURCE_NAME.PersonStub1::ID, ApiClientMock::$resource);
+        $this->assertEquals(PersonRepository::RESOURCE_NAME, ApiClientMock::$resource);
         $this->assertEquals(json_encode($person), json_encode(ApiClientMock::$params));
     }
 
