@@ -13,6 +13,11 @@ abstract class Person
     protected $address;
 
     /**
+     * @var \DateTime
+     */
+    protected $birthdate;
+
+    /**
      * @var array
      */
     protected $customFields;
@@ -26,6 +31,16 @@ abstract class Person
      * @var string
      */
     protected $firstName;
+
+    /**
+     * @var string
+     */
+    protected $guardianEmail;
+
+    /**
+     * @var string
+     */
+    protected $guardianName;
 
     /**
      * @var int
@@ -43,9 +58,29 @@ abstract class Person
     protected $lastName;
 
     /**
+     * @var int
+     */
+    protected $locationId;
+
+    /**
+     * @var string
+     */
+    protected $middleName;
+
+    /**
      * @var string
      */
     protected $phone;
+
+    /**
+     * @var bool
+     */
+    protected $sendInvite;
+
+    /**
+     * @var bool
+     */
+    protected $skipComplimentaryPasses;
 
     /**
      * @return string
@@ -56,11 +91,104 @@ abstract class Person
     }
 
     /**
-     * @param $address
+     * @param string $address
      */
     public function setAddress($address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthdate(\DateTime $birthdate = null)
+    {
+        $this->birthdate = $birthdate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGuardianEmail()
+    {
+        return $this->guardianEmail;
+    }
+
+    /**
+     * @param string $guardianEmail
+     */
+    public function setGuardianEmail($guardianEmail)
+    {
+        $this->guardianEmail = $guardianEmail;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGuardianName()
+    {
+        return $this->guardianName;
+    }
+
+    /**
+     * @param string $guardianName
+     */
+    public function setGuardianName($guardianName)
+    {
+        $this->guardianName = $guardianName;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLocationId()
+    {
+        return $this->locationId;
+    }
+
+    /**
+     * @param int $locationId
+     */
+    public function setLocationId($locationId)
+    {
+        $this->locationId = $locationId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMiddleName()
+    {
+        return $this->middleName;
+    }
+
+    /**
+     * @param string $middleName
+     */
+    public function setMiddleName($middleName)
+    {
+        $this->middleName = $middleName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSendInvite()
+    {
+        return $this->sendInvite;
+    }
+
+    /**
+     * @param bool $sendInvite
+     */
+    public function setSendInvite($sendInvite)
+    {
+        $this->sendInvite = $sendInvite;
     }
 
     /**
@@ -88,7 +216,7 @@ abstract class Person
     }
 
     /**
-     * @param $email
+     * @param string $email
      */
     public function setEmail($email)
     {
@@ -104,7 +232,7 @@ abstract class Person
     }
 
     /**
-     * @param $firstName
+     * @param string $firstName
      */
     public function setFirstName($firstName)
     {
@@ -132,6 +260,9 @@ abstract class Person
         return $this->lastName;
     }
 
+    /**
+     * @param string $lastName
+     */
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
@@ -146,10 +277,26 @@ abstract class Person
     }
 
     /**
-     * @param $phone
+     * @param string $phone
      */
     public function setPhone($phone)
     {
         $this->phone = $phone;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSkipComplimentaryPasses()
+    {
+        return $this->skipComplimentaryPasses;
+    }
+
+    /**
+     * @param bool $skipComplimentaryPasses
+     */
+    public function setSkipComplimentaryPasses($skipComplimentaryPasses)
+    {
+        $this->skipComplimentaryPasses = $skipComplimentaryPasses;
     }
 }

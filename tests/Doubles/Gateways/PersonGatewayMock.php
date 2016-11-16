@@ -34,7 +34,7 @@ class PersonGatewayMock implements PersonGateway
      */
     public function insert(Person $person)
     {
-        self::$person[++self::$id] = $person;
+        self::$person[self::$id] = $person;
 
         return self::$id;
     }
