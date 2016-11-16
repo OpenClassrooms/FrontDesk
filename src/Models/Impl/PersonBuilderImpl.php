@@ -37,6 +37,16 @@ class PersonBuilderImpl implements PersonBuilder
     /**
      * {@inheritdoc}
      */
+    public function withBirthdate(\DateTime $birthdate = null)
+    {
+        $this->person->setBirthdate($birthdate);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function withCustomFields(array $customFields)
     {
         $this->person->setCustomFields($customFields);
@@ -67,6 +77,26 @@ class PersonBuilderImpl implements PersonBuilder
     /**
      * {@inheritdoc}
      */
+    public function withGuardianEmail($guardianEmail)
+    {
+        $this->person->setGuardianEmail($guardianEmail);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withGuardianName($guardianName)
+    {
+        $this->person->setGuardianName($guardianName);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function withJoinedAt(\DateTime $joinedAt = null)
     {
         $this->person->setJoinedAt($joinedAt);
@@ -87,9 +117,49 @@ class PersonBuilderImpl implements PersonBuilder
     /**
      * {@inheritdoc}
      */
+    public function withLocationId($locationId)
+    {
+        $this->person->setLocationId($locationId);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withMiddleName($middleName)
+    {
+        $this->person->setMiddleName($middleName);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function withPhone($phone)
     {
         $this->person->setPhone($phone);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withSendInvite($sendInvite)
+    {
+        $this->person->setSendInvite($sendInvite);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withSkipComplimentaryPasses($skipComplimentaryPasses)
+    {
+        $this->person->setSkipComplimentaryPasses($skipComplimentaryPasses);
 
         return $this;
     }
