@@ -13,4 +13,9 @@ interface PersonService
      * @return int
      */
     public function create(Person $person);
+
+    /**
+     * @return int
+     */
+    public function update(Person $person);
 }

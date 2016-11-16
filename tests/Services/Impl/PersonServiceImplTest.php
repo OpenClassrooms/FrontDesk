@@ -58,6 +58,18 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
             ->build();
     }
 
+    /**
+     * @test
+     */
+    public function update_ReturnId()
+    {
+        PersonGatewayMock::$id = PersonStub1::ID;
+        $result = $this->service->update($this->buildPerson());
+
+        $this->assertEquals(PersonStub1::ID, $result);
+        $this->assertPerson(new PersonStub1(), PersonGatewayMock::$person[PersonStub1::ID]);
+    }
+
     protected function setUp()
     {
         $this->service = new PersonServiceImpl();

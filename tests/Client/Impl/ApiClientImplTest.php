@@ -61,6 +61,19 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function putResource_ReturnResponse()
+    {
+        $this->initMock();
+        $response = $this->apiClient->put(self::RESOURCE_NAME, self::PARAMS);
+
+        $this->assertEquals(ClientMock::$response->getBody()->getContents(), $response);
+        $this->assertEquals(self::RESOURCE_NAME, ClientMock::$resource);
+        $this->assertEquals(['json' => self::PARAMS], ClientMock::$params);
+    }
+
+    /**
+     * @test
+     */
     public function getResource_ReturnResponse()
     {
         $this->initMock();

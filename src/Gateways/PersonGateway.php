@@ -13,4 +13,9 @@ interface PersonGateway
      * @return int
      */
     public function insert(Person $person);
+
+    /**
+     * @return int
+     */
+    public function update(Person $person);
 }
