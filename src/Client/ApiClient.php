@@ -18,7 +18,7 @@ interface ApiClient
 
     /**
      * @param string $resourceName
-     * @param object $resourceData
+     * @param mixed  $resourceData
      *
      * @return string
      */
@@ -26,7 +26,7 @@ interface ApiClient
 
     /**
      * @param string $resourceName
-     * @param object $resourceData
+     * @param mixed  $resourceData
      *
      * @return string
      */

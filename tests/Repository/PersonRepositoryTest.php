@@ -4,18 +4,35 @@ namespace OpenClassrooms\FrontDesk\Repository;
 
 use OpenClassrooms\FrontDesk\Doubles\Client\Impl\ApiClientMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
+use OpenClassrooms\FrontDesk\Doubles\Models\PersonTestCase;
 use OpenClassrooms\FrontDesk\Models\Impl\PersonBuilderImpl;
 use OpenClassrooms\FrontDesk\Models\Impl\PersonImpl;
+use OpenClassrooms\FrontDesk\Models\Person;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
 class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
 {
+    const PAGE = 1;
+
+    use PersonTestCase;
+
     /**
      * @var PersonRepository
      */
     private $personRepository;
+
+    /**
+     * @test
+     */
+    public function getPeople_ReturnPeople()
+    {
+        ApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
+        $peopleResult = $this->personRepository->findAll(self::PAGE);
+
+        $this->assertPeople($peopleResult);
+    }
 
     /**
      * @test
@@ -28,7 +45,7 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(PersonStub1::ID, $result);
         $this->assertEquals(PersonRepository::RESOURCE_NAME, ApiClientMock::$resource);
-        $this->assertEquals(json_encode($person), json_encode(ApiClientMock::$params));
+        $this->assertEquals($this->personToJson($person), json_encode(ApiClientMock::$params));
     }
 
     /**
@@ -52,6 +69,14 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return string
+     */
+    private function personToJson(Person $person)
+    {
+        return '{"person":'.json_encode($person).'}';
+    }
+
+    /**
      * @test
      */
     public function update_ReturnPersonId()
@@ -62,12 +87,13 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(PersonStub1::ID, $result);
         $this->assertEquals(PersonRepository::RESOURCE_NAME, ApiClientMock::$resource);
-        $this->assertEquals(json_encode($person), json_encode(ApiClientMock::$params));
+        $this->assertEquals($this->personToJson($person), json_encode(ApiClientMock::$params));
     }
 
     protected function setUp()
     {
         $this->personRepository = new PersonRepository();
         $this->personRepository->setApiClient(new ApiClientMock());
+        $this->personRepository->setPersonBuilder(new PersonBuilderImpl());
     }
 }

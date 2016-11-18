@@ -48,4 +48,12 @@ class PersonGatewayMock implements PersonGateway
 
         return self::$id;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAll($page = null)
+    {
+        return self::$person;
+    }
 }

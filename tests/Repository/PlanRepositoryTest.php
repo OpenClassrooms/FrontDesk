@@ -6,6 +6,7 @@ use OpenClassrooms\FrontDesk\Doubles\Client\Impl\ApiClientMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\PlanStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\PlanTestCase;
+use OpenClassrooms\FrontDesk\Models\Impl\PlanBuilderImpl;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
@@ -51,5 +52,6 @@ class PlanRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->planRepository = new PlanRepository();
         $this->planRepository->setApiClient(new ApiClientMock());
+        $this->planRepository->setPlanBuilder(new PlanBuilderImpl());
     }
 }
