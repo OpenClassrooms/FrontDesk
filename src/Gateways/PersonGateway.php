@@ -17,6 +17,13 @@ interface PersonGateway
     public function getPeople($page = null);
 
     /**
+     * @param string $query
+     *
+     * @return []
+     */
+    public function findAllByQuery($query = null);
+
+    /**
      * @return int
      */
     public function insert(Person $person);

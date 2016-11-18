@@ -16,6 +16,7 @@ trait PersonTestCase
     protected function assertPeople(array $people)
     {
         $i = 0;
+        unset($people['total_count']);
         foreach ($people as $person) {
             $personStub = '\OpenClassrooms\FrontDesk\Doubles\Models\PersonStub'.++$i;
             $this->assertPerson(new $personStub(), $person);

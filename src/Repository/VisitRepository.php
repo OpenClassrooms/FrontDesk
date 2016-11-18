@@ -5,7 +5,6 @@ namespace OpenClassrooms\FrontDesk\Repository;
 use OpenClassrooms\FrontDesk\Gateways\VisitGateway;
 use OpenClassrooms\FrontDesk\Models\Impl\VisitBuilderImpl;
 use OpenClassrooms\FrontDesk\Models\VisitBuilder;
-use OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
@@ -57,10 +56,6 @@ class VisitRepository extends BaseRepository implements VisitGateway
                 ->withRegisterAt($visit['registered_at'] !== null ? new \DateTime($visit['registered_at']) : null)
                 ->withStatus($visit['status'])
                 ->build();
-        }
-
-        if ($result['total_count'] !== count($visits)) {
-            throw new InvalidTotalCountException();
         }
 
         return $visits;
