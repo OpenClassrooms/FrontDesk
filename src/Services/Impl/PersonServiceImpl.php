@@ -35,6 +35,14 @@ class PersonServiceImpl implements PersonService
     /**
      * {@inheritdoc}
      */
+    public function getPeopleByQuery($query = null)
+    {
+        return $this->personGateway->getPeopleByQuery($query);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function update(Person $person)
     {
         return $this->personGateway->update($person);

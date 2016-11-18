@@ -5,7 +5,6 @@ namespace OpenClassrooms\FrontDesk\Repository;
 use OpenClassrooms\FrontDesk\Gateways\PlanGateway;
 use OpenClassrooms\FrontDesk\Models\Impl\PlanBuilderImpl;
 use OpenClassrooms\FrontDesk\Models\PlanBuilder;
-use OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
@@ -63,10 +62,6 @@ class PlanRepository extends BaseRepository implements PlanGateway
                 ->withType($plan['type'])
                 ->withUpdateAt($plan['updated_at'] !== null ? new \DateTime($plan['updated_at']) : null)
                 ->build();
-        }
-
-        if ($result['total_count'] !== count($plans)) {
-            throw new InvalidTotalCountException();
         }
 
         return $plans;

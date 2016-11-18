@@ -32,6 +32,24 @@ class PersonGatewayMock implements PersonGateway
     /**
      * {@inheritdoc}
      */
+    public function getPeople($page = null)
+    {
+        return self::$person;
+    }
+
+    /**
+     * @param string $query
+     *
+     * @return []
+     */
+    public function getPeopleByQuery($query = null)
+    {
+        return self::$person;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function insert(Person $person)
     {
         self::$person[self::$id] = $person;
@@ -47,13 +65,5 @@ class PersonGatewayMock implements PersonGateway
         self::$person[self::$id] = $person;
 
         return self::$id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPeople($page = null)
-    {
-        return self::$person;
     }
 }

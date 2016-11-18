@@ -21,18 +21,6 @@ class PlanRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
-     * @expectedException \OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException
-     */
-    public function checkTotalCount()
-    {
-        ApiClientMock::$response = json_encode(["plans" => [new PlanStub1()], "total_count" => 0]);
-
-        $this->planRepository->findAllByPersonId(PersonStub1::ID);
-    }
-
-    /**
-     * @test
      */
     public function findAllByPersonId_ReturnPlans()
     {
