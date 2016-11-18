@@ -40,7 +40,7 @@ class VisitRepository extends BaseRepository implements VisitGateway
         return $this->buildVisits($result);
     }
 
-    public function buildVisits($result)
+    private function buildVisits($result)
     {
         $visits = [];
         foreach ($result['visits'] as $visit) {

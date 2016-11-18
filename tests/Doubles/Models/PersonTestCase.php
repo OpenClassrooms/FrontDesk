@@ -10,6 +10,18 @@ use PHPUnit_Framework_Assert as Assert;
  */
 trait PersonTestCase
 {
+    /**
+     * @param Person[] $people
+     */
+    protected function assertPeople(array $people)
+    {
+        $i = 0;
+        foreach ($people as $person) {
+            $personStub = '\OpenClassrooms\FrontDesk\Doubles\Models\PersonStub'.++$i;
+            $this->assertPerson(new $personStub(), $person);
+        }
+    }
+
     protected function assertPerson(Person $expected, Person $actual)
     {
         Assert::assertEquals($expected->getAddress(), $actual->getAddress());

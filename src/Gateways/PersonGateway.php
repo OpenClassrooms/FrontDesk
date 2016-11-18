@@ -10,6 +10,13 @@ use OpenClassrooms\FrontDesk\Models\Person;
 interface PersonGateway
 {
     /**
+     * @param int $page
+     *
+     * @return Person[]
+     */
+    public function getPeople($page = null);
+
+    /**
      * @return int
      */
     public function insert(Person $person);
