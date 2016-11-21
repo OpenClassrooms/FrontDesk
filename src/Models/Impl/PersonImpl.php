@@ -16,25 +16,23 @@ class PersonImpl extends Person implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'person' => [
-                'address'                   => $this->address,
-                'birthdate'                 => $this->birthdate !== null ? $this->birthdate->format(
-                    ApiDateFormat::DATE_FORMAT_MIN
-                ) : null,
-                'custom_fields'             => $this->customFields,
-                'email'                     => $this->email,
-                'first_name'                => $this->firstName,
-                'guardian_email'            => $this->guardianEmail,
-                'guardian_name'             => $this->guardianName,
-                'id'                        => $this->id,
-                'joined_at'                 => $this->joinedAt !== null ? $this->joinedAt->getTimestamp() : null,
-                'location_id'               => $this->locationId,
-                'last_name'                 => $this->lastName,
-                'middle_name'               => $this->middleName,
-                'phone'                     => $this->phone,
-                'send_invite'               => $this->sendInvite,
-                'skip_complimentary_passes' => $this->skipComplimentaryPasses,
-            ],
+            'address'                   => $this->address,
+            'birthdate'                 => $this->birthdate !== null ? $this->birthdate->format(
+                ApiDateFormat::DATE_FORMAT_MIN
+            ) : null,
+            'custom_fields'             => $this->customFields,
+            'email'                     => $this->email,
+            'first_name'                => $this->firstName,
+            'guardian_email'            => $this->guardianEmail,
+            'guardian_name'             => $this->guardianName,
+            'id'                        => $this->id,
+            'joined_at'                 => $this->joinedAt !== null ? $this->joinedAt->format(DATE_ISO8601) : null,
+            'last_name'                 => $this->lastName,
+            'location_id'               => $this->locationId,
+            'middle_name'               => $this->middleName,
+            'phone'                     => $this->phone,
+            'send_invite'               => $this->sendInvite,
+            'skip_complimentary_passes' => $this->skipComplimentaryPasses,
         ];
     }
 }

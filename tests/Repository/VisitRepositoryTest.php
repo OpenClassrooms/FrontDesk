@@ -7,6 +7,7 @@ use OpenClassrooms\FrontDesk\Doubles\Client\Impl\ApiClientMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\VisitStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\VisitTestCase;
+use OpenClassrooms\FrontDesk\Models\Impl\VisitBuilderImpl;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
@@ -100,5 +101,6 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->visitRepository = new VisitRepository();
         $this->visitRepository->setApiClient(new ApiClientMock());
+        $this->visitRepository->setVisitBuilder(new VisitBuilderImpl());
     }
 }
