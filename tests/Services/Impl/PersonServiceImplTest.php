@@ -65,7 +65,7 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
     {
         PersonGatewayMock::$person = [new PersonStub1()];
 
-        $result = $this->service->getPeople();
+        $result = $this->service->findAll();
 
         $this->assertEquals(PersonGatewayMock::$person, $result);
     }

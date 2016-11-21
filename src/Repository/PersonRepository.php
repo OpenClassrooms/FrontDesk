@@ -19,22 +19,13 @@ class PersonRepository extends BaseRepository implements PersonGateway
      */
     private $personBuilder;
 
-    public function __construct()
-    {
-        $this->personBuilder = new PersonBuilderImpl();
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function getPeople($page = null)
+    public function findAll($page = null)
     {
-        $parameters = null;
-        if (isset($page)) {
-            $parameters = '?page='.$page;
-        }
-
-        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.$parameters);
+        $parameters = ['page' => $page];
+        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.urldecode('?'.http_build_query($parameters)));
         $result = json_decode($jsonResult, true);
 
         return $this->buildPeople($result);
@@ -125,5 +116,10 @@ class PersonRepository extends BaseRepository implements PersonGateway
         $result = json_decode($jsonResult, true);
 
         return $result['people'][0]['id'];
+    }
+
+    public function setPersonBuilder(PersonBuilder $personBuilder)
+    {
+        $this->personBuilder = $personBuilder;
     }
 }

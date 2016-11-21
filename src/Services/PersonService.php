@@ -19,7 +19,7 @@ interface PersonService
      *
      * @return Person[]
      */
-    public function getPeople($page = null);
+    public function findAll($page = null);
 
     /**
      * @param string $query

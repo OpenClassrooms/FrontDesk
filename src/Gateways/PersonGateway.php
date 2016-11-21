@@ -14,7 +14,7 @@ interface PersonGateway
      *
      * @return Person[]
      */
-    public function getPeople($page = null);
+    public function findAll($page = null);
 
     /**
      * @param string $query

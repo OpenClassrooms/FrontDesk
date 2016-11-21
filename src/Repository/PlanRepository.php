@@ -3,7 +3,6 @@
 namespace OpenClassrooms\FrontDesk\Repository;
 
 use OpenClassrooms\FrontDesk\Gateways\PlanGateway;
-use OpenClassrooms\FrontDesk\Models\Impl\PlanBuilderImpl;
 use OpenClassrooms\FrontDesk\Models\PlanBuilder;
 
 /**
@@ -17,11 +16,6 @@ class PlanRepository extends BaseRepository implements PlanGateway
      * @var PlanBuilder
      */
     private $planBuilder;
-
-    public function __construct()
-    {
-        $this->planBuilder = new PlanBuilderImpl();
-    }
 
     /**
      * {@inheritdoc}
@@ -65,5 +59,10 @@ class PlanRepository extends BaseRepository implements PlanGateway
         }
 
         return $plans;
+    }
+
+    public function setPlanBuilder(PlanBuilder $planBuilder)
+    {
+        $this->planBuilder = $planBuilder;
     }
 }
