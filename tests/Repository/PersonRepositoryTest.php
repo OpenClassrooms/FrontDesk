@@ -29,6 +29,7 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
     public function findAll_ReturnPeople()
     {
         ApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
+
         $peopleResult = $this->personRepository->findAll(self::PAGE);
 
         $this->assertPeople($peopleResult);
@@ -37,11 +38,23 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function findAllByQuery_ReturnPeople()
+    public function withQuery_FindAllByQuery_ReturnPeople()
     {
         ApiClientMock::$response = json_encode([[['person' => new PersonStub1()]], 'total_count' => 1]);
 
         $peopleResult = $this->personRepository->findAllByQuery(PersonStub1::EMAIL);
+
+        $this->assertPeople($peopleResult);
+    }
+
+    /**
+     * @test
+     */
+    public function withoutQuery_FindAllByQuery_ReturnPeople()
+    {
+        ApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
+
+        $peopleResult = $this->personRepository->findAllByQuery();
 
         $this->assertPeople($peopleResult);
     }

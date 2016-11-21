@@ -21,12 +21,12 @@ class PersonGatewayMock implements PersonGateway
     public static $people = [];
 
     /**
-     * @param array $person
+     * @param Person[] $people
      */
-    public function __construct(array $person = [])
+    public function __construct(array $people = [])
     {
         self::$id = 0;
-        self::$people = $person;
+        self::$people = $people;
     }
 
     /**

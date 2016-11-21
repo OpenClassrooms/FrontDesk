@@ -23,6 +23,25 @@ class PersonRepository extends BaseRepository implements PersonGateway
     /**
      * {@inheritdoc}
      */
+    public function findAllByQuery($query = null)
+    {
+        if (null === $query) {
+            return $this->findAll();
+        }
+
+        $parameters = ['q' => $query];
+        $jsonResult = $this->apiClient->get(
+            self::RESOURCE_NAME.self::SEARCH.urldecode('?'.http_build_query($parameters))
+        );
+        $results = json_decode($jsonResult, true);
+        $arrayPeople = $this->getArrayPerson($results);
+
+        return $this->buildPeople($arrayPeople);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findAll($page = null)
     {
         $parameters = ['page' => $page];
@@ -60,21 +79,6 @@ class PersonRepository extends BaseRepository implements PersonGateway
         }
 
         return $people;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findAllByQuery($query = null)
-    {
-        $parameters = ['q' => $query];
-        $jsonResult = $this->apiClient->get(
-            self::RESOURCE_NAME.self::SEARCH.urldecode('?'.http_build_query($parameters))
-        );
-        $results = json_decode($jsonResult, true);
-        $arrayPeople = $this->getArrayPerson($results);
-
-        return $this->buildPeople($arrayPeople);
     }
 
     /**

@@ -22,7 +22,7 @@ interface PersonBuilder
     /**
      * @return PersonBuilder
      */
-    public function withBirthdate(\DateTime $birthdate);
+    public function withBirthdate(\DateTime $birthdate = null);
 
     /**
      * @param array $customFields

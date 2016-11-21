@@ -73,7 +73,7 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function findAllByQuery_ReturnPeople()
+    public function search_ReturnPeople()
     {
         PersonGatewayMock::$people = [new PersonStub1()];
 
