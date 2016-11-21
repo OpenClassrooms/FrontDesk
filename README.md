@@ -47,16 +47,19 @@ use OpenClassrooms\FrontDesk\Repository\PersonRepository;
 use OpenClassrooms\FrontDesk\Repository\PackRepository;
 
 $personGateway = new PersonRepository();         
-$personGateway->setClient($client);         
+$personGateway->setClient($client); 
+$personGateway->setPersonBuilder(new PersonBuilderImpl());        
 ...
 $packGateway = new PackRepository();         
 $packGateway->setClient($client); 
 ...
 $visitGateway = new VisitRepository();         
 $visitGateway->setClient($client);  
+$visitGateway->setVisitBuilder(new VisitBuilderImpl());
 ...
 $planGateway = new PlanRepository();         
-$planGateway->setClient($client);          
+$planGateway->setClient($client);  
+$planGateway->setPlanBuilder(new PlanBuilderImpl());        
 ```
 
 ##### Builder
@@ -73,6 +76,7 @@ $person = $personBuilder->create()
                         ->withJoinedAt(new \DateTime(PersonStub1::JOINED_AT))
                         ->withLastName(PersonStub1::LAST_NAME)
                         ->withPhone(PersonStub1::PHONE)
+                        ...
                         ->build();
 ```
 
@@ -109,13 +113,14 @@ $service = new PlanServiceImpl
 Just see here an exemple of a full person creation, this is the same logic for the pack: 
 
 ```php
-$factory = new ClientFactoryImpl();        
-$client = $factory->create('server_name', 'your_token');        
-$service = new PersonServiceImpl();        
-$personGateway = new PersonRepository();        
-$personGateway->setClient($client);       
-$service->setPersonGateway($personGateway);        
-$service->create(new PersonStub1()); 
+        $factory = new ClientFactoryImpl();
+        $client = $factory->create('server_name', 'your_token');
+        $service = new PersonServiceImpl();
+        $personGateway = new PersonRepository();
+        $personGateway->setApiClient($client);
+        $personGateway->setPersonBuilder(new PersonBuilderImpl());
+        $service->setPersonGateway($personGateway);
+        $service->findAll();
 ```
 
 ##### Get Visit by person id
@@ -125,6 +130,7 @@ $client = $factory->create('server_name', 'your_token');
 $service = new VisitServiceImpl();
 $visitGateway = new VisitRepository();
 $visitGateway->setApiClient($client);
+$visitGateway->setVisitBuilder(new VisitBuilderImpl());
 $service->setVisitGateway($visitGateway);
 $service->getVisits($personId, $from, $to);
 ```
@@ -147,6 +153,7 @@ $client = $factory->create('server_name', 'your_token');
 $service = new PlanServiceImpl();
 $planGateway = new PlanRepository();
 $planGateway->setApiClient($client);
+$planGateway->setPlanBuilder(new PlanBuilderImpl());
 $service->setPlanGateway($planGateway);
 $service->getPlans($personId);
 ```
@@ -157,6 +164,6 @@ $factory = new ClientFactoryImpl();
 $client = $factory->create('server_name', 'your_token');
 $service = new PackServiceImpl();
 $packGateway = new PackRepository();        
-$packGateway->setClient($client);       
+$packGateway->setApiClient($client);       
 $service->setPacknGateway($packGateway);        
 $service->deletePack($packId); 
