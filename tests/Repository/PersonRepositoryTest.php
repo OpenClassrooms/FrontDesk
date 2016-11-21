@@ -26,7 +26,7 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function getPeople_ReturnPeople()
+    public function findAll_ReturnPeople()
     {
         ApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
         $peopleResult = $this->personRepository->findAll(self::PAGE);
@@ -37,9 +37,9 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function getPeopleBy_ReturnPeople()
+    public function findAllByQuery_ReturnPeople()
     {
-        ApiClientMock::$response = json_encode(['people' => [new PersonStub1()], "total_count" => 1]);
+        ApiClientMock::$response = json_encode([[0 => ['person' => new PersonStub1()]], 'total_count' => 1]);
 
         $peopleResult = $this->personRepository->findAllByQuery(PersonStub1::EMAIL);
 

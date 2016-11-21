@@ -3,7 +3,6 @@
 namespace OpenClassrooms\FrontDesk\Repository;
 
 use OpenClassrooms\FrontDesk\Gateways\PersonGateway;
-use OpenClassrooms\FrontDesk\Models\Impl\PersonBuilderImpl;
 use OpenClassrooms\FrontDesk\Models\Person;
 use OpenClassrooms\FrontDesk\Models\PersonBuilder;
 
@@ -13,6 +12,8 @@ use OpenClassrooms\FrontDesk\Models\PersonBuilder;
 class PersonRepository extends BaseRepository implements PersonGateway
 {
     const RESOURCE_NAME = ApiEndpoint::DESK.'/people/';
+
+    const SEARCH_NAME = 'search';
 
     /**
      * @var PersonBuilder
@@ -27,12 +28,13 @@ class PersonRepository extends BaseRepository implements PersonGateway
         $parameters = ['page' => $page];
         $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.urldecode('?'.http_build_query($parameters)));
         $result = json_decode($jsonResult, true);
+        $result = $result['people'];
 
         return $this->buildPeople($result);
     }
 
     /**
-     * @param Person[] $result
+     * @param array $result
      *
      * @return Person[]
      */
@@ -40,7 +42,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
     {
         $people = [];
 
-        foreach ($result['people'] as $person) {
+        foreach ($result as $person) {
             $people[] = $this->personBuilder
                 ->create()
                 ->withAddress($person['address'])
@@ -66,17 +68,14 @@ class PersonRepository extends BaseRepository implements PersonGateway
      */
     public function findAllByQuery($query = null)
     {
-        $parameters = ['search?q' => $query];
-        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.urldecode(http_build_query($parameters)));
+        $parameters = ['q' => $query];
+        $jsonResult = $this->apiClient->get(
+            self::RESOURCE_NAME.self::SEARCH_NAME.urldecode('?'.http_build_query($parameters))
+        );
         $results = json_decode($jsonResult, true);
+        $arrayPeople = $this->getArrayPerson($results);
 
-        $total_count = $results['total_count'];
-
-        $arrayPeople = $this->getArrayPeople($results);
-        $people = $this->buildPeople($arrayPeople);
-        $people['total_count'] = $total_count;
-
-        return $people;
+        return $this->buildPeople($arrayPeople);
     }
 
     /**
@@ -84,13 +83,13 @@ class PersonRepository extends BaseRepository implements PersonGateway
      *
      * @return array
      */
-    private function getArrayPeople(array $results)
+    private function getArrayPerson(array $results)
     {
         $results = reset($results);
 
         $people = [];
         foreach ($results as $result) {
-            $people[] = $result;
+            $people[] = $result['person'];
         }
 
         return $people;

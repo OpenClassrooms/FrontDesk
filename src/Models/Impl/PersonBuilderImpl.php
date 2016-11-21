@@ -47,7 +47,7 @@ class PersonBuilderImpl implements PersonBuilder
     /**
      * {@inheritdoc}
      */
-    public function withCustomFields(array $customFields)
+    public function withCustomFields(array $customFields = null)
     {
         $this->person->setCustomFields($customFields);
 

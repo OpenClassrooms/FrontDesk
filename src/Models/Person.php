@@ -202,7 +202,7 @@ abstract class Person
     /**
      * @param array $customFields
      */
-    public function setCustomFields(array $customFields)
+    public function setCustomFields(array $customFields = null)
     {
         $this->customFields = $customFields;
     }

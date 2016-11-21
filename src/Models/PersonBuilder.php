@@ -29,7 +29,7 @@ interface PersonBuilder
      *
      * @return PersonBuilder
      */
-    public function withCustomFields(array $customFields);
+    public function withCustomFields(array $customFields = null);
 
     /**
      * @param string $email

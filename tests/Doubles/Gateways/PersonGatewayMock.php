@@ -32,15 +32,13 @@ class PersonGatewayMock implements PersonGateway
     /**
      * {@inheritdoc}
      */
-    public function getPeople($page = null)
+    public function findAll($page = null)
     {
         return self::$person;
     }
 
     /**
-     * @param string $query
-     *
-     * @return []
+     * {@inheritdoc}
      */
     public function findAllByQuery($query = null)
     {
@@ -65,13 +63,5 @@ class PersonGatewayMock implements PersonGateway
         self::$person[self::$id] = $person;
 
         return self::$id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findAll($page = null)
-    {
-        return self::$person;
     }
 }
