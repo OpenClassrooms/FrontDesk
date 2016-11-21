@@ -13,10 +13,31 @@ class PersonRepository extends BaseRepository implements PersonGateway
 {
     const RESOURCE_NAME = ApiEndpoint::DESK.'/people/';
 
+    const SEARCH = 'search';
+
     /**
      * @var PersonBuilder
      */
     private $personBuilder;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAllByQuery($query = null)
+    {
+        if (null === $query) {
+            return $this->findAll();
+        }
+
+        $parameters = ['q' => $query];
+        $jsonResult = $this->apiClient->get(
+            self::RESOURCE_NAME.self::SEARCH.urldecode('?'.http_build_query($parameters))
+        );
+        $results = json_decode($jsonResult, true);
+        $arrayPeople = $this->getArrayPerson($results);
+
+        return $this->buildPeople($arrayPeople);
+    }
 
     /**
      * {@inheritdoc}
@@ -27,11 +48,11 @@ class PersonRepository extends BaseRepository implements PersonGateway
         $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.urldecode('?'.http_build_query($parameters)));
         $result = json_decode($jsonResult, true);
 
-        return $this->buildPeople($result);
+        return $this->buildPeople($result['people']);
     }
 
     /**
-     * @param Person[] $result
+     * @param array $result
      *
      * @return Person[]
      */
@@ -39,7 +60,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
     {
         $people = [];
 
-        foreach ($result['people'] as $person) {
+        foreach ($result as $person) {
             $people[] = $this->personBuilder
                 ->create()
                 ->withAddress($person['address'])
@@ -55,6 +76,23 @@ class PersonRepository extends BaseRepository implements PersonGateway
                 ->withMiddleName($person['middle_name'])
                 ->withPhone($person['phone'])
                 ->build();
+        }
+
+        return $people;
+    }
+
+    /**
+     * @param array $results
+     *
+     * @return array
+     */
+    private function getArrayPerson(array $results)
+    {
+        $results = reset($results);
+
+        $people = [];
+        foreach ($results as $result) {
+            $people[] = $result['person'];
         }
 
         return $people;

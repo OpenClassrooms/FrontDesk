@@ -30,18 +30,6 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      *
-     * @expectedException \OpenClassrooms\FrontDesk\Services\Impl\InvalidTotalCountException
-     */
-    public function checkTotalCount()
-    {
-        ApiClientMock::$response = json_encode(['visits' => [new VisitStub1()], 'total_count' => 0]);
-
-        $this->visitRepository->findAllByPersonId(PersonStub1::ID);
-    }
-
-    /**
-     * @test
-     *
      * @expectedException \OpenClassrooms\FrontDesk\Client\NotFoundException
      */
     public function visitNotFound_ThrowException()

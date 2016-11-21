@@ -22,6 +22,13 @@ interface PersonService
     public function findAll($page = null);
 
     /**
+     * @param string $query
+     *
+     * @return Person[]
+     */
+    public function search($query = null);
+
+    /**
      * @return int
      */
     public function update(Person $person);

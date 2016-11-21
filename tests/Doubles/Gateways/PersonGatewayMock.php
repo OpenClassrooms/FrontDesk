@@ -18,15 +18,31 @@ class PersonGatewayMock implements PersonGateway
     /**
      * @var Person[]
      */
-    public static $person = [];
+    public static $people = [];
 
     /**
-     * @param array $person
+     * @param Person[] $people
      */
-    public function __construct(array $person = [])
+    public function __construct(array $people = [])
     {
         self::$id = 0;
-        self::$person = $person;
+        self::$people = $people;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAll($page = null)
+    {
+        return self::$people;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAllByQuery($query = null)
+    {
+        return self::$people;
     }
 
     /**
@@ -34,7 +50,7 @@ class PersonGatewayMock implements PersonGateway
      */
     public function insert(Person $person)
     {
-        self::$person[self::$id] = $person;
+        self::$people[self::$id] = $person;
 
         return self::$id;
     }
@@ -44,16 +60,8 @@ class PersonGatewayMock implements PersonGateway
      */
     public function update(Person $person)
     {
-        self::$person[self::$id] = $person;
+        self::$people[self::$id] = $person;
 
         return self::$id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findAll($page = null)
-    {
-        return self::$person;
     }
 }
