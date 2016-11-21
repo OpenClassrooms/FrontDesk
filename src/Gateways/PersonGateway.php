@@ -19,7 +19,7 @@ interface PersonGateway
     /**
      * @param string $query
      *
-     * @return []
+     * @return array
      */
     public function findAllByQuery($query = null);
 

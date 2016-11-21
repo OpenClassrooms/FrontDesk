@@ -24,9 +24,9 @@ interface PersonService
     /**
      * @param string $query
      *
-     * @return []
+     * @return Person[]
      */
-    public function findAllByQuery($query = null);
+    public function search($query = null);
 
     /**
      * @return int

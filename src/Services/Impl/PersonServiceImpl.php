@@ -35,7 +35,7 @@ class PersonServiceImpl implements PersonService
     /**
      * {@inheritdoc}
      */
-    public function findAllByQuery($query = null)
+    public function search($query = null)
     {
         return $this->personGateway->findAllByQuery($query);
     }

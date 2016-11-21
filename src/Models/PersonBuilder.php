@@ -25,11 +25,11 @@ interface PersonBuilder
     public function withBirthdate(\DateTime $birthdate);
 
     /**
-     * @param array|null $customFields
+     * @param array $customFields
      *
      * @return PersonBuilder
      */
-    public function withCustomFields(array $customFields = null);
+    public function withCustomFields(array $customFields);
 
     /**
      * @param string $email

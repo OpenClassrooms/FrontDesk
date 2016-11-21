@@ -13,7 +13,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
 {
     const RESOURCE_NAME = ApiEndpoint::DESK.'/people/';
 
-    const SEARCH_NAME = 'search';
+    const SEARCH = 'search';
 
     /**
      * @var PersonBuilder
@@ -28,9 +28,8 @@ class PersonRepository extends BaseRepository implements PersonGateway
         $parameters = ['page' => $page];
         $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.urldecode('?'.http_build_query($parameters)));
         $result = json_decode($jsonResult, true);
-        $result = $result['people'];
 
-        return $this->buildPeople($result);
+        return $this->buildPeople($result['people']);
     }
 
     /**
@@ -70,7 +69,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
     {
         $parameters = ['q' => $query];
         $jsonResult = $this->apiClient->get(
-            self::RESOURCE_NAME.self::SEARCH_NAME.urldecode('?'.http_build_query($parameters))
+            self::RESOURCE_NAME.self::SEARCH.urldecode('?'.http_build_query($parameters))
         );
         $results = json_decode($jsonResult, true);
         $arrayPeople = $this->getArrayPerson($results);

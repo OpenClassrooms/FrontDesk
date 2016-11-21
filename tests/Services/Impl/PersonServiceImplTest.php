@@ -29,7 +29,7 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
         $result = $this->service->create($this->buildPerson());
 
         $this->assertEquals(PersonStub1::ID, $result);
-        $this->assertPerson(new PersonStub1(), PersonGatewayMock::$person[PersonStub1::ID]);
+        $this->assertPerson(new PersonStub1(), PersonGatewayMock::$people[PersonStub1::ID]);
     }
 
     /**
@@ -63,11 +63,11 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
      */
     public function findAll_ReturnPeople()
     {
-        PersonGatewayMock::$person = [new PersonStub1()];
+        PersonGatewayMock::$people = [new PersonStub1()];
 
         $result = $this->service->findAll();
 
-        $this->assertEquals(PersonGatewayMock::$person, $result);
+        $this->assertEquals(PersonGatewayMock::$people, $result);
     }
 
     /**
@@ -75,11 +75,11 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
      */
     public function findAllByQuery_ReturnPeople()
     {
-        PersonGatewayMock::$person = [new PersonStub1()];
+        PersonGatewayMock::$people = [new PersonStub1()];
 
-        $result = $this->service->findAllByQuery(PersonStub1::EMAIL);
+        $result = $this->service->search(PersonStub1::EMAIL);
 
-        $this->assertEquals(PersonGatewayMock::$person, $result);
+        $this->assertEquals(PersonGatewayMock::$people, $result);
     }
 
     /**
@@ -91,7 +91,7 @@ class PersonServiceImplTest extends \PHPUnit_Framework_TestCase
         $result = $this->service->update($this->buildPerson());
 
         $this->assertEquals(PersonStub1::ID, $result);
-        $this->assertPerson(new PersonStub1(), PersonGatewayMock::$person[PersonStub1::ID]);
+        $this->assertPerson(new PersonStub1(), PersonGatewayMock::$people[PersonStub1::ID]);
     }
 
     protected function setUp()
