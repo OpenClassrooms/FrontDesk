@@ -35,13 +35,13 @@ class PersonRepository extends BaseRepository implements PersonGateway
         }
 
         $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.$parameters);
-        $people = json_decode($jsonResult, true);
+        $result = json_decode($jsonResult, true);
 
-        return $this->buildPeople($people['people']);
+        return $this->buildPeople($result);
     }
 
     /**
-     * @param array $result
+     * @param Person[] $result
      *
      * @return Person[]
      */
@@ -49,7 +49,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
     {
         $people = [];
 
-        foreach ($result as $person) {
+        foreach ($result['people'] as $person) {
             $people[] = $this->personBuilder
                 ->create()
                 ->withAddress($person['address'])
