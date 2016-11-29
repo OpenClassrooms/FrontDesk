@@ -16,7 +16,7 @@ class PlanImpl extends Plan implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'canceled_at'     => $this->canceledAt !== null ? $this->canceledAt->format(
+            'cancelled_at'    => $this->canceledAt !== null ? $this->canceledAt->format(
                 ApiDateFormat::DATE_FORMAT_FULL
             ) : null,
             'consider_member' => $this->considerMember,
