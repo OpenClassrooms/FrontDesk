@@ -60,6 +60,13 @@ interface PersonBuilder
     public function withGuardianEmail($guardianEmail);
 
     /**
+     * @param int $id
+     *
+     * @return PersonBuilder
+     */
+    public function withId($id);
+
+    /**
      * @return PersonBuilder
      */
     public function withJoinedAt(\DateTime $joinedAt = null);

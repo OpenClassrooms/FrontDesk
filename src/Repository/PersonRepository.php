@@ -70,6 +70,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
                 ->withFirstName($person['first_name'])
                 ->withGuardianEmail($person['guardian_email'])
                 ->withGuardianName($person['guardian_name'])
+                ->withId($person['id'])
                 ->withJoinedAt($person['joined_at'] !== null ? new \DateTime($person['joined_at']) : null)
                 ->withLastName($person['last_name'])
                 ->withLocationId($person['location_id'])

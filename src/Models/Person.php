@@ -248,6 +248,14 @@ abstract class Person
     }
 
     /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getJoinedAt()
