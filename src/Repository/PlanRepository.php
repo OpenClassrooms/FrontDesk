@@ -39,7 +39,7 @@ class PlanRepository extends BaseRepository implements PlanGateway
         foreach ($result['plans'] as $plan) {
             $plans[] = $this->planBuilder
                 ->create()
-                ->withCanceledAt($plan['canceled_at'] !== null ? new \DateTime($plan['canceled_at']) : null)
+                ->withCanceledAt($plan['cancelled_at'] !== null ? new \DateTime($plan['canceled_at']) : null)
                 ->withConsiderMember($plan['consider_member'])
                 ->withCount($plan['count'])
                 ->withCreatedAt(new \DateTime($plan['created_at']))
