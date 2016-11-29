@@ -97,6 +97,16 @@ class PersonBuilderImpl implements PersonBuilder
     /**
      * {@inheritdoc}
      */
+    public function withId($id)
+    {
+        $this->person->setId($id);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function withJoinedAt(\DateTime $joinedAt = null)
     {
         $this->person->setJoinedAt($joinedAt);
