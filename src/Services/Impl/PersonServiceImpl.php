@@ -27,6 +27,14 @@ class PersonServiceImpl implements PersonService
     /**
      * {@inheritdoc}
      */
+    public function find($personId)
+    {
+        return $this->personGateway->find($personId);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findAll($page = null)
     {
         return $this->personGateway->findAll($page);

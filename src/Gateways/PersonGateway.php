@@ -10,6 +10,13 @@ use OpenClassrooms\FrontDesk\Models\Person;
 interface PersonGateway
 {
     /**
+     * @param int $personId
+     *
+     * @return Person[]
+     */
+    public function find($personId);
+
+    /**
      * @param int $page
      *
      * @return Person[]

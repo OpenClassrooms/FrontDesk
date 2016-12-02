@@ -26,6 +26,18 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function find_ReturnPeople()
+    {
+        ApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
+
+        $personResult = $this->personRepository->find(PersonStub1::ID);
+
+        $this->assertPeople($personResult);
+    }
+
+    /**
+     * @test
+     */
     public function findAll_ReturnPeople()
     {
         ApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
