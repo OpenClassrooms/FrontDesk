@@ -15,6 +15,13 @@ interface PersonService
     public function create(Person $person);
 
     /**
+     * @param int $personId
+     *
+     * @return Person
+     */
+    public function find($personId);
+
+    /**
      * @param int $page
      *
      * @return Person[]

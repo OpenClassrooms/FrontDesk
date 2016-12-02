@@ -23,29 +23,9 @@ class PersonRepository extends BaseRepository implements PersonGateway
     /**
      * {@inheritdoc}
      */
-    public function findAllByQuery($query = null)
+    public function find($personId)
     {
-        if (null === $query) {
-            return $this->findAll();
-        }
-
-        $parameters = ['q' => $query];
-        $jsonResult = $this->apiClient->get(
-            self::RESOURCE_NAME.self::SEARCH.urldecode('?'.http_build_query($parameters))
-        );
-        $results = json_decode($jsonResult, true);
-        $arrayPeople = $this->getArrayPerson($results);
-
-        return $this->buildPeople($arrayPeople);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findAll($page = null)
-    {
-        $parameters = ['page' => $page];
-        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.urldecode('?'.http_build_query($parameters)));
+        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.$personId);
         $result = json_decode($jsonResult, true);
 
         return $this->buildPeople($result['people']);
@@ -80,6 +60,37 @@ class PersonRepository extends BaseRepository implements PersonGateway
         }
 
         return $people;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAllByQuery($query = null)
+    {
+        if (null === $query) {
+            return $this->findAll();
+        }
+
+        $parameters = ['q' => $query];
+        $jsonResult = $this->apiClient->get(
+            self::RESOURCE_NAME.self::SEARCH.urldecode('?'.http_build_query($parameters))
+        );
+        $results = json_decode($jsonResult, true);
+        $arrayPeople = $this->getArrayPerson($results);
+
+        return $this->buildPeople($arrayPeople);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAll($page = null)
+    {
+        $parameters = ['page' => $page];
+        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.urldecode('?'.http_build_query($parameters)));
+        $result = json_decode($jsonResult, true);
+
+        return $this->buildPeople($result['people']);
     }
 
     /**
