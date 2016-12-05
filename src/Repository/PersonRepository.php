@@ -28,7 +28,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
         $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.$personId);
         $result = json_decode($jsonResult, true);
 
-        return $this->buildPeople($result['people']);
+        return $this->buildPeople($result['people'])[0];
     }
 
     /**
