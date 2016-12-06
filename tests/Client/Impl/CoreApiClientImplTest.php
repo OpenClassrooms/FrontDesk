@@ -10,11 +10,11 @@ use Psr\Http\Message\StreamInterface;
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class ApiClientImplTest extends \PHPUnit_Framework_TestCase
+class CoreApiClientImplTest extends \PHPUnit_Framework_TestCase
 {
-    const KEY = '123apikey';
+    const KEY = '123CoreApiKey';
 
-    const TOKEN = 'jlsdhfxgcwljhgcjhgwxb';
+    const TOKEN = 'falseCoreToken';
 
     const RESOURCE_NAME = 'resource';
 
@@ -27,14 +27,14 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
     const OK_RESPONSE = 200;
 
     /**
-     * @var ApiClientImpl
+     * @var CoreApiClientImpl
      */
-    private $apiClient;
+    protected $apiClient;
 
     /**
      * @var StreamInterface | PHPUnit_Framework_MockObject_MockObject
      */
-    private $guzzleClientMock;
+    protected $guzzleClientMock;
 
     /**
      * @test
@@ -132,7 +132,7 @@ class ApiClientImplTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->apiClient = new ApiClientImpl(self::KEY, self::TOKEN);
+        $this->apiClient = new CoreApiClientImpl(self::KEY, self::TOKEN);
         $this->guzzleClientMock = new ClientMock();
         $this->setPropertyToObject($this->apiClient, 'client', $this->guzzleClientMock);
     }

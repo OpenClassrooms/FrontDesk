@@ -10,7 +10,7 @@ use OpenClassrooms\FrontDesk\Models\VisitBuilder;
  */
 class VisitRepository extends BaseRepository implements VisitGateway
 {
-    const RESOURCE_NAME = ApiEndpoint::DESK.'/visits/';
+    const RESOURCE_NAME = ApiEndpoint::CORE_API_DESK.'/visits/';
 
     /**
      * @var VisitBuilder
@@ -23,7 +23,7 @@ class VisitRepository extends BaseRepository implements VisitGateway
     public function findAllByPersonId($personId, $from = null, $to = null)
     {
         $parameters = ['from' => $from, 'to' => $to];
-        $jsonResult = $this->apiClient->get(
+        $jsonResult = $this->coreApiClient->get(
             PersonRepository::RESOURCE_NAME.$personId.'/visits'.urldecode('?'.http_build_query($parameters))
         );
         $result = json_decode($jsonResult, true);
@@ -58,7 +58,7 @@ class VisitRepository extends BaseRepository implements VisitGateway
      */
     public function deleteById($visitId, $personNotification = false)
     {
-        $this->apiClient->delete(self::RESOURCE_NAME.$visitId.'?notify_client='.(string) $personNotification);
+        $this->coreApiClient->delete(self::RESOURCE_NAME.$visitId.'?notify_client='.(string) $personNotification);
     }
 
     public function setVisitBuilder(VisitBuilder $visitBuilder)

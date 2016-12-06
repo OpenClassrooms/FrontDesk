@@ -10,7 +10,7 @@ use OpenClassrooms\FrontDesk\Models\PlanBuilder;
  */
 class PlanRepository extends BaseRepository implements PlanGateway
 {
-    const RESOURCE_NAME = ApiEndpoint::DESK.'/people/';
+    const RESOURCE_NAME = ApiEndpoint::CORE_API_DESK.'/people/';
 
     /**
      * @var PlanBuilder
@@ -22,7 +22,7 @@ class PlanRepository extends BaseRepository implements PlanGateway
      */
     public function findAllByPersonId($personId)
     {
-        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.$personId.'/plans');
+        $jsonResult = $this->coreApiClient->get(self::RESOURCE_NAME.$personId.'/plans');
         $result = json_decode($jsonResult, true);
 
         return $this->buildPlans($result);

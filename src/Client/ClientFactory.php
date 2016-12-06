@@ -11,7 +11,15 @@ interface ClientFactory
      * @param string $key
      * @param string $token
      *
-     * @return ApiClient
+     * @return CoreApiClient
      */
-    public function create($key, $token);
+    public function createCoreApi($key, $token);
+
+    /**
+     * @param string $key
+     * @param string $token
+     *
+     * @return ReportingApiClient
+     */
+    public function createReportingApi($key, $token);
 }

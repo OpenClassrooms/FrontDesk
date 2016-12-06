@@ -11,7 +11,7 @@ use OpenClassrooms\FrontDesk\Models\PersonBuilder;
  */
 class PersonRepository extends BaseRepository implements PersonGateway
 {
-    const RESOURCE_NAME = ApiEndpoint::DESK.'/people/';
+    const RESOURCE_NAME = ApiEndpoint::CORE_API_DESK.'/people/';
 
     const SEARCH = 'search';
 
@@ -25,7 +25,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
      */
     public function find($personId)
     {
-        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.$personId);
+        $jsonResult = $this->coreApiClient->get(self::RESOURCE_NAME.$personId);
         $result = json_decode($jsonResult, true);
 
         return $this->buildPeople($result['people'])[0];
@@ -72,7 +72,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
         }
 
         $parameters = ['q' => $query];
-        $jsonResult = $this->apiClient->get(
+        $jsonResult = $this->coreApiClient->get(
             self::RESOURCE_NAME.self::SEARCH.urldecode('?'.http_build_query($parameters))
         );
         $results = json_decode($jsonResult, true);
@@ -87,7 +87,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
     public function findAll($page = null)
     {
         $parameters = ['page' => $page];
-        $jsonResult = $this->apiClient->get(self::RESOURCE_NAME.urldecode('?'.http_build_query($parameters)));
+        $jsonResult = $this->coreApiClient->get(self::RESOURCE_NAME.urldecode('?'.http_build_query($parameters)));
         $result = json_decode($jsonResult, true);
 
         return $this->buildPeople($result['people']);
@@ -115,7 +115,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
      */
     public function insert(Person $person)
     {
-        $jsonResult = $this->apiClient->post(self::RESOURCE_NAME, ['person' => $person]);
+        $jsonResult = $this->coreApiClient->post(self::RESOURCE_NAME, ['person' => $person]);
         $result = json_decode($jsonResult, true);
 
         return $result['people'][0]['id'];
@@ -126,7 +126,7 @@ class PersonRepository extends BaseRepository implements PersonGateway
      */
     public function update(Person $person)
     {
-        $jsonResult = $this->apiClient->put(self::RESOURCE_NAME.$person->getId(), ['person' => $person]);
+        $jsonResult = $this->coreApiClient->put(self::RESOURCE_NAME.$person->getId(), ['person' => $person]);
         $result = json_decode($jsonResult, true);
 
         return $result['people'][0]['id'];

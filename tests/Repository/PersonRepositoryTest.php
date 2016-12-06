@@ -2,7 +2,7 @@
 
 namespace OpenClassrooms\FrontDesk\Repository;
 
-use OpenClassrooms\FrontDesk\Doubles\Client\Impl\ApiClientMock;
+use OpenClassrooms\FrontDesk\Doubles\Client\Impl\CoreApiClientMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonTestCase;
 use OpenClassrooms\FrontDesk\Models\Impl\PersonBuilderImpl;
@@ -28,11 +28,11 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function find_ReturnPeople()
     {
-        ApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
+        CoreApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
 
         $personResult = $this->personRepository->find(PersonStub1::ID);
 
-        $this->assertPeople($personResult);
+        $this->assertPeople([$personResult]);
     }
 
     /**
@@ -40,7 +40,7 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function findAll_ReturnPeople()
     {
-        ApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
+        CoreApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
 
         $peopleResult = $this->personRepository->findAll(self::PAGE);
 
@@ -52,7 +52,7 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function withQuery_FindAllByQuery_ReturnPeople()
     {
-        ApiClientMock::$response = json_encode([[['person' => new PersonStub1()]], 'total_count' => 1]);
+        CoreApiClientMock::$response = json_encode([[['person' => new PersonStub1()]], 'total_count' => 1]);
 
         $peopleResult = $this->personRepository->findAllByQuery(PersonStub1::EMAIL);
 
@@ -64,7 +64,7 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function withoutQuery_FindAllByQuery_ReturnPeople()
     {
-        ApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
+        CoreApiClientMock::$response = json_encode(['people' => [new PersonStub1()]]);
 
         $peopleResult = $this->personRepository->findAllByQuery();
 
@@ -76,13 +76,13 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function insert_ReturnPersonId()
     {
-        ApiClientMock::$response = json_encode(['people' => [0 => ['id' => PersonStub1::ID]]]);
+        CoreApiClientMock::$response = json_encode(['people' => [0 => ['id' => PersonStub1::ID]]]);
         $person = $this->buildPerson();
         $result = $this->personRepository->insert($person);
 
         $this->assertEquals(PersonStub1::ID, $result);
-        $this->assertEquals(PersonRepository::RESOURCE_NAME, ApiClientMock::$resource);
-        $this->assertEquals($this->personToJson($person), json_encode(ApiClientMock::$params));
+        $this->assertEquals(PersonRepository::RESOURCE_NAME, CoreApiClientMock::$resource);
+        $this->assertEquals($this->personToJson($person), json_encode(CoreApiClientMock::$params));
     }
 
     /**
@@ -118,19 +118,19 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function update_ReturnPersonId()
     {
-        ApiClientMock::$response = json_encode(['people' => [0 => ['id' => PersonStub1::ID]]]);
+        CoreApiClientMock::$response = json_encode(['people' => [0 => ['id' => PersonStub1::ID]]]);
         $person = $this->buildPerson();
         $result = $this->personRepository->update($person);
 
         $this->assertEquals(PersonStub1::ID, $result);
-        $this->assertEquals(PersonRepository::RESOURCE_NAME, ApiClientMock::$resource);
-        $this->assertEquals($this->personToJson($person), json_encode(ApiClientMock::$params));
+        $this->assertEquals(PersonRepository::RESOURCE_NAME, CoreApiClientMock::$resource);
+        $this->assertEquals($this->personToJson($person), json_encode(CoreApiClientMock::$params));
     }
 
     protected function setUp()
     {
         $this->personRepository = new PersonRepository();
-        $this->personRepository->setApiClient(new ApiClientMock());
+        $this->personRepository->setCoreApiClient(new CoreApiClientMock());
         $this->personRepository->setPersonBuilder(new PersonBuilderImpl());
     }
 }
