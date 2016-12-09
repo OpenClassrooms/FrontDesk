@@ -43,23 +43,20 @@ $client = $factory->create('your_front_desk_server_name', 'your_token');
 use OpenClassrooms\FrontDesk\Repository\PackRepository;
 
 $packGateway = new PackRepository();         
-$packGateway->setClient($client);      
+$packGateway->setApiClient($client);      
 ```
 
 #### Builder
 ```php
 use OpenClassrooms\FrontDesk\Models\PersonBuilder;
 
-$person = $personBuilder->create()
-                        ->withAddress(PersonStub1::ADDRESS)
-                        ->withCustomFields(PersonStub1::CUSTOM_FIELDS)
-                        ->withEmail(PersonStub1::EMAIL)
-                        ->withFirstName(PersonStub1::FIRST_NAME)
-                        ->withJoinedAt(new \DateTime(PersonStub1::JOINED_AT))
-                        ->withLastName(PersonStub1::LAST_NAME)
-                        ->withPhone(PersonStub1::PHONE)
-                        ...
-                        ->build();
+$pack = $packBuilder
+            ->create()
+            ->withCount(5)
+            ->withEndDate(new \DateTime())
+            ->withPersonIds([21987])
+            ->withStartDate(new \DateTime())
+            ->build();
 ```
 #### Services
 ##### Services Instanciation
@@ -67,16 +64,18 @@ $person = $personBuilder->create()
 use OpenClassrooms\FrontDesk\Services\Impl\PackServiceImpl;
 
 $service = new PackServiceImpl();
+$service->setPackGateway($packGateway);
 ```
 
-##### Delete a pack by id 
-```php
-$factory = new ClientFactoryImpl();        
-$client = $factory->create('server_name', 'your_token');
-$service = new PackServiceImpl();
-$packGateway = new PackRepository();        
-$packGateway->setApiClient($client);       
-$service->setPacknGateway($packGateway);        
+##### Create Pack 
+```php   
+...
+$service->create($pack, $packProductId); 
+```
+
+##### Delete Pack by id 
+```php   
+...
 $service->deletePack($packId); 
 ```
 
@@ -86,9 +85,10 @@ $service->deletePack($packId);
 use OpenClassrooms\FrontDesk\Repository\PersonRepository;
 
 $personGateway = new PersonRepository();         
-$personGateway->setClient($client); 
+$personGateway->setApiClient($client); 
 $personGateway->setPersonBuilder(new PersonBuilderImpl());            
 ```
+
 #### Builder
 The library provides a builder to create a Person:
  
@@ -96,13 +96,11 @@ The library provides a builder to create a Person:
 use OpenClassrooms\FrontDesk\Models\PersonBuilder;
 
 $person = $personBuilder->create()
-                        ->withAddress(PersonStub1::ADDRESS)
-                        ->withCustomFields(PersonStub1::CUSTOM_FIELDS)
-                        ->withEmail(PersonStub1::EMAIL)
-                        ->withFirstName(PersonStub1::FIRST_NAME)
-                        ->withJoinedAt(new \DateTime(PersonStub1::JOINED_AT))
-                        ->withLastName(PersonStub1::LAST_NAME)
-                        ->withPhone(PersonStub1::PHONE)
+                        ->withAddress('address')
+                        ->withEmail('email')
+                        ->withFirstName('first_name')
+                        ->withJoinedAt(new \DateTime())
+                        ->withLastName('last_name')
                         ...
                         ->build();
 ```
@@ -113,18 +111,31 @@ $person = $personBuilder->create()
 use OpenClassrooms\FrontDesk\Services\Impl\PersonServiceImpl;
 
 $service = new PersonServiceImpl();
+$service->setPersonGateway($personGateway);
 ```
 ##### Post a person 
-Just see here an exemple of a full person creation: 
 ```php
-        $factory = new ClientFactoryImpl();
-        $client = $factory->create('server_name', 'your_token');
-        $service = new PersonServiceImpl();
-        $personGateway = new PersonRepository();
-        $personGateway->setApiClient($client);
-        $personGateway->setPersonBuilder(new PersonBuilderImpl());
-        $service->setPersonGateway($personGateway);
-        $service->findAll();
+$service->create($person);
+```
+
+##### Put a person 
+```php
+$service->update($person);
+```
+
+##### Get person by id 
+```php
+$service->find($personId);
+```
+
+##### Get all the people
+```php
+$service->findAll($page);
+```
+
+##### Search person by query
+```php
+$service->search($query);
 ```
 
 ### PLAN
@@ -133,25 +144,19 @@ Just see here an exemple of a full person creation:
 The library provides Gateway for a person, a pack, a plan and a visit:
 ```php
 $planGateway = new PlanRepository();         
-$planGateway->setClient($client);  
+$planGateway->setApiClient($client);  
 $planGateway->setPlanBuilder(new PlanBuilderImpl());        
 ```
 
 #### Services
 ##### Services Instanciation
 ```php
-$service = new PlanServiceImpl
+$service = new PlanServiceImpl();
+$service->setPlanGateway($planGateway);
 ```
 
 ##### Get Plans by person id
 ```php
-$factory = new ClientFactoryImpl();        
-$client = $factory->create('server_name', 'your_token');
-$service = new PlanServiceImpl();
-$planGateway = new PlanRepository();
-$planGateway->setApiClient($client);
-$planGateway->setPlanBuilder(new PlanBuilderImpl());
-$service->setPlanGateway($planGateway);
 $service->getPlans($personId);
 ```
 
@@ -161,7 +166,7 @@ $service->getPlans($personId);
 use OpenClassrooms\FrontDesk\Repository\VisitRepository;
 
 $visitGateway = new VisitRepository();         
-$visitGateway->setClient($client);  
+$visitGateway->setApiClient($client);  
 $visitGateway->setVisitBuilder(new VisitBuilderImpl());
 ```
 
@@ -169,27 +174,15 @@ $visitGateway->setVisitBuilder(new VisitBuilderImpl());
 ##### Services Instanciation
 ```php
 $service = new VisitServiceImpl();
+$service->setVisitGateway($visitGateway);
 ```
 
 ##### Get Visit by person id
 ```php
-$factory = new ClientFactoryImpl();        
-$client = $factory->create('server_name', 'your_token');
-$service = new VisitServiceImpl();
-$visitGateway = new VisitRepository();
-$visitGateway->setApiClient($client);
-$visitGateway->setVisitBuilder(new VisitBuilderImpl());
-$service->setVisitGateway($visitGateway);
 $service->getVisits($personId, $from, $to);
 ```
 
 ##### Delete Visit by id
 ```php
-$factory = new ClientFactoryImpl();        
-$client = $factory->create('server_name', 'your_token');
-$service = new VisitServiceImpl();
-$visitGateway = new VisitRepository();
-$visitGateway->setApiClient($client);
-$service->setVisitGateway($visitGateway);
 $service->deleteVisit($visitId);
 ```
