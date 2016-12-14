@@ -2,12 +2,12 @@
 
 namespace OpenClassrooms\FrontDesk\Repository;
 
-use OpenClassrooms\FrontDesk\Gateways\EnrollmentsGateway;
+use OpenClassrooms\FrontDesk\Gateways\EnrollmentGateway;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class EnrollmentsRepository extends BaseRepository implements EnrollmentsGateway
+class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
 {
     const RESOURCE_NAME = '/enrollments'.ApiEndpoint::QUERY_NAME;
 

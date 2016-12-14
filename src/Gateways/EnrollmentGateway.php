@@ -5,7 +5,7 @@ namespace OpenClassrooms\FrontDesk\Gateways;
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-interface EnrollmentsGateway
+interface EnrollmentGateway
 {
     /**
      * @param array $fields

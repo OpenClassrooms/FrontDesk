@@ -5,7 +5,7 @@ namespace OpenClassrooms\FrontDesk\Services;
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-interface EnrollmentsService
+interface EnrollmentService
 {
     /**
      * @param array $field

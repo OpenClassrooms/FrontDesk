@@ -2,12 +2,12 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Gateways;
 
-use OpenClassrooms\FrontDesk\Gateways\EnrollmentsGateway;
+use OpenClassrooms\FrontDesk\Gateways\EnrollmentGateway;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class EnrollmentsGatewayMock implements EnrollmentsGateway
+class EnrollmentGatewayMock implements EnrollmentGateway
 {
     /**
      * @var array

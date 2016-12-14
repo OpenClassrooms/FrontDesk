@@ -7,14 +7,14 @@ use OpenClassrooms\FrontDesk\Doubles\Client\Impl\ReportingApiClientMock;
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class EnrollmentsRepositoryTest extends \PHPUnit_Framework_TestCase
+class EnrollmentRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     const DATA_RESPONSE = 'data';
 
     /**
-     * @var EnrollmentsRepository
+     * @var EnrollmentRepository
      */
-    private $enrollmentsRepository;
+    private $enrollmentRepository;
 
     /**
      * @test
@@ -23,14 +23,14 @@ class EnrollmentsRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         ReportingApiClientMock::$response = json_encode(['data' => ['attributes' => ['rows' => self::DATA_RESPONSE]]]);
 
-        $result = $this->enrollmentsRepository->query(['email']);
+        $result = $this->enrollmentRepository->query(['email']);
 
         $this->assertEquals(self::DATA_RESPONSE, $result);
     }
 
     protected function setUp()
     {
-        $this->enrollmentsRepository = new EnrollmentsRepository();
-        $this->enrollmentsRepository->setReportingApiClient(new ReportingApiClientMock());
+        $this->enrollmentRepository = new EnrollmentRepository();
+        $this->enrollmentRepository->setReportingApiClient(new ReportingApiClientMock());
     }
 }

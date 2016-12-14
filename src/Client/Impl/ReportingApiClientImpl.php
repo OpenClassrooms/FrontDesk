@@ -27,7 +27,7 @@ class ReportingApiClientImpl implements ReportingApiClient
                 'base_uri' => 'https://'.$key.'.frontdeskhq.com/',
                 'headers'  => [
                     'Authorization' => "Bearer $token",
-                    'Content-Type'  => ' application/vnd.api+json',
+                    'Content-Type'  => 'application/vnd.api+json',
                 ],
             ]
         );
