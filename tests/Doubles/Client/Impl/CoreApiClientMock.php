@@ -2,7 +2,7 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Client\Impl;
 
-use OpenClassrooms\FrontDesk\Client\Impl\ApiClientImpl;
+use OpenClassrooms\FrontDesk\Client\Impl\CoreApiClientImpl;
 use OpenClassrooms\FrontDesk\Client\NotFoundException;
 use OpenClassrooms\FrontDesk\Client\UnprocessableEntityException;
 use Psr\Http\Message\ResponseInterface;
@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class ApiClientMock extends ApiClientImpl
+class CoreApiClientMock extends CoreApiClientImpl
 {
     /**
      * @var int

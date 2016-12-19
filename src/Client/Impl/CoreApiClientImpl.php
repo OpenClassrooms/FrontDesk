@@ -4,14 +4,14 @@ namespace OpenClassrooms\FrontDesk\Client\Impl;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use OpenClassrooms\FrontDesk\Client\ApiClient;
+use OpenClassrooms\FrontDesk\Client\CoreApiClient;
 use OpenClassrooms\FrontDesk\Client\NotFoundException;
 use OpenClassrooms\FrontDesk\Client\UnprocessableEntityException;
 
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-class ApiClientImpl implements ApiClient
+class CoreApiClientImpl implements CoreApiClient
 {
     /**
      * @var ClientInterface
@@ -26,7 +26,7 @@ class ApiClientImpl implements ApiClient
     {
         $this->client = new Client(
             [
-                'base_uri' => 'https://'.$key.'.frontdeskhq.com/api/v2/',
+                'base_uri' => 'https://'.$key.'.frontdeskhq.com/',
                 'headers'  => ['Authorization' => "Bearer $token"],
             ]
         );

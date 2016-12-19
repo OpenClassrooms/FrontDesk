@@ -12,8 +12,16 @@ class ClientFactoryImpl implements ClientFactory
     /**
      * {@inheritdoc}
      */
-    public function create($key, $token)
+    public function createCoreApi($key, $token)
     {
-        return new ApiClientImpl($key, $token);
+        return new CoreApiClientImpl($key, $token);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createReportingApi($key, $token)
+    {
+        return new ReportingApiClientImpl($key, $token);
     }
 }

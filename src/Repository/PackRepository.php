@@ -10,16 +10,16 @@ use OpenClassrooms\FrontDesk\Models\Pack;
  */
 class PackRepository extends BaseRepository implements PackGateway
 {
-    const RESOURCE_PACK_PRODUCT_NAME = ApiEndpoint::DESK.'/pack_products/';
+    const RESOURCE_PACK_PRODUCT_NAME = ApiEndpoint::CORE_API_DESK.'/pack_products/';
 
-    const RESOURCE_PACK_NAME = ApiEndpoint::DESK.'/packs/';
+    const RESOURCE_PACK_NAME = ApiEndpoint::CORE_API_DESK.'/packs/';
 
     /**
      * {@inheritdoc}
      */
     public function insert(Pack $pack, $packProductId)
     {
-        $jsonResult = $this->apiClient->post(self::RESOURCE_PACK_PRODUCT_NAME.$packProductId.'/packs', $pack);
+        $jsonResult = $this->coreApiClient->post(self::RESOURCE_PACK_PRODUCT_NAME.$packProductId.'/packs', $pack);
         $result = json_decode($jsonResult, true);
 
         return $result['packs'][0]['id'];
@@ -30,6 +30,6 @@ class PackRepository extends BaseRepository implements PackGateway
      */
     public function deleteById($packId)
     {
-        $this->apiClient->delete(self::RESOURCE_PACK_NAME.$packId);
+        $this->coreApiClient->delete(self::RESOURCE_PACK_NAME.$packId);
     }
 }

@@ -3,7 +3,7 @@
 namespace OpenClassrooms\FrontDesk\Repository;
 
 use Carbon\Carbon;
-use OpenClassrooms\FrontDesk\Doubles\Client\Impl\ApiClientMock;
+use OpenClassrooms\FrontDesk\Doubles\Client\Impl\CoreApiClientMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\VisitStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\VisitTestCase;
@@ -34,7 +34,7 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function visitNotFound_ThrowException()
     {
-        ApiClientMock::$statusCode = self::NOT_FOUND_RESPONSE;
+        CoreApiClientMock::$statusCode = self::NOT_FOUND_RESPONSE;
         $this->visitRepository->findAllByPersonId(PersonStub1::ID);
     }
 
@@ -43,7 +43,7 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function findAllByPersonIdWithoutParameters_ReturnVisits()
     {
-        ApiClientMock::$response = json_encode(['visits' => [new VisitStub1()], 'total_count' => 1]);
+        CoreApiClientMock::$response = json_encode(['visits' => [new VisitStub1()], 'total_count' => 1]);
 
         $visits = $this->visitRepository->findAllByPersonId(PersonStub1::ID);
         $this->assertVisits($visits);
@@ -55,7 +55,7 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
     public function findAllByPersonIdWithParameters_ReturnVisits()
     {
         list($from, $to) = $this->initFromAndTo();
-        ApiClientMock::$response = json_encode(['visits' => [new VisitStub1()], 'total_count' => 1]);
+        CoreApiClientMock::$response = json_encode(['visits' => [new VisitStub1()], 'total_count' => 1]);
 
         $visits = $this->visitRepository->findAllByPersonId(PersonStub1::ID, $from, $to);
         $this->assertVisits($visits);
@@ -88,7 +88,7 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->visitRepository = new VisitRepository();
-        $this->visitRepository->setApiClient(new ApiClientMock());
+        $this->visitRepository->setCoreApiClient(new CoreApiClientMock());
         $this->visitRepository->setVisitBuilder(new VisitBuilderImpl());
     }
 }

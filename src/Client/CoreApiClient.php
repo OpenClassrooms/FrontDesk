@@ -5,7 +5,7 @@ namespace OpenClassrooms\FrontDesk\Client;
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
-interface ApiClient
+interface CoreApiClient
 {
     /**
      * @param string $resourceName
