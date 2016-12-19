@@ -37,13 +37,35 @@ $factory = new ClientFactoryImpl(); 
 $client = $factory->create('your_front_desk_server_name', 'your_token');
 ```
 ## ENDPOINTS
+### ENROLLMENT
+#### Gateway
+```php
+use OpenClassrooms\FrontDesk\Repository\PackRepository;
+
+$enrollmentGateway = new EnrollmentRepository();         
+$enrollmentGateway->setReportingApiClient($client);   
+```
+#### Services
+##### Services Instanciation
+```php
+use OpenClassrooms\FrontDesk\Services\Impl\EnrollmentServiceImpl;
+
+$service = new EnrollmentServiceImpl();
+$service->setEnrollmentGateway($enrollmentGateway);
+```
+##### Create Query
+```php   
+...
+$service->query($field, $filter, $limit); 
+```
+
 ### PACK
 #### Gateway
 ```php
 use OpenClassrooms\FrontDesk\Repository\PackRepository;
 
 $packGateway = new PackRepository();         
-$packGateway->setApiClient($client);      
+$packGateway->setCoreApiClient($client);    
 ```
 
 #### Builder
@@ -85,7 +107,7 @@ $service->deletePack($packId);
 use OpenClassrooms\FrontDesk\Repository\PersonRepository;
 
 $personGateway = new PersonRepository();         
-$personGateway->setApiClient($client); 
+$personGateway->setCoreApiClient($client); 
 $personGateway->setPersonBuilder(new PersonBuilderImpl());            
 ```
 
@@ -144,7 +166,7 @@ $service->search($query);
 The library provides Gateway for a person, a pack, a plan and a visit:
 ```php
 $planGateway = new PlanRepository();         
-$planGateway->setApiClient($client);  
+$planGateway->setCoreApiClient($client);  
 $planGateway->setPlanBuilder(new PlanBuilderImpl());        
 ```
 
@@ -166,7 +188,7 @@ $service->getPlans($personId);
 use OpenClassrooms\FrontDesk\Repository\VisitRepository;
 
 $visitGateway = new VisitRepository();         
-$visitGateway->setApiClient($client);  
+$visitGateway->setCoreApiClient($client);  
 $visitGateway->setVisitBuilder(new VisitBuilderImpl());
 ```
 
