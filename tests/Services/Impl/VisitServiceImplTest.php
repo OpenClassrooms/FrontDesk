@@ -2,7 +2,6 @@
 
 namespace OpenClassrooms\FrontDesk\Services\Impl;
 
-use Carbon\Carbon;
 use OpenClassrooms\FrontDesk\Doubles\Gateways\VisitGatewayMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\VisitStub1;
@@ -48,11 +47,8 @@ class VisitServiceImplTest extends \PHPUnit_Framework_TestCase
      */
     private function initFromAndTo()
     {
-        $from = new Carbon(self::FROM);
-        $from = $from->toISO8601String();
-
-        $to = new Carbon(self::TO);
-        $to = $to->toISO8601String();
+        $from = new \DateTime(self::FROM);
+        $to = new \DateTime(self::TO);
 
         return [$from, $to];
     }

@@ -2,7 +2,6 @@
 
 namespace OpenClassrooms\FrontDesk\Repository;
 
-use Carbon\Carbon;
 use OpenClassrooms\FrontDesk\Doubles\Client\Impl\CoreApiClientMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\VisitStub1;
@@ -66,11 +65,8 @@ class VisitRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private function initFromAndTo()
     {
-        $from = new Carbon(self::FROM);
-        $from = $from->toISO8601String();
-
-        $to = new Carbon(self::TO);
-        $to = $to->toISO8601String();
+        $from = new \DateTime(self::FROM);
+        $to = new \DateTime(self::TO);
 
         return [$from, $to];
     }
