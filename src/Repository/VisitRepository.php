@@ -22,6 +22,14 @@ class VisitRepository extends BaseRepository implements VisitGateway
      */
     public function findAllByPersonId($personId, $from = null, $to = null)
     {
+        if ($from instanceof \DateTime) {
+            $from = $from->format(DATE_ISO8601);
+        }
+
+        if ($to instanceof \DateTime) {
+            $to = $to->format(DATE_ISO8601);
+        }
+
         $parameters = ['from' => $from, 'to' => $to];
         $jsonResult = $this->coreApiClient->get(
             PersonRepository::RESOURCE_NAME.$personId.'/visits'.urldecode('?'.http_build_query($parameters))
