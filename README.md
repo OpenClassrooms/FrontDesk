@@ -34,7 +34,9 @@ The library provides a factory to create a client
 use OpenClassrooms\FrontDesk\Client\Impl\ClientFactoryImpl; 
 
 $factory = new ClientFactoryImpl();         
-$client = $factory->create('your_front_desk_server_name', 'your_token');
+$client = $factory->createCoreApi('your_front_desk_server_name', 'your_token');
+\\
+$client = $factory->createReportingApi('your_front_desk_server_name', 'your_token');
 ```
 ## ENDPOINTS
 ### ENROLLMENT
