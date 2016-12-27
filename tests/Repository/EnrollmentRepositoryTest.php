@@ -21,11 +21,13 @@ class EnrollmentRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function postQuery_ReturnResult()
     {
-        ReportingApiClientMock::$response = json_encode(['data' => ['attributes' => ['rows' => self::DATA_RESPONSE]]]);
+        ReportingApiClientMock::$response = json_encode(
+            ['data' => ['attributes' => ['rows' => [0 => [self::DATA_RESPONSE]]]]]
+        );
 
         $result = $this->enrollmentRepository->query(['email']);
 
-        $this->assertEquals(self::DATA_RESPONSE, $result);
+        $this->assertEquals([['email' => self::DATA_RESPONSE]], $result);
     }
 
     protected function setUp()
