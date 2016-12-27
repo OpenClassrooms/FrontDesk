@@ -25,8 +25,14 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
         );
 
         $result = json_decode($jsonResult, true);
+        $resultRows = $result['data']['attributes']['rows'];
 
-        return $result['data']['attributes']['rows'];
+        $finalResult = [];
+        foreach ($resultRows as $row) {
+            $finalResult[] = array_combine($fields, $row);
+        }
+
+        return $finalResult;
     }
 
     protected function getQuery(array $fields = [], array $filter = [], $limit = 100)
@@ -40,7 +46,7 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
                     'page'   => ['limit' => $limit],
                     'filter' => $filter,
                 ],
-            ]
+            ],
         ];
     }
 }
