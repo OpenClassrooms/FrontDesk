@@ -20,7 +20,7 @@ class EnrollmentServiceImpl implements EnrollmentService
      */
     public function query(array $field = [], array $filter = [], $limit = 100)
     {
-        return $this->enrollmentGateway->query($field, $filter);
+        return $this->enrollmentGateway->query($field, $filter, $limit);
     }
 
     public function setEnrollmentGateway(EnrollmentGateway $enrollmentGateway)

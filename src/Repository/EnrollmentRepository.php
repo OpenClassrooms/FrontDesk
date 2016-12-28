@@ -16,7 +16,7 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
      */
     public function query(array $fields = [], array $filter = [], $limit = 100)
     {
-        $enrollmentQuery = $this->getQuery($fields, $filter);
+        $enrollmentQuery = $this->getQuery($fields, $filter, $limit);
         $enrollmentQueryJson = json_encode($enrollmentQuery);
 
         $jsonResult = $this->reportingApiClient->post(
