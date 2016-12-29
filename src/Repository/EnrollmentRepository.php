@@ -16,26 +16,37 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
      */
     public function query(array $fields = [], array $filter = [], $limit = 100)
     {
-        $enrollmentQuery = $this->getQuery($fields, $filter, $limit);
-        $enrollmentQueryJson = json_encode($enrollmentQuery);
+        $hasMorePage = true;
+        $lastKey = null;
+        $resultPage = [];
 
-        $jsonResult = $this->reportingApiClient->post(
-            ApiEndpoint::REPORTING_API.self::RESOURCE_NAME,
-            ['body' => $enrollmentQueryJson]
-        );
+        while (true === $hasMorePage) {
+            $enrollmentQuery = $this->getQuery($fields, $filter, $limit, $lastKey);
+            $enrollmentQueryJson = json_encode($enrollmentQuery);
 
-        $result = json_decode($jsonResult, true);
-        $resultRows = $result['data']['attributes']['rows'];
+            $jsonResult = $this->reportingApiClient->post(
+                ApiEndpoint::REPORTING_API.self::RESOURCE_NAME,
+                ['body' => $enrollmentQueryJson]
+            );
+
+            $result = json_decode($jsonResult, true);
+
+            $resultPage[] = $result['data']['attributes']['rows'];
+            $hasMorePage = $result['data']['attributes']['has_more'];
+            $lastKey = $result['data']['attributes']['last_key'];
+        }
 
         $finalResult = [];
-        foreach ($resultRows as $row) {
-            $finalResult[] = array_combine($fields, $row);
+        foreach ($resultPage as $resultRows) {
+            foreach ($resultRows as $row) {
+                $finalResult[] = array_combine($fields, $row);
+            }
         }
 
         return $finalResult;
     }
 
-    protected function getQuery(array $fields = [], array $filter = [], $limit = 100)
+    protected function getQuery(array $fields = [], array $filter = [], $limit = 100, $lastKey = null)
     {
         return [
             'data' => [
@@ -43,7 +54,10 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
                 'attributes' => [
                     'fields' => $fields,
                     'sort'   => [],
-                    'page'   => ['limit' => $limit],
+                    'page'   => [
+                        'limit'          => $limit,
+                        'starting_after' => null !== $lastKey ? $lastKey : null
+                    ],
                     'filter' => $filter,
                 ],
             ],
