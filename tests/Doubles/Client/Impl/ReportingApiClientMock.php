@@ -11,6 +11,11 @@ use Psr\Http\Message\ResponseInterface;
 class ReportingApiClientMock extends ReportingApiClientImpl
 {
     /**
+     * @var int
+     */
+    public static $index = 0;
+
+    /**
      * @var ResponseInterface
      */
     public static $response;
@@ -27,6 +32,7 @@ class ReportingApiClientMock extends ReportingApiClientImpl
 
     public function __construct()
     {
+        self::$index = 0;
         self::$response = null;
         self::$params = [];
         self::$resource = null;
@@ -39,7 +45,8 @@ class ReportingApiClientMock extends ReportingApiClientImpl
     {
         self::$resource = $resourceName;
         self::$params = $resourceData;
+        self::$index = self::$index + 1;
 
-        return self::$response;
+        return self::$response[self::$index - 1];
     }
 }
