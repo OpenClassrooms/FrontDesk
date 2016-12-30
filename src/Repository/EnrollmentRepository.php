@@ -20,9 +20,8 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
         $lastKey = null;
         $resultPage = [];
 
-        while (true === $hasMorePage) {
-            $enrollmentQuery = $this->getQuery($fields, $filter, $limit, $lastKey);
-            $enrollmentQueryJson = json_encode($enrollmentQuery);
+        while ($hasMorePage) {
+            $enrollmentQueryJson = $this->getQuery($fields, $filter, $limit, $lastKey);
 
             $jsonResult = $this->reportingApiClient->post(
                 ApiEndpoint::REPORTING_API.self::RESOURCE_NAME,
@@ -36,19 +35,12 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
             $lastKey = $result['data']['attributes']['last_key'];
         }
 
-        $finalResult = [];
-        foreach ($resultPage as $resultRows) {
-            foreach ($resultRows as $row) {
-                $finalResult[] = array_combine($fields, $row);
-            }
-        }
-
-        return $finalResult;
+        return $this->finalResultPages($fields, $resultPage);
     }
 
-    protected function getQuery(array $fields = [], array $filter = [], $limit = 100, $lastKey = null)
+    private function getQuery(array $fields = [], array $filter = [], $limit = 100, $lastKey = null)
     {
-        return [
+        $query = [
             'data' => [
                 'type'       => 'queries',
                 'attributes' => [
@@ -62,5 +54,39 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
                 ],
             ],
         ];
+
+        return json_encode($query);
+    }
+
+    /**
+     * @param array $fields
+     * @param array $resultPage
+     *
+     * @return array
+     */
+    private function finalResultPages(array $fields, array $resultPage)
+    {
+        return array_map(
+            function ($resultRows) use ($fields) {
+                return $this->getRows($resultRows, $fields);
+            },
+            $resultPage
+        );
+    }
+
+    /**
+     * @param array $resultRows
+     * @param array $fields
+     *
+     * @return array
+     */
+    private function getRows(array $resultRows, array $fields)
+    {
+        return array_map(
+            function ($row) use ($fields) {
+                return array_combine($fields, $row);
+            },
+            $resultRows
+        );
     }
 }
