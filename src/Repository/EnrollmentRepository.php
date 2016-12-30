@@ -16,37 +16,77 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentGateway
      */
     public function query(array $fields = [], array $filter = [], $limit = 100)
     {
-        $enrollmentQuery = $this->getQuery($fields, $filter, $limit);
-        $enrollmentQueryJson = json_encode($enrollmentQuery);
+        $hasMorePage = true;
+        $lastKey = null;
+        $resultPage = [];
 
-        $jsonResult = $this->reportingApiClient->post(
-            ApiEndpoint::REPORTING_API.self::RESOURCE_NAME,
-            ['body' => $enrollmentQueryJson]
-        );
+        while ($hasMorePage) {
+            $enrollmentQueryJson = $this->getQuery($fields, $filter, $limit, $lastKey);
 
-        $result = json_decode($jsonResult, true);
-        $resultRows = $result['data']['attributes']['rows'];
+            $jsonResult = $this->reportingApiClient->post(
+                ApiEndpoint::REPORTING_API.self::RESOURCE_NAME,
+                ['body' => $enrollmentQueryJson]
+            );
 
-        $finalResult = [];
-        foreach ($resultRows as $row) {
-            $finalResult[] = array_combine($fields, $row);
+            $result = json_decode($jsonResult, true);
+
+            $resultPage[] = $result['data']['attributes']['rows'];
+            $hasMorePage = $result['data']['attributes']['has_more'];
+            $lastKey = $result['data']['attributes']['last_key'];
         }
 
-        return $finalResult;
+        return $this->finalResultPages($fields, $resultPage);
     }
 
-    protected function getQuery(array $fields = [], array $filter = [], $limit = 100)
+    private function getQuery(array $fields = [], array $filter = [], $limit = 100, $lastKey = null)
     {
-        return [
+        $query = [
             'data' => [
                 'type'       => 'queries',
                 'attributes' => [
                     'fields' => $fields,
                     'sort'   => [],
-                    'page'   => ['limit' => $limit],
+                    'page'   => [
+                        'limit'          => $limit,
+                        'starting_after' => null !== $lastKey ? $lastKey : null
+                    ],
                     'filter' => $filter,
                 ],
             ],
         ];
+
+        return json_encode($query);
+    }
+
+    /**
+     * @param array $fields
+     * @param array $resultPage
+     *
+     * @return array
+     */
+    private function finalResultPages(array $fields, array $resultPage)
+    {
+        return array_map(
+            function ($resultRows) use ($fields) {
+                return $this->getRows($resultRows, $fields);
+            },
+            $resultPage
+        );
+    }
+
+    /**
+     * @param array $resultRows
+     * @param array $fields
+     *
+     * @return array
+     */
+    private function getRows(array $resultRows, array $fields)
+    {
+        return array_map(
+            function ($row) use ($fields) {
+                return array_combine($fields, $row);
+            },
+            $resultRows
+        );
     }
 }

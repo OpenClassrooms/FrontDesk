@@ -25,8 +25,14 @@ class ReportingApiClientMock extends ReportingApiClientImpl
      */
     public static $params;
 
+    /**
+     * @var int
+     */
+    private $index = 0;
+
     public function __construct()
     {
+        $this->index = 0;
         self::$response = null;
         self::$params = [];
         self::$resource = null;
@@ -40,6 +46,6 @@ class ReportingApiClientMock extends ReportingApiClientImpl
         self::$resource = $resourceName;
         self::$params = $resourceData;
 
-        return self::$response;
+        return self::$response[$this->index++];
     }
 }
