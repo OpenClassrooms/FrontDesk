@@ -102,6 +102,8 @@ class PersonRepositoryTest extends \PHPUnit_Framework_TestCase
             ->withJoinedAt(new \DateTime(PersonStub1::JOINED_AT))
             ->withLastName(PersonStub1::LAST_NAME)
             ->withPhone(PersonStub1::PHONE)
+            ->withPrimaryStaffMember(PersonStub1::PRIMARY_STAFF_MEMBER)
+            ->withStaffContactId(PersonStub1::STAFF_CONTACT_ID)
             ->build();
     }
 

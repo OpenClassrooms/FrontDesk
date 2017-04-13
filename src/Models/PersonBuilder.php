@@ -100,6 +100,13 @@ interface PersonBuilder
     public function withPhone($phone);
 
     /**
+     * @param array|null $primaryStaffMember
+     *
+     * @return PersonBuilder
+     */
+    public function withPrimaryStaffMember($primaryStaffMember);
+
+    /**
      * @param bool $sendInvite
      *
      * @return PersonBuilder
@@ -112,6 +119,13 @@ interface PersonBuilder
      * @return PersonBuilder
      */
     public function withSkipComplimentaryPasses($skipComplimentaryPasses);
+
+    /**
+     * @param int $staffContactId
+     *
+     * @return PersonBuilder
+     */
+    public function withStaffContactId($staffContactId);
 
     /**
      * @return Person

@@ -38,9 +38,13 @@ class PersonStub1 extends PersonImpl
 
     const PHONE = 'Person stub 1 PHONE';
 
+    const PRIMARY_STAFF_MEMBER = ['id' => 21893, 'name' => 'primary staff member person stub 1'];
+
     const SEND_INVITE = false;
 
     const SKIP_COMPLIMENTARY_PASSES = false;
+
+    const STAFF_CONTACT_ID = 57823894;
 
     protected $address = self::ADDRESS;
 
@@ -64,9 +68,13 @@ class PersonStub1 extends PersonImpl
 
     protected $phone = self::PHONE;
 
+    protected $primaryStaffMember = self::PRIMARY_STAFF_MEMBER;
+
     protected $sendInvite = self::SEND_INVITE;
 
     protected $skipComplimentaryPasses = self::SKIP_COMPLIMENTARY_PASSES;
+
+    protected $staffContactId = self::STAFF_CONTACT_ID;
 
     public function __construct()
     {

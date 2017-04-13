@@ -17,7 +17,7 @@ class PersonImpl extends Person implements \JsonSerializable
     {
         return [
             'address'                   => $this->address,
-            'birthdate'                 => $this->birthdate !== null ? $this->birthdate->format(
+            'birthdate'                 => null !== $this->birthdate ? $this->birthdate->format(
                 ApiDateFormat::DATE_FORMAT_MIN
             ) : null,
             'custom_fields'             => $this->customFields,
@@ -26,13 +26,15 @@ class PersonImpl extends Person implements \JsonSerializable
             'guardian_email'            => $this->guardianEmail,
             'guardian_name'             => $this->guardianName,
             'id'                        => $this->id,
-            'joined_at'                 => $this->joinedAt !== null ? $this->joinedAt->format(DATE_ISO8601) : null,
+            'joined_at'                 => null !== $this->joinedAt ? $this->joinedAt->format(DATE_ISO8601) : null,
             'last_name'                 => $this->lastName,
             'location_id'               => $this->locationId,
             'middle_name'               => $this->middleName,
             'phone'                     => $this->phone,
+            'primary_staff_member'      => null !== $this->primaryStaffMember ? $this->primaryStaffMember : null,
             'send_invite'               => $this->sendInvite,
             'skip_complimentary_passes' => $this->skipComplimentaryPasses,
+            'staff_contact_id'          => null !== $this->staffContactId ? $this->staffContactId : null,
         ];
     }
 }
