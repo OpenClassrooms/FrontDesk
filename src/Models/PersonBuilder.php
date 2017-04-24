@@ -104,7 +104,7 @@ interface PersonBuilder
      *
      * @return PersonBuilder
      */
-    public function withPrimaryStaffMember($primaryStaffMember);
+    public function withPrimaryStaffMember(array $primaryStaffMember = null);
 
     /**
      * @param bool $sendInvite

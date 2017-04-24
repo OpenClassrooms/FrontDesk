@@ -31,10 +31,10 @@ class PersonImpl extends Person implements \JsonSerializable
             'location_id'               => $this->locationId,
             'middle_name'               => $this->middleName,
             'phone'                     => $this->phone,
-            'primary_staff_member'      => null !== $this->primaryStaffMember ? $this->primaryStaffMember : null,
+            'primary_staff_member'      => $this->primaryStaffMember,
             'send_invite'               => $this->sendInvite,
             'skip_complimentary_passes' => $this->skipComplimentaryPasses,
-            'staff_contact_id'          => null !== $this->staffContactId ? $this->staffContactId : null,
+            'staff_contact_id'          => $this->staffContactId,
         ];
     }
 }

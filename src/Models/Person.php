@@ -196,7 +196,7 @@ abstract class Person
     /**
      * @param array|null $primaryStaffMember
      */
-    public function setPrimaryStaffMember($primaryStaffMember)
+    public function setPrimaryStaffMember(array $primaryStaffMember = null)
     {
         $this->primaryStaffMember = $primaryStaffMember;
     }

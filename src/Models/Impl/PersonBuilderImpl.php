@@ -157,7 +157,7 @@ class PersonBuilderImpl implements PersonBuilder
     /**
      * {@inheritdoc}
      */
-    public function withPrimaryStaffMember($primaryStaffMember)
+    public function withPrimaryStaffMember(array $primaryStaffMember = null)
     {
         $this->person->setPrimaryStaffMember($primaryStaffMember);
 
