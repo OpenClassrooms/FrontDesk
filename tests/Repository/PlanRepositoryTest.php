@@ -2,6 +2,7 @@
 
 namespace OpenClassrooms\FrontDesk\Repository;
 
+use Carbon\Carbon;
 use OpenClassrooms\FrontDesk\Doubles\Client\Impl\CoreApiClientMock;
 use OpenClassrooms\FrontDesk\Doubles\Models\PersonStub1;
 use OpenClassrooms\FrontDesk\Doubles\Models\PlanStub1;
@@ -38,8 +39,14 @@ class PlanRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        Carbon::setTestNow(Carbon::now());
         $this->planRepository = new PlanRepository();
         $this->planRepository->setCoreApiClient(new CoreApiClientMock());
         $this->planRepository->setPlanBuilder(new PlanBuilderImpl());
+    }
+
+    public function tearDown()
+    {
+        Carbon::setTestNow();
     }
 }

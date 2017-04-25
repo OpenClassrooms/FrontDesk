@@ -2,6 +2,8 @@
 
 namespace OpenClassrooms\FrontDesk\Models;
 
+use Carbon\Carbon;
+
 /**
  * @author Killian Herbunot <killian.herbunot@openclassrooms.com>
  */
@@ -87,6 +89,39 @@ abstract class Plan
      */
     protected $updateAt;
 
+    public function isActive()
+    {
+        return null !== $this->getEndDate()
+            && $this->getEndDate() > new \DateTime(Carbon::now())
+            && $this->getStartDate() < new \DateTime(Carbon::now());
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(\DateTime $endDate = null)
+    {
+        $this->endDate = $endDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate(\DateTime $startDate = null)
+    {
+        $this->startDate = $startDate;
+    }
+
     /**
      * @return \DateTime
      */
@@ -159,19 +194,6 @@ abstract class Plan
     public function setDescription($description)
     {
         $this->description = $description;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    public function setEndDate(\DateTime $endDate = null)
-    {
-        $this->endDate = $endDate;
     }
 
     /**
@@ -284,19 +306,6 @@ abstract class Plan
     public function setStaffMemberId($staffMemberId)
     {
         $this->staffMemberId = $staffMemberId;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    public function setStartDate(\DateTime $startDate = null)
-    {
-        $this->startDate = $startDate;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Models;
 
+use Carbon\Carbon;
 use OpenClassrooms\FrontDesk\Models\Impl\PlanImpl;
 
 /**
@@ -9,13 +10,9 @@ use OpenClassrooms\FrontDesk\Models\Impl\PlanImpl;
  */
 class PlanStub1 extends PlanImpl
 {
-    const CANCELED_AT = '2017-03-20 15:30:06';
-
     const CONSIDER_MEMBER = false;
 
     const COUNT = 22;
-
-    const CREATED_AT = '2016-09-27 15:30:06';
 
     const DESCRIPTION = 'planDescription';
 
@@ -35,11 +32,7 @@ class PlanStub1 extends PlanImpl
 
     const STAFF_MEMBER_ID = 999;
 
-    const START_DATE = '2016-09-27';
-
     const TYPE = 'planType';
-
-    const UPDATED_AT = '2016-10-12';
 
     protected $considerMember = self::CONSIDER_MEMBER;
 
@@ -65,10 +58,10 @@ class PlanStub1 extends PlanImpl
 
     public function __construct()
     {
-        $this->canceledAt = new \DateTime(self::CANCELED_AT);
-        $this->createdAt = new \DateTime(self::CREATED_AT);
-        $this->endDate = new \DateTime(self::END_DATE);
-        $this->startDate = new \DateTime(self::START_DATE);
-        $this->updateAt = new \DateTime(self::UPDATED_AT);
+        $this->canceledAt = new \DateTime(Carbon::now()->subMinute());
+        $this->createdAt = new \DateTime(Carbon::now()->subYear());
+        $this->endDate = new \DateTime(Carbon::now()->addMonth());
+        $this->startDate = new \DateTime(Carbon::now()->subMonth());
+        $this->updateAt = new \DateTime(Carbon::now()->addMinute());
     }
 }
