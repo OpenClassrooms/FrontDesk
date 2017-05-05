@@ -92,8 +92,8 @@ abstract class Plan
     public function isActive()
     {
         return null !== $this->getEndDate()
-            && $this->getEndDate() > new \DateTime(Carbon::now()->toDateString())
-            && $this->getStartDate() < new \DateTime(Carbon::now()->toDateString());
+            && $this->getEndDate() >= new \DateTime(Carbon::now()->toDateString())
+            && $this->getStartDate() <= new \DateTime(Carbon::now()->toDateString());
     }
 
     /**
