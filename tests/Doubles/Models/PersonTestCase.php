@@ -36,7 +36,9 @@ trait PersonTestCase
         Assert::assertEquals($expected->getLocationId(), $actual->getLocationId());
         Assert::assertEquals($expected->getMiddleName(), $actual->getMiddleName());
         Assert::assertEquals($expected->getPhone(), $actual->getPhone());
+        Assert::assertEquals($expected->getPrimaryStaffMember(), $actual->getPrimaryStaffMember());
         Assert::assertEquals($expected->isSendInvite(), $actual->isSendInvite());
         Assert::assertEquals($expected->isSkipComplimentaryPasses(), $actual->isSkipComplimentaryPasses());
+        Assert::assertEquals($expected->getStaffContactId(), $actual->getStaffContactId());
     }
 }

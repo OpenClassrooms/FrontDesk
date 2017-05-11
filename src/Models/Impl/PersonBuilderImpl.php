@@ -157,6 +157,16 @@ class PersonBuilderImpl implements PersonBuilder
     /**
      * {@inheritdoc}
      */
+    public function withPrimaryStaffMember(array $primaryStaffMember = null)
+    {
+        $this->person->setPrimaryStaffMember($primaryStaffMember);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function withSendInvite($sendInvite)
     {
         $this->person->setSendInvite($sendInvite);
@@ -170,6 +180,16 @@ class PersonBuilderImpl implements PersonBuilder
     public function withSkipComplimentaryPasses($skipComplimentaryPasses)
     {
         $this->person->setSkipComplimentaryPasses($skipComplimentaryPasses);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withStaffContactId($staffContactId)
+    {
+        $this->person->setStaffContactId($staffContactId);
 
         return $this;
     }

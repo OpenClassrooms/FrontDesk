@@ -73,6 +73,11 @@ abstract class Person
     protected $phone;
 
     /**
+     * @var array|null
+     */
+    protected $primaryStaffMember;
+
+    /**
      * @var bool
      */
     protected $sendInvite;
@@ -81,6 +86,11 @@ abstract class Person
      * @var bool
      */
     protected $skipComplimentaryPasses;
+
+    /**
+     * @var int
+     */
+    protected $staffContactId;
 
     /**
      * @return string
@@ -173,6 +183,22 @@ abstract class Person
     public function setMiddleName($middleName)
     {
         $this->middleName = $middleName;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getPrimaryStaffMember()
+    {
+        return $this->primaryStaffMember;
+    }
+
+    /**
+     * @param array|null $primaryStaffMember
+     */
+    public function setPrimaryStaffMember(array $primaryStaffMember = null)
+    {
+        $this->primaryStaffMember = $primaryStaffMember;
     }
 
     /**
@@ -314,5 +340,21 @@ abstract class Person
     public function setSkipComplimentaryPasses($skipComplimentaryPasses)
     {
         $this->skipComplimentaryPasses = $skipComplimentaryPasses;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStaffContactId()
+    {
+        return $this->staffContactId;
+    }
+
+    /**
+     * @param int $staffContactId
+     */
+    public function setStaffContactId($staffContactId)
+    {
+        $this->staffContactId = $staffContactId;
     }
 }

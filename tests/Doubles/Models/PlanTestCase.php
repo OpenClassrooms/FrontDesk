@@ -2,6 +2,7 @@
 
 namespace OpenClassrooms\FrontDesk\Doubles\Models;
 
+use OpenClassrooms\FrontDesk\Models\ApiDateFormat;
 use OpenClassrooms\FrontDesk\Models\Plan;
 use PHPUnit_Framework_Assert as Assert;
 
@@ -16,7 +17,10 @@ trait PlanTestCase
         Assert::assertEquals($expected->getCount(), $actual->getCount());
         Assert::assertEquals($expected->getCreatedAt(), $actual->getCreatedAt());
         Assert::assertEquals($expected->getDescription(), $actual->getDescription());
-        Assert::assertEquals($expected->getEndDate(), $actual->getEndDate());
+        Assert::assertEquals(
+            $expected->getEndDate()->format(ApiDateFormat::DATE_FORMAT_MIN),
+            $actual->getEndDate()->format(ApiDateFormat::DATE_FORMAT_MIN)
+        );
         Assert::assertEquals($expected->getId(), $actual->getId());
         Assert::assertEquals($expected->isConsiderMember(), $actual->isConsiderMember());
         Assert::assertEquals($expected->getLocationId(), $actual->getLocationId());
@@ -25,8 +29,15 @@ trait PlanTestCase
         Assert::assertEquals($expected->getPlanProductId(), $actual->getPlanProductId());
         Assert::assertEquals($expected->getPriceCents(), $actual->getPriceCents());
         Assert::assertEquals($expected->getStaffMemberId(), $actual->getStaffMemberId());
-        Assert::assertEquals($expected->getStartDate(), $actual->getStartDate());
+        Assert::assertEquals(
+            $expected->getStartDate()->format(ApiDateFormat::DATE_FORMAT_MIN),
+            $actual->getStartDate()->format(ApiDateFormat::DATE_FORMAT_MIN)
+        );
         Assert::assertEquals($expected->getType(), $actual->getType());
-        Assert::assertEquals($expected->getUpdateAt(), $actual->getUpdateAt());
+        Assert::assertEquals(
+            $expected->getUpdateAt()->format(ApiDateFormat::DATE_FORMAT_MIN),
+            $actual->getUpdateAt()->format(ApiDateFormat::DATE_FORMAT_MIN)
+        );
+        Assert::assertTrue($actual->isActive());
     }
 }

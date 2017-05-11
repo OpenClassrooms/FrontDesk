@@ -56,6 +56,12 @@ class PersonRepository extends BaseRepository implements PersonGateway
                 ->withLocationId($person['location_id'])
                 ->withMiddleName($person['middle_name'])
                 ->withPhone($person['phone'])
+                ->withPrimaryStaffMember(
+                    isset($person['primary_staff_member']) ? $person['primary_staff_member'] : null
+                )
+                ->withStaffContactId(
+                    isset($person['staff_contact_id']) ? $person['staff_contact_id'] : null
+                )
                 ->build();
         }
 
