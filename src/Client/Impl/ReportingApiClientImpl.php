@@ -24,7 +24,7 @@ class ReportingApiClientImpl implements ReportingApiClient
     {
         $this->client = new Client(
             [
-                'base_uri' => 'https://'.$key.'.frontdeskhq.com/',
+                'base_uri' => 'https://openclassrooms.frontdeskhq.com/',
                 'headers'  => [
                     'Authorization' => "Bearer $token",
                     'Content-Type'  => 'application/vnd.api+json',

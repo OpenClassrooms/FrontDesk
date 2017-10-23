@@ -37,7 +37,13 @@ class CoreApiClientImpl implements CoreApiClient
      */
     public function get($resourceName)
     {
-        $response = $this->client->get($resourceName);
+        $client = new Client(
+            [
+                'base_uri' => 'https://openclassrooms.frontdeskhq.com/',
+                'headers'  => ['Authorization' => "Bearer $token"],
+            ]);
+
+        $response = $client->get($resourceName);
 
         return $response->getBody()->getContents();
     }
