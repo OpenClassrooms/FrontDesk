@@ -18,12 +18,16 @@ class CoreApiClientImpl implements CoreApiClient
      */
     private $client;
 
+    private $token;
+
     /**
      * @param string $key
      * @param string $token
      */
     public function __construct($key, $token)
     {
+        $this->token = $token;
+        
         $this->client = new Client(
             [
                 'base_uri' => 'https://'.$key.'.frontdeskhq.com/',
@@ -40,7 +44,7 @@ class CoreApiClientImpl implements CoreApiClient
         $client = new Client(
             [
                 'base_uri' => 'https://openclassrooms.frontdeskhq.com/',
-                'headers'  => ['Authorization' => "Bearer $token"],
+                'headers'  => ['Authorization' => "Bearer $this->token"],
             ]);
 
         $response = $client->get($resourceName);
