@@ -30,7 +30,7 @@ class ClientFactoryImplTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(CoreApiClientImpl::class, $client);
         $guzzle = $this->getGuzzle($client);
-        $this->assertEquals(self::KEY.'.frontdeskhq.com', $guzzle->getConfig('base_uri')->getHost());
+        $this->assertEquals(self::KEY.'.pike13.com', $guzzle->getConfig('base_uri')->getHost());
         $this->assertArrayHasKey('Authorization', $guzzle->getConfig('headers'));
         $this->assertEquals('Bearer '.self::TOKEN, $guzzle->getConfig('headers')['Authorization']);
     }
@@ -58,7 +58,7 @@ class ClientFactoryImplTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(ReportingApiClientImpl::class, $client);
         $guzzle = $this->getGuzzle($client);
-        $this->assertEquals(self::KEY.'.frontdeskhq.com', $guzzle->getConfig('base_uri')->getHost());
+        $this->assertEquals(self::KEY.'.pike13.com', $guzzle->getConfig('base_uri')->getHost());
         $this->assertArrayHasKey('Authorization', $guzzle->getConfig('headers'));
         $this->assertEquals('Bearer '.self::TOKEN, $guzzle->getConfig('headers')['Authorization']);
     }

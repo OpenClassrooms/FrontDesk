@@ -26,7 +26,7 @@ class CoreApiClientImpl implements CoreApiClient
     {
         $this->client = new Client(
             [
-                'base_uri' => 'https://'.$key.'.frontdeskhq.com/',
+                'base_uri' => 'https://'.$key.'.pike13.com/',
                 'headers'  => ['Authorization' => "Bearer $token"],
             ]
         );
